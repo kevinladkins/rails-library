@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    binding.pry
     raise request.env['omniauth.auth'].inspect
   end
 
