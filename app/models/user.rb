@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  has_many :loans, :foreign_key => "patron_id"
+  has_many :borrowed_books, :through => :loans , :source => :book
+
   has_secure_password
 
   enum role: [:patron, :librarian]
