@@ -6,8 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     login
-    binding.pry
-    redirect_to root_path
+    logged_in? ? redirect_to_root_path : render 'new'
   end
 
 
