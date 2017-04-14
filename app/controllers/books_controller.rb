@@ -1,8 +1,7 @@
 class BooksController < ApplicationController
 
   def index
-    binding.pry
-    params[:author_id] ? @books = Author.find(params[:author_id]).books : @books = Book.all
+    params[:author_id] ? set_author_books_view : set_books_view
   end
 
   def new
@@ -24,4 +23,14 @@ class BooksController < ApplicationController
   def destroy
   end
 
+  private
+
+  def set_books_view
+    @books = Book.all
+  end
+
+  def set_author_books_view
+    @author = Author.find(params[:author_id])
+    @books = @author.books
+  end
 end
