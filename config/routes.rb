@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :loans
   resources :books
   resources :authors do
     resources :books, only: [:index, :show]
   end
   resources :users, only: [:index, :create, :edit, :update, :delete]
   resources :sessions, only: :create
+  resources :loans
   get 'signup', to: 'users#new'
 
   get 'login', to: 'sessions#new'
