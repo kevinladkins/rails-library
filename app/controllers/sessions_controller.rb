@@ -27,18 +27,18 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_authenticate
-    user = User.find_or_create_by(uid: auth['uid'])
+    session[:user_id] = User.find_or_create_by_omniauth(auth).id
   end
 
   def auth
-    request.env['omniauth.auth']
+    request.env['omniauth.auth']['info']
   end
 
   def bcrypt_authenticate
       user = User.find_by(email: params[:user][:email])
       if user && user.authenticate(params[:user][:password])
         session[:user_id] = user.id
-      else 
+      else
         flash.alert = "Login failed. Please try again or create an account."
       end
   end
