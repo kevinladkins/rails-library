@@ -1,0 +1,20 @@
+<%= form_for @book do |f|%>
+<%= f.label :title %>
+<%= f.text_field :title%><br>
+<%= f.label :author %>
+<%= f.collection_select :author_id, Author.all, :id, :name%><br>
+<%= f.label "New Author: "%><br>
+<%= f.fields_for :author, book.build_author do |author_attributes|%>
+<%= author_attributes.label :name%>
+<%= author_attributes.text_field :name%><br>
+<%= author_attributes.label :born%>
+<%= author_attributes.text_field :born%><br>
+<%= author_attributes.label :died%>
+<%= author_attributes.text_field :died%><br>
+<%end%>
+<%= f.label :synopsis%>
+<%= f.text_area :synopsis%><br>
+<%= f.label :quantity%>
+<%= f.number_field :quantity%><br>
+<%= f.submit%>
+<%end%>
