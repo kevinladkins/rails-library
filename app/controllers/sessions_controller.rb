@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     login
-    logged_in? ? redirect_to_root_path : render 'new'
+    current_user ? redirect_to_root_path : render 'new'
   end
 
 
