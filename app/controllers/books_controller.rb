@@ -26,6 +26,7 @@ class BooksController < ApplicationController
   end
 
   private
+  
 
   def set_books_view
     @books = Book.all

@@ -8,9 +8,9 @@
 <%= author_attributes.label :name%>
 <%= author_attributes.text_field :name%><br>
 <%= author_attributes.label :born%>
-<%= author_attributes.text_field :born%><br>
+<%= author_attributes.date_select :born%><br>
 <%= author_attributes.label :died%>
-<%= author_attributes.text_field :died%><br>
+<%= author_attributes.date_field :died%><br>
 <%end%>
 <%= f.label :synopsis%>
 <%= f.text_area :synopsis%><br>
