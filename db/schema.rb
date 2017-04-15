@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415162121) do
+ActiveRecord::Schema.define(version: 20170415170706) do
 
   create_table "authors", force: :cascade do |t|
     t.datetime "born"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20170415162121) do
 
   create_table "classifications", force: :cascade do |t|
     t.integer  "category"
-    t.string   "type"
+    t.string   "main_type"
     t.string   "subtype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
