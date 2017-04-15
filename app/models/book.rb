@@ -4,6 +4,9 @@ class Book < ApplicationRecord
   has_many :borrowers, :through => :loans, :source => :patron
   accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
 
+  validates :quantity, :title, presence: true
+  validates :quantity, numericality: {greater_than: 0}, unless: :persisted? 
+
 
   #def author_attributes=(author_hash)
   #    if author = Author.find_by(name: author_hash[:name])
