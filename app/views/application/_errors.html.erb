@@ -6,7 +6,7 @@
       prevented this <%=item.class.name.downcase%> from being saved:
     </h2>
     <ul>
-      <%item.errors.full_messages.each do |m|%>
+      <%item.errors.full_messages.each do |msg|%>
       <li><%=msg%></li>
       <%end%>
     </ul>

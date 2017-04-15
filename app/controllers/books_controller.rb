@@ -9,11 +9,16 @@ class BooksController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to @book
+    else
+      render 'new'
+    end
   end
 
   def show
-    @book = Book.find_by(params[:id])
+    @book = Book.find(params[:id])
   end
 
   def edit
@@ -26,7 +31,12 @@ class BooksController < ApplicationController
   end
 
   private
-  
+
+  def book_params
+    params.require(:book).permit(:title, :publication_year, :quantity, :author_id, :synopsis, author_attributes: [:name, :born, :died])
+  end
+
+
 
   def set_books_view
     @books = Book.all

@@ -11,7 +11,9 @@
 <%= author_attributes.date_field :born%><br>
 <%= author_attributes.label :died%>
 <%= author_attributes.date_field :died%><br>
-<%end%>
+<%end%><br>
+<%= f.label :publication_year%>
+<%= f.number_field :publication_year%><br>
 <%= f.label :synopsis%>
 <%= f.text_area :synopsis%><br>
 <%= f.label :quantity%>
