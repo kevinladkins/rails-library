@@ -1,0 +1,2 @@
+class AuthorClassification < ApplicationRecord
+end
