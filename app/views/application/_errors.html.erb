@@ -1,6 +1,6 @@
 
 <%if item.errors.any?%>
-  <div id="error-explanation">
+  <div class="fields-with-errors">
     <h2>
       <%= pluralize(item.errors.count, "error")%>
       prevented this <%=item.class.name.downcase%> from being saved:
