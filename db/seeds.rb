@@ -27,12 +27,12 @@ end
 
 def make_classifications
   [
-    {category: "fiction", type: "Science Fiction", subtype: "Space Opera"},
-    {category: "fiction", type: "Science Fiction", subtype: "Military Sci-Fi"},
-    {category: "fiction", type: "Literature", subtype: "Postmodern"},
-    {category: "non_fiction", type: "Computer Programming", subtype: "Javascript"},
-    {category: "non_fiction", type: "History", subtype: "20th Century Political History(U.S.)"},
-    {category: "non_fiction", type: "Criticism and Theory", subtype: "Music Criticism"}
+    {category: "fiction", main_type: "Science Fiction", subtype: "Space Opera"},
+    {category: "fiction", main_type: "Science Fiction", subtype: "Military Sci-Fi"},
+    {category: "fiction", main_type: "Literature", subtype: "Postmodern"},
+    {category: "non_fiction", main_type: "Computer Programming", subtype: "Javascript"},
+    {category: "non_fiction", main_type: "History", subtype: "20th Century Political History(U.S.)"},
+    {category: "non_fiction", main_type: "Criticism and Theory", subtype: "Music Criticism"}
   ].each do |classification_hash|
     Classification.create(classification_hash)
   end
@@ -48,7 +48,7 @@ def make_authors
     {name: "Rick Perlstein", born: '1969-09-03'}
 
   ].each do |authors_hash|
-    Authors.create(authors_hash)
+    Author.create(authors_hash)
   end
 end
 
