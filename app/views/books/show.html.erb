@@ -1,5 +1,6 @@
 <h1><%= @book.title%></h1>
-<h2>by <%=link_to @book.author.name, author_path(@book.author)%></h2>
+<h2>by <%=link_to @book.author.name, author_path(@book.author)%> </h2>
+<%=@book.quantity%> available
 <%if current_user.patron? && @book.available? %>
   <%=button_to "Borrow", loans_path, method: :post, params: {book_id: @book.id}%>
 <%end%>
