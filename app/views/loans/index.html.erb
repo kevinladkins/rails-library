@@ -1,0 +1,6 @@
+<h1>Overdue Loans</h1>
+<ul>
+  <%@overdue.each do |l|%>
+  <li><%= l.book.title%> borrowed by <%=link_to l.patron.name, user_path(l.patron)%> on <%= l.checkout_date.strftime("%B %W, %Y")%> </li>
+    <%end%>
+  </ul>
