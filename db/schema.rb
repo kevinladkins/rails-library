@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415205902) do
+ActiveRecord::Schema.define(version: 20170416215524) do
 
   create_table "authors", force: :cascade do |t|
     t.datetime "born"
@@ -19,24 +19,27 @@ ActiveRecord::Schema.define(version: 20170415205902) do
     t.string   "name"
   end
 
+  create_table "book_categories", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "book_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.integer  "author_id"
     t.string   "title"
     t.text     "synopsis"
-    t.integer  "status",            default: 0
+    t.integer  "status",           default: 0
     t.integer  "quantity"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "publication_year"
-    t.integer  "classification_id"
+    t.integer  "category_id"
+    t.integer  "classification"
   end
 
-  create_table "classifications", force: :cascade do |t|
-    t.integer  "category"
-    t.string   "main_type"
-    t.string   "subtype"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "categories", force: :cascade do |t|
+    t.integer "classification"
+    t.string  "name"
   end
 
   create_table "loans", force: :cascade do |t|
