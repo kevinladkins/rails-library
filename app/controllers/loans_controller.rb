@@ -3,7 +3,6 @@ class LoansController < ApplicationController
   def create
     loan = current_user.loans.build
     loan.borrow_book(params[:book_id])
-    binding.pry 
     if loan.save
       redirect_to book_path(loan.book)
     else

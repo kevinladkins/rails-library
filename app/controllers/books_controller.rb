@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
 
+  before_action :authorize_user, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     params[:author_id] ? set_author_books_view : set_books_view
   end

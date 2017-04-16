@@ -14,17 +14,4 @@ class Book < ApplicationRecord
     quantity > 0 ? status = "available" : status = "checked_out"
   end
 
-
-  #def author_attributes=(author_hash)
-  #    if author = Author.find_by(name: author_hash[:name])
-  #      self.author = author
-  #    else
-  #      self.build_author(author_hash)
-  #    end
-  #end
-
-
-
-
-
 end
