@@ -7,7 +7,5 @@
 <%else%>
 
   <h1>Browse Books</h1>
-    <%= render partial: 'application/search', locals: {item: @books.first}%><br>
-
     <%= render partial: 'books_list', locals: {books: @books}%>
 <%end%>
