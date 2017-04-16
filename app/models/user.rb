@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  verifies :name, :email, :role, presence: :true
+
   enum role: [:patron, :librarian]
 
   def self.find_or_create_by_omniauth(auth)
