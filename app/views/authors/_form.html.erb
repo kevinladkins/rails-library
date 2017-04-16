@@ -1,0 +1,11 @@
+<%=form_for author do |f|%>
+<%= f.label :name%>
+<%= f.text_field :name%><br>
+<%= f.label :born%>
+<%= f.date_field :born%><br>
+<%= f.label :died%>
+<%= f.date_field :died %><br>
+<%= f.label :bio%>
+<%= f.text_area :bio%><br>
+<%= f.submit%>
+<%end%>
