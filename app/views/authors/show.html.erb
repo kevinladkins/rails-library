@@ -1,6 +1,6 @@
 <h1><%= @author.name%>
   <%if current_user.librarian?%>
-  <%=button_to "Edit", edit_author_path(@author)%>
+  <%=button_to "Edit", edit_author_path(@author), method: :get%>
   <%end%>
 </h1>
 
