@@ -1,7 +1,10 @@
 class AuthorsController < ApplicationController
 
+  before_action :authorize_user, only: [:new, :create, :edit, :update, :destroy]
+
 
   def index
+    @authors = Author.all
   end
 
   def new
