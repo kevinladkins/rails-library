@@ -17,5 +17,13 @@ class User < ApplicationRecord
     end
   end
 
+  def number_of_loans
+    books_borrowed.size
+  end
+
+  def books_borrowed
+    loans.checked_out.map {|l| l.book}
+  end
+
 
 end
