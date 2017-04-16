@@ -5,14 +5,17 @@ class Loan < ApplicationRecord
   validates :patron_id, :book_id, presence: :true
   before_create :take_book
 
-  enum status: [:on_loan, :returned]
+  scope :on_loan, -> {where(status: "checked_out")}
+  scope :overdue, -> {on_loan.where("due_date < ?", DateTime.now)}
+
+  enum status: [:checked_out, :returned]
 
   def borrow_book(book_id)
     if book = Book.find(book_id)
       if book.check_availability == "available"
         self.book = book
-        self.checkout_date = DateTime.now
-        self.due_date = DateTime.now + 14
+        checkout_date = DateTime.now
+        due_date = DateTime.now + 14
       end
     end
   end
