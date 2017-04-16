@@ -12,7 +12,8 @@ class Book < ApplicationRecord
 
   def self.search(query)
     if query.present?
-      where('title like ?', "%#{query}")
+      search = where('title like ?', "%#{query}")
+      search.empty? ? self.all : search
     else
       self.all
     end
