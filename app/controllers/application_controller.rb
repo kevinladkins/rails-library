@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user
-    unless !!current_user.librarian?
+    unless !!current_user && !!current_user.librarian?
       flash.alert = "You are not authorized to do that."
       redirect_to root_path
     end

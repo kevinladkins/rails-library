@@ -10,6 +10,14 @@ class Book < ApplicationRecord
   enum status: [:available, :checked_out]
   after_update :check_availability
 
+  def self.search(query)
+    if query.present?
+      where('title like ?', "%#{query}")
+    else
+      self.all
+    end
+  end
+
   def check_availability
     quantity > 0 ? status = "available" : status = "checked_out"
   end

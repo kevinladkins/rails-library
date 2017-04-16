@@ -1,3 +1,4 @@
+
 <%if author_view?%>
 
   <h1>Browse Books by <%=link_to @author.name, author_path(@author)%></h1>
@@ -6,5 +7,7 @@
 <%else%>
 
   <h1>Browse Books</h1>
+    <%= render partial: 'application/search', locals: {item: @books.first}%><br>
+
     <%= render partial: 'books_list', locals: {books: @books}%>
 <%end%>
