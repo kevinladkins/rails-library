@@ -1,0 +1,18 @@
+<h1><%= @author.name%>
+  <%if current_user.librarian?%>
+  <%=button_to "Edit", edit_author_path(@author)%>
+  <%end%>
+</h1>
+
+Born: <%= @author.born.strftime("%B %W, %Y") %><br>
+<% if @author.died %>
+Died: <%= @author.died.strftime("%B %W, %Y")%><br>
+<%end%>
+<h3>Bio: </h3>
+<p><%=@author.bio%></p>
+<h3>Titles:</h3>
+<ul>
+<%@author.books.each do |book|%>
+  <li><%= link_to book.title, author_book_path(@author, book)%></li>
+<%end%>
+</ul>
