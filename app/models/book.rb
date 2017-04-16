@@ -2,12 +2,16 @@ class Book < ApplicationRecord
   belongs_to :author
   has_many :loans
   has_many :borrowers, :through => :loans, :source => :patron
+  has_many :book_categories
+  has_many :categories, through: :book_categories
+
   accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
 
   validates :quantity, :title, presence: true
   validates :quantity, numericality: {greater_than: 0}, unless: :persisted?
 
   enum status: [:available, :checked_out]
+  enum classification: [:fiction, :non_fiction]
   after_update :check_availability
 
   def self.search(query)
