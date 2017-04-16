@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415172404) do
+ActiveRecord::Schema.define(version: 20170415205902) do
 
   create_table "authors", force: :cascade do |t|
     t.datetime "born"
@@ -44,8 +44,9 @@ ActiveRecord::Schema.define(version: 20170415172404) do
     t.integer  "book_id"
     t.datetime "checkout_date"
     t.datetime "due_date"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "status",        default: 0
   end
 
   create_table "users", force: :cascade do |t|
