@@ -8,7 +8,7 @@ Died: <%= @author.died.strftime("%B %W, %Y")%><br>
 <h3>Bio: </h3>
 <p><%=@author.bio%></p>
 
-<%if current_user.librarian?%>
+<%if logged_in? && current_user.librarian?%>
  <%=button_to "Edit", edit_author_path(@author), method: :get%>
 <%end%>
 
