@@ -12,7 +12,12 @@ class AuthorsController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    @author = Author.new(author_params)
+    if @author.save
+      redirect_to @author
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -23,6 +28,12 @@ class AuthorsController < ApplicationController
   end
 
   def update
+  end
+
+  private
+
+  def author_params
+    params.require(:author).permit(:name, :born, :died, :bio)
   end
 
 
