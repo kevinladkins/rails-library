@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  verifies :name, :email, :role, presence: :true
+  validates :name, :email, :role, presence: :true
 
   enum role: [:patron, :librarian]
 
