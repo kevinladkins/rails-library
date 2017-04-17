@@ -18,7 +18,7 @@ class Book < ApplicationRecord
   scope :non_fiction, -> {where(classification: "non_fiction")}
 
   before_create :set_available_copies
-  
+
 
   def self.search(query)
     if query.present?
@@ -46,10 +46,14 @@ class Book < ApplicationRecord
 
   def check_out
     if available_copies == 0
-       puts "No copies avaiable"
+       self.errors.add(:available_copies,  "No copies available") 
     else
       update(available_copies: available_copies - 1)
     end
+  end
+
+  def check_in
+    update(available_copies: available_copies + 1)
   end
 
   private
