@@ -18,7 +18,7 @@ class Book < ApplicationRecord
   scope :non_fiction, -> {where(classification: "non_fiction")}
 
   before_create :set_available_copies
-  before_update :check_availability
+  
 
   def self.search(query)
     if query.present?
@@ -32,6 +32,12 @@ class Book < ApplicationRecord
   def set_available_copies
     amount = self.copies
     self.available_copies = amount
+  end
+
+  def add_copies(number)
+    self.copies = self.copies + number
+    self.set_available_copies
+    save
   end
 
   def check_availability
