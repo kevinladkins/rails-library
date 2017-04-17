@@ -22,10 +22,25 @@ class Book < ApplicationRecord
 
   def category_ids=(ids)
     ids.delete("")
-    if ids.any?
-      
-
+    binding.pry
+    if ids.empty?
+      self.categories.destroy_all
+    else
+      if !(self.category_ids - ids).empty?
+      self.categories.destroy_all
+      ids.each do |id|
+        self.categories << Category.find(id)
+      end
+    end
   end
+  end
+
+  def categories_attributes=(categories_attributes)
+    unless categories_attributes[:name].blank?
+      self.categories.build(name: categories_attributes[:name], classification: self.classification)
+    end
+  end
+
 
 
   def set_available_copies
