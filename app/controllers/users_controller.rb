@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authorize_user, only: [:index, :edit, :update]
+
 
   def index
   end

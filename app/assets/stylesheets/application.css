@@ -35,6 +35,10 @@ header {
   background: grey;
 }
 
+fieldset {
+  width: 20em;
+}
+
 * {
   font-family: arial;
 }

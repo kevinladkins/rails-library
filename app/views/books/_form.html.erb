@@ -7,6 +7,7 @@
 <%= f.text_field :title%><br>
 <%= f.label :author %>
 <%= f.collection_select :author_id, Author.all, :id, :name%><br>
+<%= field_set_tag "New Author" do %>
 <%= f.label "New Author: "%><br>
 <%= f.fields_for :author, book.build_author do |author_attributes|%>
 <%= author_attributes.label :name%>
@@ -16,6 +17,7 @@
 <%= author_attributes.label :died%>
 <%= author_attributes.date_field :died%><br>
 <%end%><br>
+<%end%>
 <%= f.label :publication_year%>
 <%= f.number_field :publication_year%><br>
 <%= f.label :synopsis%><br>
