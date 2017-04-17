@@ -4,7 +4,7 @@ class AuthorsController < ApplicationController
 
 
   def index
-    @authors = Author.all
+    set_authors
   end
 
   def new
@@ -42,6 +42,12 @@ class AuthorsController < ApplicationController
   def set_author
     @author = Author.find(params[:id])
   end
+
+  def set_authors
+    @authors = Author.name_search(params[:query]).order(:name)
+  end
+
+
 
 
 
