@@ -3,7 +3,6 @@ class Loan < ApplicationRecord
   belongs_to :book
 
   validates :patron_id, :book_id, presence: :true
-  before_create :take_book
 
   scope :on_loan, -> {where(status: "checked_out")}
   scope :overdue, -> {on_loan.where("due_date < ?", DateTime.now)}
@@ -12,7 +11,7 @@ class Loan < ApplicationRecord
 
   def borrow_book(book_id)
     if book = Book.find(book_id)
-      if book.check_availability == "available"
+      if book.check_out
         self.book = book
         checkout_date = DateTime.now
         due_date = DateTime.now + 14
@@ -21,9 +20,6 @@ class Loan < ApplicationRecord
   end
 
 
-  def take_book
-    book.update(available_copies: book.available_copies - 1)
-  end
 
 
 end

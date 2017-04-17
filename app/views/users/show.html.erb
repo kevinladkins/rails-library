@@ -1,3 +1,9 @@
 <h1><%= @user.name%></h1>
 <% if @user.checked_out_books.any?%>
 <h3>Current Loans: </h3>
+<ul>
+  <%@user.checked_out_books.each do |b|%>
+  <li><%=b.title%></li>
+  <%end%>
+</ul>
+<%end%>
