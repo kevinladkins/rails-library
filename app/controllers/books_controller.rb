@@ -1,11 +1,10 @@
 class BooksController < ApplicationController
 
   before_action :authorize_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit]
 
   def index
-
     params[:author_id] ? set_author_books_view : set_books_view
-    binding.pry
   end
 
   def new
@@ -22,11 +21,9 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
   end
 
   def edit
-    @book = Book.find(params[:id])
   end
 
   def update
@@ -41,7 +38,9 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :publication_year, :quantity, :author_id, :synopsis, :classification, author_attributes: [:name, :born, :died])
   end
 
-
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
   def set_books_view
     @books = Book.title_search(params[:query]).order(:title)
