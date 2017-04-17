@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   before_action :authorize_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_book, only: [:show, :edit]
+  before_action :set_book, only: [:show, :edit, :update]
 
   def index
     params[:author_id] ? set_author_books_view : set_books_view
@@ -27,6 +27,8 @@ class BooksController < ApplicationController
   end
 
   def update
+    @book.update(book_params)
+    redirect_to @book
   end
 
   def destroy

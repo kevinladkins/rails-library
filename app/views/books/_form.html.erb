@@ -1,4 +1,4 @@
-<%= form_for @book do |f|%>
+<%= form_for book do |f|%>
 <%= f.radio_button :classification, "fiction" %>
 <%= f.label :classfication, "Fiction" %>
 <%= f.radio_button :classification, "non_fiction" %>
@@ -18,8 +18,8 @@
 <%end%><br>
 <%= f.label :publication_year%>
 <%= f.number_field :publication_year%><br>
-<%= f.label :synopsis%>
-<%= f.text_area :synopsis%><br>
+<%= f.label :synopsis%><br>
+<%= f.text_area :synopsis, :cols => "30", :rows => "5"%><br>
 <%= f.label :copies%>
 <%= f.number_field :copies%><br>
 <%= f.submit%>
