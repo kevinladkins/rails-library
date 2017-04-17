@@ -9,17 +9,24 @@
   </head>
 
   <body>
+  <header>
+    <h1 id="logo">RAILS LIBRARY</h1>
+    <%if current_user%>
+      <strong>Logged in as: </strong><%=current_user.name%> ||
+      <%= link_to "Logout", logout_path, method: :delete%>
+    <%else%>
+      <%= link_to "Sign Up", signup_path%> ||
+      <%= link_to "Log In", login_path%> ||
+      <%= link_to "Facebook Log In", "auth/facebook"%>
+    <%end%>
+  </header>
     <nav>
       <%= link_to "Home", root_path%>
       <% if current_user %>
-        || <%=link_to "Your books"%><br>
-        <strong>Logged in as: </strong><%=current_user.name%> ||
-        <%= link_to "Logout", logout_path, method: :delete%>
-      <%else%>
-        <%= link_to "Sign Up", signup_path%> ||
-        <%= link_to "Log In", login_path%> ||
-        <%= link_to "Facebook Log In", "auth/facebook"%>
+        || <%=link_to "Your books"%>
       <%end%><br>
+    </nav><br>
+
 
       <%flash.each do |name, msg|%>
         <%= content_tag :div, msg, class: name%>
