@@ -9,7 +9,7 @@ class Book < ApplicationRecord
 
   validates :copies, :title, presence: true
   validates :copies, numericality: {greater_than: 0}
-  
+
 
   enum status: [:available, :checked_out]
   enum classification: [:fiction, :non_fiction]
@@ -18,7 +18,7 @@ class Book < ApplicationRecord
   scope :non_fiction, -> {where(classification: "non_fiction")}
 
   before_create :set_available_copies
-  #after_update :check_availability
+  before_update :check_availability
 
   def self.search(query)
     if query.present?
@@ -29,15 +29,21 @@ class Book < ApplicationRecord
     end
   end
 
-
   def set_available_copies
     amount = self.copies
     self.available_copies = amount
   end
 
-
   def check_availability
     available_copies > 0 ? status = "available" : status = "checked_out"
+  end
+
+  def check_out
+    if available_copies == 0
+       puts "No copies avaiable"
+    else
+      update(available_copies: available_copies - 1)
+    end
   end
 
   private
