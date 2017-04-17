@@ -20,6 +20,14 @@ class Book < ApplicationRecord
 
   extend Searchable::ClassMethods
 
+  def category_ids=(ids)
+    ids.delete("")
+    if ids.any?
+      
+
+  end
+
+
   def set_available_copies
     amount = self.copies
     self.available_copies = amount

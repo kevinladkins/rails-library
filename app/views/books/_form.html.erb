@@ -7,8 +7,13 @@
 <%= f.text_field :title%><br>
 <%= f.label :author %>
 <%= f.collection_select :author_id, Author.all, :id, :name%><br>
+<%= f.label :publication_year%>
+<%= f.number_field :publication_year%><br>
+<%= f.label :synopsis%><br>
+<%= f.text_area :synopsis, :cols => "30", :rows => "5"%><br>
+<%= f.label :copies%>
+<%= f.number_field :copies%><br><br><br>
 <%= field_set_tag "New Author" do %>
-<%= f.label "New Author: "%><br>
 <%= f.fields_for :author, book.build_author do |author_attributes|%>
 <%= author_attributes.label :name%>
 <%= author_attributes.text_field :name%><br>
@@ -18,11 +23,15 @@
 <%= author_attributes.date_field :died%><br>
 <%end%><br>
 <%end%>
-<%= f.label :publication_year%>
-<%= f.number_field :publication_year%><br>
-<%= f.label :synopsis%><br>
-<%= f.text_area :synopsis, :cols => "30", :rows => "5"%><br>
-<%= f.label :copies%>
-<%= f.number_field :copies%><br>
+<%= field_set_tag "Categories" do %>
+<%= f.label :categories%>
+<%= f.collection_check_boxes :category_ids, Category.all, :id, :name%><br>
+<%= f.label "New Category"%>
+<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
+<%= category_attributes.label :name%>
+<%= category_attributes.text_field :name%><br>
+<%end%><br>
+<%end%>
+
 <%= f.submit%>
 <%end%>

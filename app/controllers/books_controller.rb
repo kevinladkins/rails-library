@@ -12,6 +12,7 @@ class BooksController < ApplicationController
   end
 
   def create
+    binding.pry
     @book = Book.new(book_params)
     if @book.save
       redirect_to @book
@@ -38,7 +39,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :publication_year, :quantity, :author_id, :synopsis, :classification, author_attributes: [:name, :born, :died])
+    params.require(:book).permit(:title, :publication_year, :copies, :author_id, :synopsis, :classification, author_attributes: [:name, :born, :died], :category_ids => [], categories_attributes: [:name])
   end
 
   def set_book
