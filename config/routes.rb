@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :authors do
     resources :books, only: [:index, :show]
   end
-  resources :users, only: [:index, :create, :edit, :update, :delete]
+  resources :users, only: [:index, :create, :edit, :show, :update, :delete]
   resources :sessions, only: :create
   resources :loans
 
