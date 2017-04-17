@@ -22,7 +22,6 @@ class Book < ApplicationRecord
 
   def category_ids=(ids)
     ids.delete("")
-    binding.pry
     if ids.empty?
       self.categories.destroy_all
     else
@@ -36,9 +35,14 @@ class Book < ApplicationRecord
   end
 
   def categories_attributes=(categories_attributes)
-    unless categories_attributes[:name].blank?
-      self.categories.build(name: categories_attributes[:name], classification: self.classification)
+    name = categories_attributes[:name]
+    unless name.blank?
+      if category = Category.find_by(name: name)
+        self.categories << category 
+      else 
+       self.categories.create(name: categories_attributes[:name], classification: self.classification)
     end
+   end
   end
 
 
