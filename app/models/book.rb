@@ -13,8 +13,8 @@ class Book < ApplicationRecord
   enum status: [:available, :checked_out]
   enum classification: [:fiction, :non_fiction]
 
-  scope :fiction, -> {where(status: "fiction")}
-  scope :non_fiction, -> {where(status: "non_fiction")}
+  scope :fiction, -> {where(classifciation: "fiction")}
+  scope :non_fiction, -> {where(classification: "non_fiction")}
 
   after_update :check_availability
 
