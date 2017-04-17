@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417133438) do
+ActiveRecord::Schema.define(version: 20170417162258) do
 
   create_table "authors", force: :cascade do |t|
     t.datetime "born"
@@ -28,10 +28,9 @@ ActiveRecord::Schema.define(version: 20170417133438) do
     t.integer  "author_id"
     t.string   "title"
     t.text     "synopsis"
-    t.integer  "status",           default: 0
     t.integer  "available_copies"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "publication_year"
     t.integer  "category_id"
     t.integer  "classification"

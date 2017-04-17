@@ -10,8 +10,6 @@ class Book < ApplicationRecord
   validates :copies, :title, presence: true
   validates :copies, numericality: {greater_than: 0}
 
-
-  enum status: [:available, :checked_out]
   enum classification: [:fiction, :non_fiction]
 
   scope :fiction, -> {where(classifciation: "fiction")}
@@ -33,8 +31,8 @@ class Book < ApplicationRecord
     save
   end
 
-  def check_availability
-    available_copies > 0 ? status = "available" : status = "checked_out"
+  def available?
+    available_copies > 0
   end
 
   def check_out
