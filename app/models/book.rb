@@ -20,14 +20,7 @@ class Book < ApplicationRecord
   before_create :set_available_copies
 
 
-  def self.search(query)
-    if query.present?
-      search = where('title like ?', "%#{query}")
-      search.empty? ? self.all : search
-    else
-      self.all
-    end
-  end
+  extend Searchable::ClassMethods
 
   def set_available_copies
     amount = self.copies
@@ -46,7 +39,7 @@ class Book < ApplicationRecord
 
   def check_out
     if available_copies == 0
-       self.errors.add(:available_copies,  "No copies available") 
+       self.errors.add(:available_copies,  "No copies available")
     else
       update(available_copies: available_copies - 1)
     end
