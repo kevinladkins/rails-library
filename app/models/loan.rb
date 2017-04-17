@@ -22,7 +22,7 @@ class Loan < ApplicationRecord
 
 
   def take_book
-    book.update(quantity: book.quantity - 1)
+    book.update(available_copies: book.available_copies - 1)
   end
 
 

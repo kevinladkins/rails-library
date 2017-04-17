@@ -7,8 +7,8 @@ class Book < ApplicationRecord
 
   accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
 
-  validates :quantity, :title, presence: true
-  validates :quantity, numericality: {greater_than: 0}, unless: :persisted?
+  validates :copies, :title, presence: true
+  validates :copies, numericality: {greater_than: 0}
 
   enum status: [:available, :checked_out]
   enum classification: [:fiction, :non_fiction]
@@ -28,7 +28,7 @@ class Book < ApplicationRecord
   end
 
   def check_availability
-    quantity > 0 ? status = "available" : status = "checked_out"
+    available_copies > 0 ? status = "available" : status = "checked_out"
   end
 
 end
