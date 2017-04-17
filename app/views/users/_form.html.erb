@@ -1,8 +1,8 @@
 <%= form_for user do |f| %>
-<%= f.label(:role, "New Librarian") %>
-<%= f.radio_button(:role, "librarian") %>
-<%= f.label(:role, "New Patron") %>
-<%= f.radio_button(:role, "patron") %><br>
+<%= f.label :role, "New Librarian" %>
+<%= f.radio_button :role, "librarian" %>
+<%= f.label :role, "New Patron" %>
+<%= f.radio_button :role, "patron" %><br>
 <%= f.label :name %>
 <%= f.text_field :name%><br>
 <%= f.label :email %>
