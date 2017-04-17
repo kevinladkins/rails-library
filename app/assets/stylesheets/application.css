@@ -20,6 +20,17 @@
   padding-left: 2px;
 }
 
+#user-nav {
+  color: white;
+  float: right;
+  margin-top: 2em;
+  margin-right: 1em;
+}
+
+#user-nav a {
+  text-decoration: none;
+}
+
 header {
   background: grey;
 }
