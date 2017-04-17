@@ -2,11 +2,11 @@ module ApplicationHelper
 
 
   def generate_path(item)
-    item.class.name.downcase + "s"
+    pluralize(2, item.class.name.downcase).split.last
   end
 
   def item_name(item)
-    item.class.name + "s"
+    pluralize(2, item.class.name).split.last 
   end
 
 
