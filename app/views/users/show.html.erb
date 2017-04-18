@@ -5,7 +5,7 @@
   <%@user.loans.checked_out.each do |l|%>
     <%if l.overdue?%>
       <li><%=l.book.title%> ||
-      OVERDUE -- PLEASE RETURN
+      OVERDUE <%if current_user.patron?%> -- PLEASE RETURN <%end%>
     <%else%>
       <li><%=l.book.title%> ||
       due on <%= l.due_date.strftime("%A, %B %d %Y") %>
@@ -13,7 +13,7 @@
     <%if current_user.patron?%>
       <%=button_to "Return", loan_path(l), method: :put%>
     <%elsif current_user.librarian?%>
-      <%=form_tag loan_path(l), method: :put%>
+      <br><%=form_tag loan_path(l), method: :put%>
       Extend Loan <%=text_field_tag "extend"%> Days
       <%= submit_tag "Extend"%>
     <%end%>
