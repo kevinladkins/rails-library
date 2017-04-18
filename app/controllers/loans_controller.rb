@@ -20,6 +20,7 @@ class LoansController < ApplicationController
   end
 
   def update
+    raise params.inspect
   end
 
 

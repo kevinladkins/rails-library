@@ -13,10 +13,14 @@ class Loan < ApplicationRecord
     if book = Book.find(book_id)
       if book.check_out
         self.book = book
-        checkout_date = DateTime.now
-        due_date = DateTime.now + 14
+        self.checkout_date = DateTime.now
+        self.due_date = DateTime.now + 14
       end
     end
+  end
+
+  def overdue?
+    self.due_date < DateTime.now
   end
 
 
