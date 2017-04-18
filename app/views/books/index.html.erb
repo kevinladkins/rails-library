@@ -1,4 +1,6 @@
-
+<%if current_user.librarian?%>
+  <%= button_to "Add a Book", new_book_path, method: :get%>
+<%end%>
 <%if author_view?%>
 
   <h1>Browse Books by <%=link_to @author.name, author_path(@author)%></h1>

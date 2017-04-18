@@ -15,7 +15,6 @@ class Book < ApplicationRecord
   scope :fiction, -> {where(classifciation: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}
 
-  before_create :set_available_copies
 
 
   extend Searchable::ClassMethods
