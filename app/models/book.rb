@@ -33,7 +33,7 @@ class Book < ApplicationRecord
   end
   
   def available_copies
-    self.copies - self.checked_out_copies
+    self.copies - self.checked_out_copies 
   end
   
   def checked_out_copies
