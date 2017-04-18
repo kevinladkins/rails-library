@@ -22,9 +22,16 @@ class LoansController < ApplicationController
 
   def update
     loan = Loan.find(params[:id])
-    loan.return_book
-    flash.alert = "Book returned"
-    redirect_to user_path(current_user)
+    if params[:extend]
+      loan.extend_loan(params[:extend])
+      flash.alert = "Loan extened until #{loan.due_date.strftime("%A, %B %W %Y")}."
+      redirect_to :back
+    else
+      loan.return_book
+      flash.alert = "Book returned."
+      redirect_to user_path(current_user)
+    end
+
   end
 
 

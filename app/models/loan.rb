@@ -28,6 +28,12 @@ class Loan < ApplicationRecord
     self.update(status: "returned")
   end
 
+  def extend_loan(number_of_days)
+    binding.pry
+    self.due_date = self.due_date + number_of_days.to_i.days
+    self.save
+  end
+
 
 
 
