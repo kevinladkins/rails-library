@@ -12,7 +12,7 @@ class Book < ApplicationRecord
 
   enum classification: [:fiction, :non_fiction]
 
-  scope :fiction, -> {where(classifciation: "fiction")}
+  scope :fiction, -> {where(classification: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}
 
 
