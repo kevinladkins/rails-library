@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :sessions, only: :create
   resources :loans
 
-  scope 'librarians', module: 'dashboard' do 
+  scope 'librarians', module: 'librarians' do 
     resources :dashboard, only: [:index]
   end
 

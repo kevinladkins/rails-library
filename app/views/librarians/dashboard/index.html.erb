@@ -1,0 +1,7 @@
+<h1>Librarian Dashboard</h1>
+
+<h3>Total Books On Loan: <%= @loan.on_loan.count(:book_id)%></h3>
+<h3>Total Overdue Books: <%=@loan.overdue.count(:book_id)%></h3>
+
+<%= link_to "Manage Users", users_path%><br>  <%= render partial: 'application/search', locals: {item: @user}%><br>
+<%= link_to "Manage Collection", books_path%> <%= render partial: 'application/search', locals: {item: @book}%><br>

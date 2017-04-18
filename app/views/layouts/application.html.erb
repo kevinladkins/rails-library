@@ -24,9 +24,13 @@
   </header>
     <nav>
       <%= link_to "Home", root_path%>
-      <% if current_user %>
-        || <%=link_to "Your books"%>
-      <%end%><br>
+      <%if current_user%>
+        <% if current_user.patron? %>
+          || <%=link_to "Your Account", user_path(current_user)%>
+        <%elsif current_user.librarian?%>
+          || <%=link_to "Dashboard", dashboard_index_path%>
+        <%end%><br>
+      <%end%>
     </nav><br>
 
 
