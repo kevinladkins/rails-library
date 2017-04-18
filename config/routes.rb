@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   resources :authors do
     resources :books, only: [:index, :show]
   end
-  resources :users, only: [:index, :create, :edit, :show, :update, :delete]
-  resources :sessions, only: :create
+  resources :users, only: [:index, :create, :edit, :show, :update]
+  resources :sessions, only: [:create]
   resources :loans
+  resources :categories, only: [:index, :show]
 
-  scope 'librarians', module: 'librarians' do 
+  scope 'librarians', module: 'librarians' do
     resources :dashboard, only: [:index]
   end
 
