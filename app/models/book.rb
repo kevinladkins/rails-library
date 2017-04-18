@@ -22,27 +22,16 @@ class Book < ApplicationRecord
 
   def category_ids=(ids)
     ids.delete("")
-    if ids.empty?
-      self.categories.destroy_all
-    else
-      if !(self.category_ids - ids).empty?
-      self.categories.destroy_all
-      ids.each do |id|
-        self.categories << Category.find(id)
-      end
-    end
-  end
+    rejected_ids = self.category_ids - ids
+    new_ids = ids - self.category_ids
+    binding.pry
+    rejected_ids.each {|id| self.categories.delete(id)} unless rejected_ids.empty?
+    ids.empty? ? self.categories.destroy_all : new_ids.each {|id| self.categories << Category.find(id)}
   end
 
   def categories_attributes=(categories_attributes)
-    name = categories_attributes[:name]
-    unless name.blank?
-      if category = Category.find_by(name: name)
-        self.categories << category 
-      else 
-       self.categories.create(name: categories_attributes[:name], classification: self.classification)
-    end
-   end
+    name = categories_attributes["0"][:name]
+    self.categories.create(name: name, classification: self.classification) unless name.blank?
   end
 
 

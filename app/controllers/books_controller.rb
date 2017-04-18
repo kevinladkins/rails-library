@@ -29,7 +29,6 @@ class BooksController < ApplicationController
   end
 
   def update
-    binding.pry 
     @book.update(book_params)
     redirect_to @book
   end
