@@ -36,7 +36,7 @@ class AuthorsController < ApplicationController
   private
 
   def author_params
-    params.require(:author).permit(:name, :born, :died, :bio)
+    params.require(:author).permit(:first_name, :last_name, :born, :died, :bio)
   end
 
   def set_author
@@ -44,7 +44,7 @@ class AuthorsController < ApplicationController
   end
 
   def set_authors
-    @authors = Author.name_search(params[:query]).order(:name)
+    @authors = Author.name_search(params[:query]).order(:last_name)
   end
 
 

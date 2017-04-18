@@ -7,7 +7,7 @@ class Book < ApplicationRecord
 
   accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
 
-  validates :copies, :title, :classification, presence: true
+  validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
 
   enum classification: [:fiction, :non_fiction]

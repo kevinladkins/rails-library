@@ -15,8 +15,10 @@
 <%= f.number_field :copies%><br><br><br>
 <%= field_set_tag "New Author" do %>
 <%= f.fields_for :author, book.build_author do |author_attributes|%>
-<%= author_attributes.label :name%>
-<%= author_attributes.text_field :name%><br>
+<%= author_attributes.label :first_name%>
+<%= author_attributes.text_field :first_name%><br>
+<%= author_attributes.label :last_name%>
+<%= author_attributes.text_field :last_name%><br>
 <%= author_attributes.label :born%>
 <%= author_attributes.date_field :born%><br>
 <%= author_attributes.label :died%>

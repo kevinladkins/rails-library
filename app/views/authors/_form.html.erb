@@ -1,11 +1,13 @@
 <%=form_for author do |f|%>
-<%= f.label :name%>
-<%= f.text_field :name%><br>
-<%= f.label :born%>
-<%= f.date_field :born%><br>
-<%= f.label :died%>
-<%= f.date_field :died %><br>
-<%= f.label :bio%>
-<%= f.text_area :bio, :cols => "30", :rows => "5" %><br>
-<%= f.submit%>
+	<%= f.label :first_name%>
+	<%= f.text_field :last_name%><br>
+	<%= f.label :last_name%>
+	<%= f.text_field :last_name%><br>
+	<%= f.label :born%>
+	<%= f.date_field :born%><br>
+	<%= f.label :died%>
+	<%= f.date_field :died %><br>
+	<%= f.label :bio%>
+	<%= f.text_area :bio, :cols => "30", :rows => "5" %><br>
+	<%= f.submit%>
 <%end%>
