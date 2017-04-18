@@ -29,7 +29,7 @@ class Book < ApplicationRecord
 
   def categories_attributes=(categories_attributes)
     name = categories_attributes["0"][:name]
-    self.categories.create(name: name, classification: self.classification) unless name.blank?
+    self.categories.build(name: name, classification: self.classification) unless name.blank?
   end
   
   def available_copies

@@ -20,17 +20,12 @@
 <%elsif logged_in? && current_user.librarian? %>
   <%= @book.copies%> in collection<br>
   
-  <%if @book.checked_out_copies != 0%>
-	  <%= @book.checked_out_copies%> checked out to: 
+  
+	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies != 0%> to: 
 	  <%@book.loans.each do |l|%>
 		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.due_date.strftime("%A, %B %d %Y")%>
 	  <%end%>
    <%end%>	  
-	   
-	<%=form_tag book_path(@book), method: :put %>
-	  Add A Copy <%=number_field_tag "book[add_copies]"%> 
-	<%= submit_tag "Add"%>
-
   
 
 <%end%>
