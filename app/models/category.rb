@@ -7,6 +7,6 @@ class Category < ApplicationRecord
   validates :name, :classification, presence: true
   validates :name, uniqueness: true
 
-  scope :fiction, -> {where(status: "fiction")}
-  scope :non_fiction, -> {where(status: "non_fiction")}
+  scope :fiction, -> {where(classification: "fiction")}
+  scope :non_fiction, -> {where(classification: "non_fiction")}
 end

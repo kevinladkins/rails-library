@@ -1,7 +1,15 @@
 <h1>Book Categories</h1>
 
+<h3>Fiction</h3>
 <ul>
-  <%@categories.each do |c| %>
+  <%@categories.fiction.order(:name).each do |c| %>
     <li><%=link_to c.name, category_path(c)%></li>
   <%end%>
+</ul>
+
+<h3>Non-Fiction</h3>
 <ul>
+  <%@categories.non_fiction.order(:name).each do |c| %>
+    <li><%=link_to c.name, category_path(c)%></li>
+  <%end%>
+</ul>
