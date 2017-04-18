@@ -1,9 +1,9 @@
 <h1><%= @author.name%>
 </h1>
 
-Born: <%= @author.born.strftime("%B %W, %Y") %><br>
+Born: <%= @author.born.strftime("%B %d, %Y") %><br>
 <% if @author.died %>
-Died: <%= @author.died.strftime("%B %W, %Y")%><br>
+Died: <%= @author.died.strftime("%B %d, %Y")%><br>
 <%end%>
 <h3>Bio: </h3>
 <p><%=@author.bio%></p>
