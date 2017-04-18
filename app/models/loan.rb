@@ -11,7 +11,7 @@ class Loan < ApplicationRecord
 
   def borrow_book(book_id)
     if book = Book.find(book_id)
-      if book.check_out
+      if book.available?
         self.book = book
         self.checkout_date = DateTime.now
         self.due_date = DateTime.now + 14
@@ -24,12 +24,10 @@ class Loan < ApplicationRecord
   end
 
   def return_book
-    self.book.check_in
     self.update(status: "returned")
   end
 
   def extend_loan(number_of_days)
-    binding.pry
     self.due_date = self.due_date + number_of_days.to_i.days
     self.save
   end

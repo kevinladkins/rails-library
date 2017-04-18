@@ -7,13 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 def make_seeds
   make_users
-  make_classifications
+  make_categories
   make_authors
 end
 
 
 def make_users
   [
+    {name: "Kevin Adkins", email: "kevinladkins@gmail.com", password: "umbrasprite", role: "librarian"},
     {name: "Lorna Adkins", email: "ladkins@gmail.com", password: "ladkins1", role: "librarian"},
     {name: "Marissa Saam", email: "msaam@gmail.com", password: "msaam1", role: "librarian"},
     {name: "Chris Fowler", email: "cfowler@gmail.com", password: "cfowler1", role: "patron"},
@@ -25,16 +26,16 @@ def make_users
   end
 end
 
-def make_classifications
+def make_categories
   [
-    {category: "fiction", main_type: "Science Fiction", subtype: "Space Opera"},
-    {category: "fiction", main_type: "Science Fiction", subtype: "Military Sci-Fi"},
-    {category: "fiction", main_type: "Literature", subtype: "Postmodern"},
-    {category: "non_fiction", main_type: "Computer Programming", subtype: "Javascript"},
-    {category: "non_fiction", main_type: "History", subtype: "20th Century Political History(U.S.)"},
-    {category: "non_fiction", main_type: "Criticism and Theory", subtype: "Music Criticism"}
-  ].each do |classification_hash|
-    Classification.create(classification_hash)
+    {classification: "fiction", name: "Space Opera"},
+    {classification: "fiction", name: "Military Sci-Fi"},
+    {classification: "fiction", name:  "Postmodern"},
+    {classification: "non_fiction", name: "Computer Programming"},
+    {classification: "non_fiction", name: "History"},
+    {classification: "non_fiction", name: "Music Criticism"}
+  ].each do |category_hash|
+    Category.create(category_hash)
   end
 end
 

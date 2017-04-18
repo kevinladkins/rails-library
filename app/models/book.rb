@@ -32,29 +32,21 @@ class Book < ApplicationRecord
     name = categories_attributes["0"][:name]
     self.categories.create(name: name, classification: self.classification) unless name.blank?
   end
-
-  def set_available_copies
-    amount = self.copies
-    self.available_copies = amount
+  
+  def available_copies
+    self.copies - self.loans.checked_out.count(:book_id)  
   end
 
-  def add_copies(number)
-    self.copies = self.copies + number
-    self.set_available_copies
-    save
-  end
 
   def available?
     available_copies > 0
   end
 
   def check_out
-    available? ? update(available_copies: available_copies - 1) : self.errors.add(:available_copies,  "No copies available")
+     self.errors.add(:available_copies,  "No copies available") unless available?
   end
 
-  def check_in
-    update(available_copies: available_copies + 1)
-  end
+
 
   private
 
