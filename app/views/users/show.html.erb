@@ -3,7 +3,7 @@
 <h3>Current Loans: </h3>
 <ul>
   <%@user.loans.each do |l|%>
-  <li><%=l.book.title%> || <%if l.overdue?%> OVERDUE -- PLEASE RETURN <%else%> due on <%= l.due_date.strftime("%A, %B %W %Y") %>  <%end%>  <%=button_to "Return", loan_path(l), method: :put, params: {book_id: l.book.id}%></li>
+  <li><%=l.book.title%> || <%if l.overdue?%> OVERDUE -- PLEASE RETURN <%else%> due on <%= l.due_date.strftime("%A, %B %W %Y") %>  <%end%>  <%=button_to "Return", loan_path(l), method: :put%></li>
   <%end%>
 </ul>
 <%end%>
