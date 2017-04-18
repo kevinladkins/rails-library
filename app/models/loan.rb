@@ -23,6 +23,11 @@ class Loan < ApplicationRecord
     self.due_date < DateTime.now
   end
 
+  def return_book
+    self.book.check_in
+    self.update(status: "returned")
+  end
+
 
 
 
