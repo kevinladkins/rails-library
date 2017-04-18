@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :sessions, only: :create
   resources :loans
 
+  scope 'librarians', module: 'dashboard' do 
+    resources :dashboard, only: [:index]
+  end
+
   get 'signup', to: 'users#new'
 
   get 'login', to: 'sessions#new'

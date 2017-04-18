@@ -24,7 +24,6 @@ class Book < ApplicationRecord
     ids.delete("")
     rejected_ids = self.category_ids - ids
     new_ids = ids - self.category_ids
-    binding.pry
     rejected_ids.each {|id| self.categories.delete(id)} unless rejected_ids.empty?
     ids.empty? ? self.categories.destroy_all : new_ids.each {|id| self.categories << Category.find(id)}
   end
@@ -33,8 +32,6 @@ class Book < ApplicationRecord
     name = categories_attributes["0"][:name]
     self.categories.create(name: name, classification: self.classification) unless name.blank?
   end
-
-
 
   def set_available_copies
     amount = self.copies
@@ -52,11 +49,7 @@ class Book < ApplicationRecord
   end
 
   def check_out
-    if available_copies == 0
-       self.errors.add(:available_copies,  "No copies available")
-    else
-      update(available_copies: available_copies - 1)
-    end
+    available? ? update(available_copies: available_copies - 1) : self.errors.add(:available_copies,  "No copies available")
   end
 
   def check_in
