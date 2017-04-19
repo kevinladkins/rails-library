@@ -1,10 +1,15 @@
-<h1>Overdue Loans</h1>
+<h3>Overdue Loans</h3>
 <ul>
   <%@loans.overdue.order(due_date: :desc).each do |l|%>
-  <li><%= l.book.title%> borrowed by <%=link_to l.patron.name, user_path(l.patron)%> on <%= l.checkout_date.strftime("%B %W, %Y")%> </li>
-    <%end%>
-  </ul>
+    <li><%= link_to l.book.title, book_path(l.book)%> borrowed by <%=link_to l.patron.name, user_path(l.patron)%> due on <%= l.due_date.strftime("%B %W, %Y")%> </li>
+  <%end%>
+</ul>
   
-<h1>All Current Loans</h1>
+<h3>All Current Loans</h3>
+<ul>
+  <%@loans.order(due_date: :desc).each do |l|%>
+  <li><%= link_to l.book.title, book_path(l.book)%> borrowed by <%=link_to l.patron.name, user_path(l.patron)%> on <%= l.checkout_date.strftime("%B %W, %Y")%> </li>
+    <%end%>
+</ul>
   
   

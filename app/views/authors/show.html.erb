@@ -1,10 +1,11 @@
-<h1><%= @author.name%>
-</h1>
+<h1><%= @author.name%></h1>
+
 
 Born: <%= @author.born.strftime("%B %d, %Y") %><br>
 <% if @author.died %>
 Died: <%= @author.died.strftime("%B %d, %Y")%><br>
-<%end%>
+<%end%><br>
+<%= link_to "Browse Books By This Author", author_books_path(@author)%><br>
 <h3>Bio: </h3>
 <p><%=@author.bio%></p>
 
@@ -12,9 +13,5 @@ Died: <%= @author.died.strftime("%B %d, %Y")%><br>
  <%=button_to "Edit", edit_author_path(@author), method: :get%>
 <%end%>
 
-<h3>Titles:</h3>
-<ul>
-<%@author.books.each do |book|%>
-  <li><%= link_to book.title, author_book_path(@author, book)%></li>
-<%end%>
-</ul>
+
+
