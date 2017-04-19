@@ -25,12 +25,14 @@
     <nav>
     <%if current_user%>
         <% if current_user.patron? %>
-           <%=link_to "Your Account", user_path(current_user)%> ||
+           <%=link_to "Home", user_path(current_user)%> ||
         <%elsif current_user.librarian?%>
-           <%=link_to "Dashboard", dashboard_index_path%> ||
+           <%=link_to "Home", dashboard_index_path%> ||
+        <%else%> 
+           <%= link_to "Home", root_path%> || 
         <%end%>
       <%end%>
-      <%= link_to "Home", root_path%> ||
+
       <%= link_to "Books", books_path%> ||
       <%= link_to "Authors", authors_path%> ||
       <%= link_to "Categories", categories_path%> 

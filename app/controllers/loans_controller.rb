@@ -1,7 +1,7 @@
 class LoansController < ApplicationController
 
   def index
-    @overdue = Loan.overdue.order(:due_date)
+    @loans = Loan.on_loan
   end
 
   def create

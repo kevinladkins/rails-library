@@ -6,8 +6,10 @@ class SessionsController < ApplicationController
 
   def create
     login
-    if current_user
-      redirect_to root_path
+    if current_user  && current_user.librarian?
+      redirect_to dashboard_index_path
+    elsif current_user
+      redirect_to current_user
     else
       render 'new'
     end
