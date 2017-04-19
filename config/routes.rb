@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
   resources :books do
     get :most_borrowed, on: :collection
+    resources :categories, only: [:new, :create]
    end
   
   
