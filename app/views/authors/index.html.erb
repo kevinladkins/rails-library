@@ -1,4 +1,7 @@
 <h1>Authors</h1>
+
+<%= render partial: 'application/search', locals: {item: @authors.first}%><br>
+
 <% @authors.each do |author|%><br>
  <%= link_to author.alphabetized_name, author_path(author)%>
 <%end%>

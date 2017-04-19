@@ -36,6 +36,7 @@ class Book < ApplicationRecord
     self.categories.build(name: name, classification: self.classification) unless name.blank?
   end
   
+  
   def available_copies
     self.copies - self.checked_out_copies 
   end

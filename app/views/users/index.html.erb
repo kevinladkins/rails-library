@@ -1,5 +1,7 @@
 <%= render partial: 'application/search', locals: {item: @users.first}%><br>
+
 <ul>
   <%@users.each do |user| %>
     <li><%=link_to user.alphabetized_name, user_path(user)%></li>
   <%end%>
+</ul>
