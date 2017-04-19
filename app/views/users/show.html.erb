@@ -13,9 +13,7 @@
     <%if current_user.patron?%>
       <%=button_to "Return", loan_path(l), method: :put%>
     <%elsif current_user.librarian?%>
-      <br><%=form_tag loan_path(l), method: :put%>
-      Extend Loan <%=text_field_tag "extend"%> Days
-      <%= submit_tag "Extend"%>
+      <%=link_to "Extend Loan", edit_loan_path(l)%>
     <%end%>
   </li>
   <%end%>

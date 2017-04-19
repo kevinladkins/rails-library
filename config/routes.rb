@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :create, :edit, :show, :update]
   resources :sessions, only: [:create]
-  resources :loans
+  resources :loans, only: [:index, :create, :edit, :update]
   resources :categories, only: [:index, :show]
 
   scope 'librarians', module: 'librarians' do

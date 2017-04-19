@@ -14,6 +14,10 @@
  *= require_self
  */
 
+* {
+  font-family: arial;
+}
+
 #logo {
   display: inline-block;
   color: white;
@@ -31,6 +35,11 @@
   text-decoration: none;
 }
 
+.librarian-option {
+  font-variant: small-caps;
+  color: red;
+}
+
 header {
   background: grey;
 }
@@ -39,6 +48,6 @@ fieldset {
   width: 20em;
 }
 
-* {
-  font-family: arial;
-}
+
+
+

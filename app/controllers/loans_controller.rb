@@ -6,7 +6,7 @@ class LoansController < ApplicationController
 
   def create
     loan = current_user.loans.build
-    loan.borrow_book(params[:book_id])
+    loan.borrow_book(params[book_params][:book_id])
     if loan.save
       flash.alert = "Checkout successful."
       redirect_to user_path(current_user)
@@ -19,13 +19,18 @@ class LoansController < ApplicationController
   def show
 
   end
+  
+  def edit
+    @loan = Loan.find(params[:id])
+  end
 
   def update
     loan = Loan.find(params[:id])
-    if params[:extend]
-      loan.extend_loan(params[:extend])
+    if current_user.librarian? && params[:loan][:due_date]
+      binding.pry
+      loan.update(loan_params)
       flash.alert = "Loan extened until #{loan.due_date.strftime("%A, %B %W %Y")}."
-      redirect_to :back
+      redirect_to dashboard_index_path
     else
       loan.return_book
       flash.alert = "Book returned."
@@ -38,7 +43,7 @@ class LoansController < ApplicationController
   private
 
   def loan_params
-    params.require(:book_id)
+    params.require(:loan).permit(:book_id, :due_date)
   end
 
 end
