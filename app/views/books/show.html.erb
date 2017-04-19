@@ -15,7 +15,7 @@
 
 <%if logged_in? && current_user.patron? && @book.available? %>
   <%=@book.available_copies%> available
-  <%=button_to "Borrow", loans_path, method: :post, params: {book_id: @book.id}%>
+  <%=button_to "Borrow", loans_path, method: :post, params: {"loan[book_id]": @book.id}%>
   
 <%elsif logged_in? && current_user.librarian? %>
   <%= @book.copies%> in collection<br>
