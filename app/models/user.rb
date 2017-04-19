@@ -25,13 +25,6 @@ class User < ApplicationRecord
 		end
 	end
 
-	def alphabetized_name
-	  self.last_name + ", " + self.first_name
-	end
-
-	def set_name
-	  self.name = self.first_name + " " + self.last_name
-	end
 
 	def number_of_loans
 	  checked_out_books.size

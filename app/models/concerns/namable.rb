@@ -1,4 +1,4 @@
-module Searchable
+module Namable
   extend ActiveSupport::Concern
 
 	  module InstanceMethods
