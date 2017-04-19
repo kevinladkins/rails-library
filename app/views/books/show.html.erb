@@ -26,7 +26,7 @@
   
   
 	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies != 0%> to: <br><br>
-	  <%@book.loans.each do |l|%>
+	  <%@book.loans.on_loan.each do |l|%>
 		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.due_date.strftime("%A, %B %d %Y")%><br>
 	  <%end%>
    <%end%>	  
