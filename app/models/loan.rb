@@ -18,7 +18,9 @@ class Loan < ApplicationRecord
       end
     end
   end
-
+  
+        
+ 
   def overdue?
     self.due_date < DateTime.now
   end

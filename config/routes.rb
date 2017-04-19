@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get 'home', to: 'home#index'
-  resources :books
+  resources :books do
+    get :most_borrowed, on: :collection
+   end
+  
+  
   resources :authors do
     resources :books, only: [:index, :show]
   end

@@ -1,7 +1,7 @@
 
 <%if author_view?%>
 
-	<%if current_user.librarian?%>
+	<%if current_user && current_user.librarian?%>
 	   <h1>Manage Books by <%=link_to @author.name, author_path(@author)%></h1>
 	   <%= button_to "Add a Book", new_book_path, method: :get%>
 	<%else%>
@@ -11,11 +11,12 @@
     <%= render partial: 'books_list', locals: {books: @author.books}%>
     
 <%else%>
-  <% if current_user.librarian?%>
+  <% if current_user && current_user.librarian?%>
      <h1>Manage Books</h1>
      <%= button_to "Add a Book", new_book_path, method: :get%>
   <%else%>
     <h1>Browse Books</h1>
   <%end%>
+    <h3><%=link_to "View Our Most-Borrowed Books", most_borrowed_books_path%></h3>
     <%= render partial: 'books_list', locals: {books: @books}%>
 <%end%>

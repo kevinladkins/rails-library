@@ -21,7 +21,11 @@ class BooksController < ApplicationController
   end
 
   def show
-
+   
+  end
+  
+  def most_borrowed
+    @most_borrowed_books = Book.most_borrowed
   end
 
   def edit

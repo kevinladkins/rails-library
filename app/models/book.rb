@@ -14,10 +14,14 @@ class Book < ApplicationRecord
 
   scope :fiction, -> {where(classification: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}
-
+  
 
 
   extend Searchable::ClassMethods
+  
+  def self.most_borrowed
+    joins(:loans).group("loans.book_id").order("count (*) desc").limit(5)
+  end
 
   def category_ids=(ids)
     ids.delete("")
