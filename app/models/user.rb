@@ -5,28 +5,42 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  validates :name, :email, :role, presence: :true
+  validates :first_name, :last_name, :email, :role, presence: :true
   validates :email, uniqueness: :true
 
   enum role: [:patron, :librarian]
+  
+  before_create :set_name
+  
+  include Namable::InstanceMethods
+  
 
-  def self.find_or_create_by_omniauth(auth)
-    if user = self.find_by(email: auth['email'])
-      user
-    else
-      user = self.create(email: auth['email'], name: auth['name'])
-      user.password = SecureRandom.hex
-      user
-    end
-  end
+	def self.find_or_create_by_omniauth(auth)
+		if user = self.find_by(email: auth['email'])
+		  user
+		else
+		  user = self.create(email: auth['email'], name: auth['name'])
+		  user.password = SecureRandom.hex
+		  user
+		end
+	end
 
-  def number_of_loans
-    checked_out_books.size
-  end
+	def alphabetized_name
+	  self.last_name + ", " + self.first_name
+	end
 
-  def checked_out_books
-    loans.checked_out.map {|l| l.book}
-  end
+	def set_name
+	  self.name = self.first_name + " " + self.last_name
+	end
+
+	def number_of_loans
+	  checked_out_books.size
+	end
+
+	def checked_out_books
+		loans.checked_out.map {|l| l.book}
+	end
+	
 
 
 end

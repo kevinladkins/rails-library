@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418233440) do
+ActiveRecord::Schema.define(version: 20170419000559) do
 
   create_table "authors", force: :cascade do |t|
     t.datetime "born"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170418233440) do
     t.integer  "role",            default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
 end
