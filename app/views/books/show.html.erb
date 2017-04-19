@@ -6,24 +6,28 @@
 
 <strong>Categories: || </strong><%@book.categories.each do |c|%><%=link_to c.name, category_path(c) %> || <%end%>
 
+<%if librarian?%>
+  <br><br><%=button_to "Create New Category", new_book_category_path(@book), method: :get%>
+<%end%>
+
 <p><%=@book.synopsis%></p>
 
-<%if logged_in? && current_user.librarian? %>
+<%if librarian? %>
   <%=button_to "Edit Book", edit_book_path(@book), method: :get%>
 <%end%><br>
 
 
-<%if logged_in? && current_user.patron? && @book.available? %>
+<%if patron? && @book.available? %>
   <%=@book.available_copies%> available
   <%=button_to "Borrow", loans_path, method: :post, params: {"loan[book_id]": @book.id}%>
   
-<%elsif logged_in? && current_user.librarian? %>
+<%elsif librarian? %>
   <%= @book.copies%> in collection<br>
   
   
-	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies != 0%> to: 
+	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies != 0%> to: <br><br>
 	  <%@book.loans.each do |l|%>
-		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.due_date.strftime("%A, %B %d %Y")%>
+		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.due_date.strftime("%A, %B %d %Y")%><br>
 	  <%end%>
    <%end%>	  
   
