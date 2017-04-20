@@ -32,9 +32,12 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book.update(book_params)
-    redirect_to @book
-  end
+    book = Book.find(params[:id])
+    if book.update(params[:book])
+       redirect_to book_path(book)
+    else
+      render 'edit'
+   end
 
   def destroy
   end
@@ -44,8 +47,6 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :publication_year, :copies, :author_id, :synopsis, :classification, author_attributes: [:name, :born, :died], :category_ids => [], categories_attributes: [:name])
   end
-  
-  
 
   def set_book
     @book = Book.find(params[:id])
