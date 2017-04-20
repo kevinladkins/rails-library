@@ -17,7 +17,7 @@ module ApplicationHelper
      !!logged_in? && !!current_user.patron?
   end
   
-  def sort_by_attribute(collection, attribute)
+  def alphabetize_by(collection, attribute)
     collection.sort_by &attribute.to_sym
   end
 

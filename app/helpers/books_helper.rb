@@ -6,8 +6,7 @@ module BooksHelper
   
   def classification_list(object, classification)
     selected = object.select {|o| o.classification == classification}
-    alphabetized = sort_by_attribute(selected, "title")
-    alphabetized
+    alphabetize_by(selected, :title)
   end
   
   

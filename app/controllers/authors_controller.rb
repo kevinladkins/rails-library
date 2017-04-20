@@ -44,7 +44,7 @@ class AuthorsController < ApplicationController
   end
 
   def set_authors
-    @authors = Author.name_search(params[:query]).order(:last_name)
+    @authors = Author.name_search(params[:query])
   end
 
 
