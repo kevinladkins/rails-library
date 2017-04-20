@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+
+  extend Searchable::ClassMethods
   
   enum classification: {fiction: 0, non_fiction: 1}
   
@@ -8,23 +10,13 @@ class Book < ApplicationRecord
   has_many :book_categories
   has_many :categories, through: :book_categories
 
-  accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
-
   validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
 
-  
+  accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
 
   scope :fiction, -> {where(classification: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}
-  
-
-
-  extend Searchable::ClassMethods
-  
-  def self.most_borrowed
-    joins(:loans).group("loans.book_id").order("count (*) desc").limit(5)
-  end
 
   def category_ids=(ids)
     ids.delete("")
@@ -39,6 +31,13 @@ class Book < ApplicationRecord
     self.categories.build(name: name, classification: self.classification) unless name.blank?
   end
   
+  def available?
+    available_copies > 0
+  end
+  
+  def self.most_borrowed
+    joins(:loans).group("loans.book_id").order("count (*) desc").limit(5)
+  end
   
   def available_copies
     self.copies - self.checked_out_copies 
@@ -52,18 +51,9 @@ class Book < ApplicationRecord
     self.copies = self.copies + new_copies
   end
 
-
-  def available?
-    available_copies > 0
-  end
-
   def check_out
      self.errors.add(:available_copies,  "No copies available") unless available?
   end
-
-
-
-  private
 
 
 

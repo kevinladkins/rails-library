@@ -1,13 +1,15 @@
 class Author < ActiveRecord::Base
 
-has_many :books
+  extend Searchable::ClassMethods
+  include Namable::InstanceMethods
 
-validates :first_name, :last_name, :born, presence: :true
+  has_many :books
 
-before_create :set_name
+  validates :first_name, :last_name, :born, presence: :true
+  
+  before_create :set_name
 
-extend Searchable::ClassMethods
-include Namable::InstanceMethods
+
 
 	
 
