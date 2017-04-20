@@ -1,7 +1,7 @@
-<%if books.fiction.any?%>
+
   <h3>Fiction</h3>
 	<ul>
-	  <%books.fiction.each do |b|%>
+	  <%classification_list(books, "fiction").each do |b|%>
 		<% if author_view? %>
 		   <li><%= link_to b.title, book_path(b)%>
 		<%else%>
@@ -9,12 +9,11 @@
 		<%end%>
 	  <%end%>
 	</ul>
-<%end%>
 	
-<%if books.non_fiction.any?%>
+	
   <h3>Non-Fiction</h3>
 	<ul>
-	  <%books.non_fiction.each do |b|%>
+	  <%classification_list(books, "non_fiction").each do |b|%>
 		<% if author_view? %>
 		   <li><%= link_to b.title, book_path(b)%>
 		<%else%>
@@ -22,4 +21,4 @@
 		<%end%>
 	  <%end%>
 	</ul>
-  <%end%>
+ 

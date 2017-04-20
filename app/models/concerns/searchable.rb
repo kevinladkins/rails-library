@@ -9,18 +9,18 @@ module Searchable
     def title_search(query)
       if query.present?
         search = where('title like ?', "%#{query}")
-        search.empty? ? self.all : search
+        search.empty? ? self.find_each : search
       else
-        self.all
+        self.find_each
       end
     end
 
     def name_search(query)
       if query.present?
         search = where('name like ?', "%#{query}")
-        search.empty? ? self.all : search
+        search.empty? ? self.find_each : search
       else
-        self.all
+        self.find_each
       end
     end
     

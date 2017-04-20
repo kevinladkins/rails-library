@@ -17,8 +17,8 @@ module ApplicationHelper
      !!logged_in? && !!current_user.patron?
   end
   
-  def classification_list(object, classification)
-    selected = object.select {|o| o.classification = classification}
+  def sort_by_attribute(collection, attribute)
+    collection.sort_by &attribute.to_sym
   end
 
 

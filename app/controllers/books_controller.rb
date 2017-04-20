@@ -46,7 +46,7 @@ class BooksController < ApplicationController
   end
 
   def set_books_view
-    @books = Book.title_search(params[:query]).order(:title)
+    @books = Book.title_search(params[:query])
   end
 
   def set_author_books_view
