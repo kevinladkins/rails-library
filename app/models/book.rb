@@ -13,11 +13,17 @@ class Book < ApplicationRecord
   validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
 
-  accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['name'].blank?}
+  #accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['last_name'].blank?}
 
   scope :fiction, -> {where(classification: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}
+  
+  
+  def author_attributes=(author_attributes)
+    self.build_author(author_attributes) unless author_attributes[:last_name].blank?
+  end
 
+  
   def category_ids=(ids)
     ids.delete("")
     rejected_ids = self.category_ids - ids

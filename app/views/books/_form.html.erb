@@ -1,4 +1,4 @@
-<%= form_for book do |f|%>
+
 <%= f.radio_button :classification, "fiction" %>
 <%= f.label :classfication, "Fiction" %>
 <%= f.radio_button :classification, "non_fiction" %>
@@ -6,33 +6,11 @@
 <%= f.label :title %>
 <%= f.text_field :title%><br>
 <%= f.label :author %>
-<%= f.collection_select :author_id, Author.all.order(:last_name), :id, :name%><br>
+<%= f.collection_select :author_id, Author.all.order(:last_name), :id, :name, {:include_blank => "Please select"}%><br>
 <%= f.label :publication_year%>
 <%= f.number_field :publication_year%><br>
 <%= f.label :synopsis%><br>
 <%= f.text_area :synopsis, :cols => "30", :rows => "5"%><br>
 <%= f.label :copies%>
 <%= f.number_field :copies%><br><br>
-<%= field_set_tag "New Author" do %>
-<%= f.fields_for :author, book.build_author do |author_attributes|%>
-<%= author_attributes.label :first_name%>
-<%= author_attributes.text_field :first_name%><br>
-<%= author_attributes.label :last_name%>
-<%= author_attributes.text_field :last_name%><br>
-<%= author_attributes.label :born%>
-<%= author_attributes.date_field :born%><br>
-<%= author_attributes.label :died%>
-<%= author_attributes.date_field :died%><br>
-<%end%><br>
-<%end%>
-<%= field_set_tag "Categories" do %>
-<%= f.collection_check_boxes :category_ids, Category.all, :id, :name%><br><br>
-<%= f.label "New Category"%>
-<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
-<%= category_attributes.label :name%>
-<%= category_attributes.text_field :name%><br>
-<%end%><br>
-<%end%>
 
-<%= f.submit%>
-<%end%>

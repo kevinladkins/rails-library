@@ -3,5 +3,5 @@
 <%= render partial: 'application/search', locals: {item: @authors.first}%><br>
 
 <% alphabetize_by(@authors, :last_name).each do |author|%><br>
- <%= link_to author.alphabetized_name, author_path(author)%>
+  <%= link_to author.alphabetized_name, author_path(author)%>
 <%end%>

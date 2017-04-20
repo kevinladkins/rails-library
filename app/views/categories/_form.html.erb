@@ -1,6 +1,4 @@
-    <%= f.radio_button :classification, "fiction" %>
-	<%= f.label :classfication, "Fiction" %>
-	<%= f.radio_button :classification, "non_fiction" %>
-	<%= f.label :classfication, "Non-Fiction" %><br>
+	<%= f.hidden_field :classification %>
+	<%= hidden_field_tag :classification, book.classification  %>
 	<%= f.label :name%>
 	<%= f.text_field :name%>

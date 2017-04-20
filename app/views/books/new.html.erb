@@ -2,4 +2,29 @@
 
 <h1>Add a New Book</h1>
 
-<%= render partial: 'form', locals: {book: @book}%>
+<%= form_for @book do |f|%>
+  <%= render partial: 'form', locals: {book: @book, f: f}%>
+
+<%= field_set_tag "New Author" do %>
+	<%= f.fields_for :author, @book.build_author do |author_attributes|%>
+		<%= author_attributes.label :first_name%>
+		<%= author_attributes.text_field :first_name%><br>
+		<%= author_attributes.label :last_name%>
+		<%= author_attributes.text_field :last_name%><br>
+		<%= author_attributes.label :born%>
+		<%= author_attributes.date_field :born%><br>
+		<%= author_attributes.label :died%>
+		<%= author_attributes.date_field :died%><br>
+	<%end%><br>
+<%end%>
+
+<%= field_set_tag "Categories" do %>
+	<%= f.collection_check_boxes :category_ids, Category.all, :id, :name%><br><br>
+	<%= f.label "New Category: "%>
+	<%= f.fields_for :categories, @book.categories.build do |category_attributes|%>
+		<%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
+  <%end%><br>
+<%end%>
+
+<%= f.submit%>
+<%end%>

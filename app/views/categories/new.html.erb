@@ -3,6 +3,6 @@
 <%= render partial: 'application/errors', locals: {item: @category}%>
 
 <%= form_for @category, url: book_categories_path(@book) do |f|%>
-	<%= render 'form', f: f%>
+	<%= render partial: 'form', locals: {book: @book, f: f}%>
 	<%= f.submit%>
 <%end%>
