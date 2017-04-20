@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 
-  def generate_path(item)
+  def generate_path_name(item)
     pluralize(2, item.class.name.downcase).split.last
   end
 
@@ -16,6 +16,11 @@ module ApplicationHelper
   def patron?
      !!logged_in? && !!current_user.patron?
   end
+  
+  def classification_list(object, classification)
+    selected = object.select {|o| o.classification = classification}
+  end
+
 
 
 

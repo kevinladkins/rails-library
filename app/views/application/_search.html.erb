@@ -1,4 +1,4 @@
-<%= form_tag generate_path(item), method: :get do%>
+<%= form_tag generate_path_name(item), method: :get do%>
 <%= text_field_tag :query, params[:query], placeholder: "Search #{item_name(item)}"%>
 <%= submit_tag "Search", name: nil%>
 <%end%>
