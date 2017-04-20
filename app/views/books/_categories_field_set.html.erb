@@ -1,0 +1,10 @@
+<%= field_set_tag "Categories" do %>
+		
+		<%= render partial: 'categories/check_boxes', locals: {f: f}%> <br><br>
+		
+		<%= f.label "New Category: " %>
+		<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
+		  <%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
+		<%end%><br>
+	
+	<%end%>

@@ -4,26 +4,5 @@
 
 <%= form_for @book do |f|%>
   <%= render partial: 'form', locals: {book: @book, f: f}%>
-
-<%= field_set_tag "New Author" do %>
-
-	<%= f.fields_for :author, @book.build_author do |author_attributes|%>
-		<%= render partial: 'authors/form', locals: {f: author_attributes}%>
-	<%end%><br>
-	
-<%end%>
-
-<%= field_set_tag "Categories" do %>
-
-	<%= render partial: 'categories/check_boxes', locals: {f: f}%> <br><br>
-	
-	<%= f.label "New Category: " %>
-	
-	<%= f.fields_for :categories, @book.categories.build do |category_attributes|%>
-		 <%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
-  <%end%><br>
-  
-<%end%>
-
-<%= f.submit%>
+  <%= f.submit%>
 <%end%>
