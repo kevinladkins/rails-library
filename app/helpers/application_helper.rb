@@ -20,6 +20,11 @@ module ApplicationHelper
   def alphabetize_by(collection, attribute)
     collection.sort_by &attribute.to_sym
   end
+  
+  def classification_list(object, classification, attribute)
+    selected = object.select {|o| o.classification == classification}
+    alphabetize_by(selected, attribute)
+  end
 
 
 
