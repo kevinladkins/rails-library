@@ -1,4 +1,7 @@
 class Loan < ApplicationRecord
+
+  enum status: {checked_out: 0, returned: 1}
+  
   belongs_to :patron, class_name: "User"
   belongs_to :book
 
@@ -7,7 +10,7 @@ class Loan < ApplicationRecord
   scope :on_loan, -> {where(status: "checked_out")}
   scope :overdue, -> {on_loan.where("due_date < ?", DateTime.now)}
 
-  enum status: [:checked_out, :returned]
+  
 
   def borrow_book(book_id)
     if book = Book.find(book_id)

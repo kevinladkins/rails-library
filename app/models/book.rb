@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+  
+  enum classification: {fiction: 0, non_fiction: 1}
+  
   belongs_to :author
   has_many :loans
   has_many :borrowers, :through => :loans, :source => :patron
@@ -10,7 +13,7 @@ class Book < ApplicationRecord
   validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
 
-  enum classification: [:fiction, :non_fiction]
+  
 
   scope :fiction, -> {where(classification: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}
