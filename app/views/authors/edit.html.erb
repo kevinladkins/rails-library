@@ -1,7 +1,7 @@
 <%= render partial: 'application/errors', locals: {item: @author}%>
 
 
-<%= form_for @book do |f|%>
-  <%= render partial: 'form', locals: {book: @book, f: f}%>
-  <%= f.submit%>
+<%= form_for @author do |f|%>
+  <%= render partial: 'form', locals: {f: f}%>
+<%= f.submit%>
 <%end%>
