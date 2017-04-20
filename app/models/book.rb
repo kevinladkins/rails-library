@@ -13,7 +13,6 @@ class Book < ApplicationRecord
   validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
 
-  #accepts_nested_attributes_for :author, :reject_if => proc {|attributes| attributes['last_name'].blank?}
 
   scope :fiction, -> {where(classification: "fiction")}
   scope :non_fiction, -> {where(classification: "non_fiction")}

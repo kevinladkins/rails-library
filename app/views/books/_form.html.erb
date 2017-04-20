@@ -6,7 +6,7 @@
 <%= f.label :title %>
 <%= f.text_field :title%><br>
 <%= f.label :author %>
-<%= f.collection_select :author_id, Author.all.order(:last_name), :id, :name, {:include_blank => "Please select"}%><br>
+<%= f.collection_select :author_id, Author.all.order(:last_name), :id, :name%><br>
 <%= f.label :publication_year%>
 <%= f.number_field :publication_year%><br>
 <%= f.label :synopsis%><br>
