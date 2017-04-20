@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
 
-  def new
-    
-  end
 
   def create
     login
@@ -13,15 +10,6 @@ class SessionsController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def edit
-  end
-
-  def update
-    book = Book.find(params[:id])
-    book.update(params[:book])
-    redirect_to book_path(book)
   end
 
 

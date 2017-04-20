@@ -23,6 +23,8 @@ module Searchable
         self.all
       end
     end
+    
+        
 
   end
 

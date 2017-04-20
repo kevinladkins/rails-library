@@ -37,6 +37,7 @@ class BooksController < ApplicationController
        redirect_to book_path(book)
     else
       render 'edit'
+    end
    end
 
   def destroy
