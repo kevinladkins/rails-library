@@ -13,11 +13,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    if @book.save
-      redirect_to @book
-    else
-      render 'new'
-    end
+    @book.save ? redirect_to(@book) : render('new')
   end
 
   def show
@@ -33,11 +29,7 @@ class BooksController < ApplicationController
 
   def update
     book = Book.find(params[:id])
-    if book.update(params[:book])
-       redirect_to book_path(book)
-    else
-      render 'edit'
-    end
+    book.update(book_params) ? redirect_to(book_path(book)) : render('edit')
    end
 
   def destroy

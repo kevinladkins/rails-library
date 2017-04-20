@@ -55,6 +55,4 @@ class Book < ApplicationRecord
      self.errors.add(:available_copies,  "No copies available") unless available?
   end
 
-
-
 end
