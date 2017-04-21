@@ -4,12 +4,11 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update]
 
   def index
-    params[:author_id] ? set_author_books_view : set_books_view
+    set_books
   end
 
   def new
-    raise params.inspect
-    @book = Book.new
+    set_new_book
   end
 
   def create
@@ -46,12 +45,23 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
-  def set_books_view
-    @books = Book.title_search(params[:query])
+  def set_books
+    if params[:author_id]
+      @author = Author.find(params[:author_id])
+      @books = @author.books.find_each
+    else
+      @books = Book.title_search(params[:query])
+    end
+  end
+  
+  def set_new_book
+    if params[:author_id]
+      @author = Author.find(params[:author_id])
+      @book = @author.books.build
+    else 
+      @book = Book.new
+    end
   end
 
-  def set_author_books_view
-    @author = Author.find(params[:author_id])
-    @books = @author.books.find_each
-  end
+
 end
