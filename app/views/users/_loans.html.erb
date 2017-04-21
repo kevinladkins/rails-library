@@ -8,21 +8,18 @@
 	  <% on_loan_to(user).each do |loan| %> 
 		
 			<%if loan.overdue?%>
-				<li><%=link_to loan.book.title, book_path(loan.book)%> ||
+				<li><%=render partial: 'books/links', locals: {book: loan.book}%> ||
 				OVERDUE <%if patron?%> -- PLEASE RETURN <%end%> 
 			
 			<%else%>
 			
-				<li><%=link_to loan.book.title, book_path(loan.book)%> ||
+				<li><%=render partial: 'books/links', locals: {book: loan.book}%> ||
 				due on <%= loan.show_due_date %>
 			<%end%>
 			
-			<%if patron?%>
-			
-				<%=button_to "Return", loan_path(loan), method: :put%>
+		  <%= render partial: 'return_book_button', locals: {loan: loan}%>
+		  <%= render partial: 'extend_loan_button', locals: {loan: loan}%>
 				
-			<%elsif librarian?%>
-				<%=button_to  "Extend Loan", edit_loan_path(loan), method: :get%>
 			<%end%>
 		
 		</li>
