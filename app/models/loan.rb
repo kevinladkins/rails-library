@@ -35,6 +35,15 @@ class Loan < ApplicationRecord
     self.due_date = self.due_date + number_of_days.to_i.days
     self.save
   end
+  
+  def self.number_of_loans(patron)
+	  self.checked_out_books(patron).size
+	end
+  
+  def self.checked_out_books(patron)
+	  patron_loans = self.includes(:patron).where(patron_id: patron.id)
+	  patron_loans.checked_out.map {|l| l.book}
+	end
 
 
 

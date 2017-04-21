@@ -16,21 +16,14 @@ class User < ApplicationRecord
   
 
   def self.find_or_create_by_omniauth(auth)
-	if user = self.find_by(email: auth['email'])
-	  user
-	 else
-	  user = self.new(email: auth['email'], first_name: auth['first_name'], last_name: auth['last_name'])
-	  user.password = SecureRandom.hex
-	  user
-	  end
+		if user = self.find_by(email: auth['email'])
+			user
+		 else
+			user = self.new(email: auth['email'], first_name: auth['first_name'], last_name: auth['last_name'])
+			user.password = SecureRandom.hex
+			user
+		 end
 	end
 
-	def number_of_loans
-	  checked_out_books.size
-	end
-
-	def checked_out_books
-	  loans.checked_out.map {|l| l.book}
-	end
 
 end
