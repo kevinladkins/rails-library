@@ -1,19 +1,20 @@
 <h1><%= @author.name%></h1>
 
 
-Born: <%= @author.born.strftime("%B %d, %Y") %><br>
-<% if @author.died %>
-  Died: <%= @author.died.strftime("%B %d, %Y")%><br>
-<%end%><br>
+Born: <%= @author.birth_date %><br>
+Died: <%= @author.death_date%><br>
 
-<%= link_to "Browse Books By This Author", author_books_path(@author)%><br>
+
+<br><%= link_to "Browse Books By This Author", author_books_path(@author)%> 
+<%= render partial: 'add_book_button', locals: {author: @author}%>
+<br>
 
 <h3>Bio: </h3>
 <p><%=@author.bio%></p>
 
-<%if librarian?%>
-  <%=button_to "Edit", edit_author_path(@author), method: :get%>
-<%end%>
+<%= render partial: 'edit_button', locals: {author: @author}%>
+
+
 
 
 

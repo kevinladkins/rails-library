@@ -8,6 +8,7 @@ class BooksController < ApplicationController
   end
 
   def new
+    raise params.inspect
     @book = Book.new
   end
 

@@ -14,13 +14,7 @@
 <%= f.label :copies%>
 <%= f.number_field :copies%><br><br>
  
-<%= field_set_tag "New Author" do %>
-	
-    <%= f.fields_for :author, book.build_author do |author_attributes|%>
-			<%= render partial: 'authors/form', locals: {f: author_attributes}%>
-		<%end%><br>
-	
-<%end%>
+<%= render partial: 'new_author_field_set', locals: {book: book, f: f} unless author_view?%>
 
 
 <%= field_set_tag "Categories" do %>
