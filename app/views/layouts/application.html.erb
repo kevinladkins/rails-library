@@ -11,30 +11,13 @@
   <body>
   <header>
     <h1 id="logo">RAILS LIBRARY</h1>
-     <span id="user-nav">
-    <%if current_user%>
-      <strong>Logged in as: </strong><%=current_user.name%> ||
-      <%= link_to "Logout", logout_path, method: :delete%>
-    <%else%>
-      <%= link_to "Sign Up", signup_path%> ||
-      <%= link_to "Log In", login_path%> ||
-      <%= link_to "Facebook Log In", "auth/facebook"%>
-    <%end%>
+     <span id="login-nav">
+        <%= render 'layouts/login_nav'%>
      <span>
   </header>
     <nav>
-    <%if current_user%>
-        <% if current_user.patron? %>
-           <%=link_to "Your Account", user_path(current_user)%> ||
-        <%elsif current_user.librarian?%>
-           <%=link_to "Dashboard", dashboard_index_path%> ||
-        <%end%> 
-           <%= link_to "Home", root_path%> || 
-      <%end%>
-
-      <%= link_to "Books", books_path%> ||
-      <%= link_to "Authors", authors_path%> ||
-      <%= link_to "Categories", categories_path%> 
+     <%= render 'layouts/user_nav'%>
+     <%= render 'layouts/site_nav'%>
       
     </nav><br>
 

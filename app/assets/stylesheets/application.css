@@ -24,28 +24,20 @@
   padding-left: 2px;
 }
 
-#user-nav {
+#login-nav {
   color: white;
   float: right;
   margin-top: 2em;
   margin-right: 1em;
 }
 
-#user-nav a {
+#login-nav a {
   text-decoration: none;
 }
 
 .librarian-option {
   font-variant: small-caps;
   color: red;
-}
-
-header {
-  background: grey;
-}
-
-fieldset {
-  width: 20em;
 }
 
 .button_to,
@@ -57,6 +49,16 @@ fieldset {
 .link_to div {
   display: inline;
 }
+
+header {
+  background: grey;
+}
+
+fieldset {
+  width: 20em;
+}
+
+
 
 
 
