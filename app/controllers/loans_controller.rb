@@ -1,4 +1,6 @@
 class LoansController < ApplicationController
+  
+  before_action :authorize_user, only: :edit
 
   def index
     @loans = Loan.on_loan
@@ -12,7 +14,7 @@ class LoansController < ApplicationController
       redirect_to user_path(current_user)
     else
        redirect_to :back
-       flash.alert = "Sorry, this book is not available."
+       flash.alert = "Sorry, this book is currently not available."
     end
   end
 
@@ -29,7 +31,7 @@ class LoansController < ApplicationController
     if current_user.librarian? && params[:loan][:due_date]
       loan.update(loan_params)
       flash.alert = "Loan extened until #{loan.due_date.strftime("%A, %B %W %Y")}."
-      redirect_to dashboard_index_path
+      redirect_to :back
     else
       loan.return_book
       flash.alert = "Book returned."
