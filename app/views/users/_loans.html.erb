@@ -8,6 +8,7 @@
 	  <% on_loan_to(user).each do |loan| %> 
 		
 			<%if loan.overdue?%>
+			
 				<li><%=render partial: 'books/links', locals: {book: loan.book}%> ||
 				OVERDUE <%if patron?%> -- PLEASE RETURN <%end%> 
 			
@@ -15,12 +16,12 @@
 			
 				<li><%=render partial: 'books/links', locals: {book: loan.book}%> ||
 				due on <%= loan.show_due_date %>
+				
 			<%end%>
 			
 		  <%= render partial: 'return_book_button', locals: {loan: loan}%>
 		  <%= render partial: 'extend_loan_button', locals: {loan: loan}%>
-				
-			<%end%>
+	
 		
 		</li>
 		<%end%>

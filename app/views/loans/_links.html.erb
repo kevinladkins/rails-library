@@ -1,1 +1,1 @@
-<%= link_to loan.book.title, book_path(loan.book)%> borrowed by <%=link_to loan.patron.name, user_path(loan.patron)%>
+<%=render partial: 'books/links', locals: {book: loan.book}%> borrowed by <%=link_to loan.patron.name, user_path(loan.patron)%>
