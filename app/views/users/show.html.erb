@@ -1,24 +1,9 @@
 <h1><%= @user.name%></h1>
 
-<% if @user.checked_out_books.any?%>
+<%= render partial: 'delete_user_button', locals: {user: @user}%>
 
-<h3>Current Loans: </h3>
+<%= render partial: 'loans', locals: {user: @user}
 
-<ul>
-  <%@user.loans.checked_out.each do |loan|%>
-    <%if loan.overdue?%>
-      <li><%=link_to loan.book.title, book_path(loan.book)%> ||
-      OVERDUE <%if patron?%> -- PLEASE RETURN <%end%>
-    <%else%>
-      <li><%=link_to loan.book.title, book_path(loan.book)%> ||
-      due on <%= loan.due_date.strftime("%A, %B %d %Y") %>
-    <%end%>
-    <%if patron?%>
-      <%=button_to "Return", loan_path(loan), method: :put%>
-    <%elsif librarian?%>
-      <%=link_to "Extend Loan", edit_loan_path(loan)%>
-    <%end%>
-  </li>
-  <%end%>
-</ul>
-<%end%>
+
+
+
