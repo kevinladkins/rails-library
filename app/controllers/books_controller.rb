@@ -51,5 +51,6 @@ class BooksController < ApplicationController
 
   def set_author_books_view
     @author = Author.find(params[:author_id])
+    @books = @author.books.find_each
   end
 end
