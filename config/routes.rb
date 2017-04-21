@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
-  get 'auth/:provider/callback' => 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
   
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
    end
   
   resources :authors do
-    resources :books, only: [:index, :show]
+    resources :books, only: [:index, :show, :new, :create]
   end
   
   resources :categories, only: [:index, :show]  
