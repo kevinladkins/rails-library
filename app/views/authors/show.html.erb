@@ -12,7 +12,7 @@ Born: <%= @author.born.strftime("%B %d, %Y") %><br>
 <p><%=@author.bio%></p>
 
 <%if librarian?%>
- <%=button_to "Edit", edit_author_path(@author), method: :get%>
+  <%=button_to "Edit", edit_author_path(@author), method: :get%>
 <%end%>
 
 
