@@ -8,7 +8,5 @@ class Category < ApplicationRecord
   validates :name, :classification, presence: true
   validates :name, uniqueness: true
 
-  scope :fiction, -> {where(classification: "fiction")}
-  scope :non_fiction, -> {where(classification: "non_fiction")}
 
 end

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authorize_user, only: [:index, :edit, :update, :destroy]
+  before_action :require_login, only: [:show]
 
 
   def index
@@ -38,5 +39,12 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
   end
+  
+  def require_login
+    if !logged_in?
+      flash.alert = "Please log in to view your account."
+      redirect_to root_path
+    end
+  end 
 
 end

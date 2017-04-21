@@ -13,16 +13,13 @@ class Book < ApplicationRecord
   validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
 
-
-  scope :fiction, -> {where(classification: "fiction")}
-  scope :non_fiction, -> {where(classification: "non_fiction")}
   
+  ## attribute builders ##
   
   def author_attributes=(author_attributes)
     self.build_author(author_attributes) unless author_attributes[:last_name].blank?
   end
 
-  
   def category_ids=(ids)
     ids.delete("")
     rejected_ids = self.category_ids - ids
@@ -36,12 +33,16 @@ class Book < ApplicationRecord
     self.categories.build(name: name, classification: self.classification) unless name.blank?
   end
   
-  def available?
-    available_copies > 0
-  end
+  ## most_borrowed ##
   
   def self.most_borrowed
     joins(:loans).group("loans.book_id").order("count (*) desc").limit(5)
+  end
+  
+  ## availability status ##
+  
+  def available?
+    available_copies > 0
   end
   
   def available_copies

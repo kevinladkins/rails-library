@@ -9,20 +9,14 @@ class Author < ActiveRecord::Base
   
   before_create :set_name
   
+  
   def birth_date
      born.strftime("%B %d, %Y")
   end
   
   def death_date
-    if died
-      died.strftime("%B %d, %Y")
-    else
-       "Still living"
-    end
+    died ? died.strftime("%B %d, %Y") : "Still living"
   end
 
-
-
-	
 
 end

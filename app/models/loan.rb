@@ -43,9 +43,9 @@ class Loan < ApplicationRecord
     overdue.count(:book_id)
   end
   
-   def overdue?
-    self.due_date < DateTime.now
-   end
+	def overdue?
+	  due_date < DateTime.now
+	end
    
    
   

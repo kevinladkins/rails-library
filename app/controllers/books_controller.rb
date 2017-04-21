@@ -32,9 +32,6 @@ class BooksController < ApplicationController
     book.update(book_params) ? redirect_to(book_path(book)) : render('edit')
    end
 
-  def destroy
-  end
-
   private
 
   def book_params
