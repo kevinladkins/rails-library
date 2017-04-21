@@ -19,7 +19,7 @@ class User < ApplicationRecord
 	if user = self.find_by(email: auth['email'])
 	  user
 	 else
-	  user = self.new(email: auth['email'], name: auth['name'])
+	  user = self.new(email: auth['email'], first_name: auth['first_name'], last_name: auth['last_name'])
 	  user.password = SecureRandom.hex
 	  user
 	  end

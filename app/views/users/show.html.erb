@@ -1,19 +1,22 @@
 <h1><%= @user.name%></h1>
+
 <% if @user.checked_out_books.any?%>
+
 <h3>Current Loans: </h3>
+
 <ul>
-  <%@user.loans.checked_out.each do |l|%>
-    <%if l.overdue?%>
-      <li><%=l.book.title%> ||
-      OVERDUE <%if current_user.patron?%> -- PLEASE RETURN <%end%>
+  <%@user.loans.checked_out.each do |loan|%>
+    <%if loan.overdue?%>
+      <li><%=link_to loan.book.title, book_path(loan.book)%> ||
+      OVERDUE <%if patron?%> -- PLEASE RETURN <%end%>
     <%else%>
-      <li><%=l.book.title%> ||
-      due on <%= l.due_date.strftime("%A, %B %d %Y") %>
+      <li><%=link_to loan.book.title, book_path(loan.book)%> ||
+      due on <%= loan.due_date.strftime("%A, %B %d %Y") %>
     <%end%>
-    <%if current_user.patron?%>
-      <%=button_to "Return", loan_path(l), method: :put%>
-    <%elsif current_user.librarian?%>
-      <%=link_to "Extend Loan", edit_loan_path(l)%>
+    <%if patron?%>
+      <%=button_to "Return", loan_path(loan), method: :put%>
+    <%elsif librarian?%>
+      <%=link_to "Extend Loan", edit_loan_path(loan)%>
     <%end%>
   </li>
   <%end%>

@@ -48,6 +48,16 @@ fieldset {
   width: 20em;
 }
 
+.button_to,
+.button_to div {
+  display: inline;
+}
+
+.link_to,
+.link_to div {
+  display: inline;
+}
+
 
 
 
