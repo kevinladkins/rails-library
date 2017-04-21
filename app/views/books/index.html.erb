@@ -2,6 +2,7 @@
 	   
 	   <%= render 'add_book_button' if librarian?%>
 	   
+	   
 	   <%unless author_view?%>
 	   
 			 <h3><%=link_to "View Our Most-Borrowed Books", most_borrowed_books_path%></h3>

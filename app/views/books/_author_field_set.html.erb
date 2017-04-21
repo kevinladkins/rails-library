@@ -1,7 +1,0 @@
-<%= field_set_tag "New Author" do %>
-	
-    <%= f.fields_for :author, book.build_author do |author_attributes|%>
-			<%= render partial: 'authors/form', locals: {f: author_attributes}%>
-		<%end%><br>
-	
-<%end%>
