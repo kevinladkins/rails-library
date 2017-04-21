@@ -45,6 +45,10 @@
   display: inline;
 }
 
+.alert, .fields-with-errors {
+  color: red;
+}
+
 .link_to,
 .link_to div {
   display: inline;
