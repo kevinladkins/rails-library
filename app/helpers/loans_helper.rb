@@ -13,4 +13,15 @@ module LoansHelper
 	  on_loan
 	end
 	
+	def overdue_books
+	  overdue = Loan.overdue.order(due_date: :desc)
+	  overdue
+	end
+	
+	
+	def books_by_due_date
+	  due_dates = Loan.order(due_date: :desc)
+	  due_dates
+	end
+	
 end

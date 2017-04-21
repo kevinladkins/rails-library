@@ -14,7 +14,7 @@
 			<%else%>
 			
 				<li><%=link_to loan.book.title, book_path(loan.book)%> ||
-				due on <%= loan.due_date.strftime("%A, %B %d %Y") %>
+				due on <%= loan.show_due_date %>
 			<%end%>
 			
 			<%if patron?%>
