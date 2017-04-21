@@ -2,6 +2,10 @@
 
 <h2>by <%=link_to @book.author.name, author_path(@book.author)%> </h2>
 
+<%if librarian? %>
+  <%=button_to "Edit Book", edit_book_path(@book), method: :get%>
+<%end%><br>
+
 <p>Publication Year: <%=@book.publication_year%></p>
 
 <strong>Categories: || </strong><%@book.categories.each do |c|%><%=link_to c.name, category_path(c) %> || <%end%>
@@ -12,9 +16,7 @@
 
 <p><%=@book.synopsis%></p>
 
-<%if librarian? %>
-  <%=button_to "Edit Book", edit_book_path(@book), method: :get%>
-<%end%><br>
+
 
 
 <%if patron? && @book.available? %>
