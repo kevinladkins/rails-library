@@ -9,23 +9,27 @@
   </head>
 
   <body>
-  <header>
-    <h1 id="logo">RAILS LIBRARY</h1>
-     <span id="login-nav">
-        <%= render 'layouts/login_nav'%>
-     <span>
-  </header>
-    <nav>
-     <%= render 'layouts/user_nav'%>
-     <%= render 'layouts/site_nav'%>
-      
-    </nav><br>
+  
+		<header>
+			<h1 id="logo">RAILS LIBRARY</h1>
+		
+		 <span id="login-nav">
+				<%= render 'layouts/login_nav'%>
+		 <span>
+		 
+		</header>
+	
+		<nav>
+			 <%= render 'layouts/user_nav'%>
+			 <%= render 'layouts/site_nav'%>
+		</nav><br>
 
 
-      <%flash.each do |name, msg|%>
-        <%= content_tag :div, msg, class: name%>
-      <%end%>
+				<%flash.each do |name, msg|%>
+					<%= content_tag :div, msg, class: name%>
+				<%end%>
 
     <%= yield %>
+    
   </body>
 </html>
