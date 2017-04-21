@@ -8,7 +8,7 @@
 
 <p>Publication Year: <%=@book.publication_year%></p>
 
-<strong>Categories: || </strong><%@book.categories.each do |c|%><%=link_to c.name, category_path(c) %> || <%end%>
+<strong>Categories: </strong><%@book.categories.each do |c|%><%=link_to c.name, category_path(c) %> || <%end%>
 
 <%if librarian?%>
   <br><br><%=button_to "Create New Category", new_book_category_path(@book), method: :get%>
@@ -29,7 +29,7 @@
   
 	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies != 0%> to: <br><br>
 	  <%@book.loans.on_loan.each do |l|%>
-		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.due_date.strftime("%A, %B %d %Y")%><br>
+		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.show_due_date%><br>
 	  <%end%>
    <%end%>	  
   
