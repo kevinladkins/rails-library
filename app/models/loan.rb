@@ -11,7 +11,8 @@ class Loan < ApplicationRecord
   scope :overdue, -> {on_loan.where("due_date < ?", DateTime.now)}
 
   
-
+   ## borrow/return/extend ##
+   
   def borrow_book(book_id)
     if book = Book.find(book_id)
       if book.available?
@@ -22,12 +23,7 @@ class Loan < ApplicationRecord
     end
   end
   
- 
-  def overdue?
-    self.due_date < DateTime.now
-  end
-
-  def return_book
+   def return_book
     self.update(status: "returned")
   end
 
@@ -36,7 +32,29 @@ class Loan < ApplicationRecord
     self.save
   end
   
-  def self.number_of_loans(patron)
+  
+  ## loan status ##
+  
+  def self.total_on_loan
+    on_loan.count(:book_id)
+  end
+  
+  def self.total_overdue
+    overdue.count(:book_id)
+  end
+  
+   def overdue?
+    self.due_date < DateTime.now
+   end
+   
+   
+  
+  
+  
+  ## patron stats ##
+  
+  
+   def self.number_of_loans(patron)
 	  self.checked_out_books(patron).size
 	end
   
@@ -44,6 +62,12 @@ class Loan < ApplicationRecord
 	  patron_loans = self.includes(:patron).where(patron_id: patron.id)
 	  patron_loans.checked_out.map {|l| l.book}
 	end
+ 
+ 
+
+ 
+  
+ 
 
 
 
