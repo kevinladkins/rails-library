@@ -1,20 +1,26 @@
-<% if checked_out_books(user)?%>
+
+<% if checked_out_books?(user) %>
 
 	<h3>Current Loans: </h3>
 
-	<ul>
-		<%user_checked_out_books(user).each do |loan|%>
+
+  <ul>
+	  <% on_loan_to(user).each do |loan| %> 
 		
 			<%if loan.overdue?%>
 				<li><%=link_to loan.book.title, book_path(loan.book)%> ||
-				OVERDUE <%if patron?%> -- PLEASE RETURN <%end%>
+				OVERDUE <%if patron?%> -- PLEASE RETURN <%end%> 
+			
 			<%else%>
+			
 				<li><%=link_to loan.book.title, book_path(loan.book)%> ||
 				due on <%= loan.due_date.strftime("%A, %B %d %Y") %>
 			<%end%>
 			
 			<%if patron?%>
+			
 				<%=button_to "Return", loan_path(loan), method: :put%>
+				
 			<%elsif librarian?%>
 				<%=button_to  "Extend Loan", edit_loan_path(loan), method: :get%>
 			<%end%>
@@ -22,5 +28,5 @@
 		</li>
 		<%end%>
 	</ul>
-
+	
 <%end%>

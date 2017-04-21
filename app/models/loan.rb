@@ -54,8 +54,12 @@ class Loan < ApplicationRecord
   ## patron stats ##
   
   
-   def self.number_of_loans(patron)
+  def self.number_of_loans(patron)
 	  self.checked_out_books(patron).size
+	end
+	
+	def self.on_loan_to(patron)
+	  self.on_loan.where(patron_id: patron.id)
 	end
   
   def self.checked_out_books(patron)
@@ -66,10 +70,5 @@ class Loan < ApplicationRecord
  
 
  
-  
- 
-
-
-
 
 end
