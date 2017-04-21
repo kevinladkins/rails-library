@@ -11,25 +11,11 @@
 	   
 	   <%end%>
 	
-	   <%unless fiction_books.empty?%>
-	     
-	     <h3>Fiction</h3>
-	        
-	        <ul>
-	          <%= render partial: 'list', collection: fiction_books, as: :book%>
-	        </ul>
-	    
-	    <%end%>
-	        
-	    <%unless non_fiction_books.empty?%>
-	    
-	    <h3>Non-Fiction</h3>
-	      
-	      <ul>
-	        <%= render partial: 'list', collection: non_fiction_books, as: :book%>
-	      </ul>
-	      
-	    <%end%>
+	   
+	   <%= render 'fiction_index'%>
+	   
+	   <%= render 'non_fiction_index'%>     
+	   
 	      
 	     
 	  
