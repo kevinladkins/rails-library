@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save ? redirect_to(@user) : render('new')
+    @user.save ? redirect_to(login_path) : render('new')
   end
 
   def show
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:last_name, :first_name, :email, :password, :password_confirmation, :role)
   end
   
   def require_login
