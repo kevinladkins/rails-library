@@ -30,8 +30,8 @@ class LoansController < ApplicationController
     loan = Loan.find(params[:id])
     if current_user.librarian? && params[:loan][:due_date]
       loan.update(loan_params)
-      flash.alert = "Loan extened until #{loan.due_date.strftime("%A, %B %W %Y")}."
-      redirect_to :back
+      flash.alert = "Loan extened until #{loan.due_date.strftime("%A, %B %d %Y")}."
+      redirect_to user_path(loan.patron)
     else
       loan.return_book
       flash.alert = "Book returned."

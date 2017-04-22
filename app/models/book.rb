@@ -12,6 +12,7 @@ class Book < ApplicationRecord
 
   validates :copies, :title, :classification, :author, presence: true
   validates :copies, numericality: {greater_than: 0}
+  validates_associated :author
 
   
   ## attribute builders ##
