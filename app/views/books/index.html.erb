@@ -1,6 +1,6 @@
      <h1>Browse Books <%if author_view?%> by <%=link_to @author.name, author_path(@author)%> <%end%></h1>
 	   
-	   <%= render 'add_book_button' if librarian?%>
+	   <%= render 'add_book_button'%>
 	   
 	   
 	   <%unless author_view?%>
@@ -12,9 +12,9 @@
 	   <%end%>
 	
 	   
-	   <%= render 'fiction_index'%>
+	   <%= render 'classifications'%>
 	   
-	   <%= render 'non_fiction_index'%>     
+	    
 	   
 	      
 	     

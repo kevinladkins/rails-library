@@ -3,15 +3,11 @@
 <h3>Fiction</h3>
 
 <ul>
-  <%fiction_categories.each do |category| %>
-    <li><%=link_to category.name, category_path(category)%></li>
-  <%end%>
+  <%=render partial: 'list', collection: fiction_categories, as: :category%>
 </ul>
 
 <h3>Non-Fiction</h3>
 
 <ul>
-  <%non_fiction_categories.each do |category| %>
-    <li><%=link_to category.name, category_path(category)%></li>
-  <%end%>
+  <%=render partial: 'list', collection: non_fiction_categories, as: :category%>
 </ul>

@@ -2,4 +2,4 @@
   <%= render partial: 'authors/book_list', locals: {book: book}%>
 <%else%>
 
-<li><%= link_to book.title, book_path(book)%> by <%=link_to book.author.name, author_path(book.author)%> <%end%> </li>
+<li><%= render partial: 'books/links', locals: {book: book}%> by <%=link_to book.author.name, author_path(book.author)%> <%end%> </li>

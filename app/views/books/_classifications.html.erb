@@ -1,3 +1,15 @@
+ <%unless fiction_books.empty?%>
+	     
+		 <h3>Fiction</h3>
+				
+				<ul>
+					<%= render partial: 'list', collection: fiction_books, as: :book%>
+				</ul>
+	    
+<%end%>
+ 
+ 
+ 
  <%unless non_fiction_books.empty?%>
 	    
 		<h3>Non-Fiction</h3>

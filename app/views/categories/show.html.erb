@@ -1,5 +1,5 @@
 <h1><%= @category.name%> Books </h1>
 
 <ul>  
-   <%= render partial: 'books/list', collection: @category.books.find_each, as: :book%>
+   <%= render partial: 'books/list', collection: @category.books, as: :book%>
 </ul>
