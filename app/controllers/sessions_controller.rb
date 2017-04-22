@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
 
 
+  def new
+  end
+
+
   def create
     login
     if current_user  && current_user.librarian?
