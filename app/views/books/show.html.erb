@@ -1,33 +1,33 @@
 <h1><%= @book.title%>  </h1>
 
-<h2>by <%=link_to @book.author.name, author_path(@book.author)%> </h2>
+<h2>by <%=link_to @book.author.name, author_path(@book.author)%> 
+  <%= render partial: 'edit_book_button', locals: {book: @book}%> </h2>
 
-<%if librarian? %>
-  <%=button_to "Edit Book", edit_book_path(@book), method: :get%>
-<%end%><br>
-
+  
 <p>Publication Year: <%=@book.publication_year%></p>
 
-<strong>Categories: </strong><%@book.categories.each do |c|%><%=link_to c.name, category_path(c) %> || <%end%>
+<strong>Categories: </strong>
 
-<%if librarian?%>
-  <br><br><%=button_to "Create New Category", new_book_category_path(@book), method: :get%>
-<%end%>
-
+ <%@book.categories.find_each do |c|%><%= render partial: 'categories/links', locals: {category: c} %> || <%end%>
+ <%= render partial: 'create_category_button', locals: {book: @book}%>
+  
 <p><%=@book.synopsis%></p>
 
 
 
 
 <%if patron? && @book.available? %>
+
   <%=@book.available_copies%> available
   <%=button_to "Borrow", loans_path, method: :post, params: {"loan[book_id]": @book.id}%>
   
 <%elsif librarian? %>
-  <%= @book.copies%> in collection<br>
+  
+  <br><%= @book.copies%> in collection<br>
   
   
-	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies != 0%> to: <br><br>
+	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies > 0%> to: <br><br>
+	  
 	  <%@book.loans.on_loan.each do |l|%>
 		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.show_due_date%><br>
 	  <%end%>
