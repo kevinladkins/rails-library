@@ -26,6 +26,10 @@ module ApplicationHelper
     alphabetize_by(selected, attribute)
   end
   
+  def alphabetized_by_last_name(collection)
+		selection = alphabetize_by(collection, :last_name)
+  end
+  
   
 
 

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.all.order(:last_name)
+    set_users
   end
 
 
@@ -46,5 +46,10 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end 
+  
+  def set_users
+    @users = User.name_search(params[:query])
+    
+  end
 
 end

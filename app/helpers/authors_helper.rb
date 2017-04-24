@@ -5,9 +5,7 @@ module AuthorsHelper
 		selection = alphabetize_by(authors, :last_name)
   end
   
-  def alphabetized_authors(authors)
-		selection = alphabetize_by(authors, :last_name)
-  end
+  
   
   
 

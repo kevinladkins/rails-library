@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
+  extend Searchable::ClassMethods
   include Namable::InstanceMethods
 
   has_secure_password

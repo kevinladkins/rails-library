@@ -4,5 +4,5 @@
 <h3>Total Overdue Books: <%=@loans.total_overdue%></h3>
 
 <h4><%= link_to "Manage Loans", loans_path%></h4>
-<%= link_to "Manage Users", users_path%><br>  <%= render partial: 'application/search', locals: {item: @user}%><br>
-<%= link_to "Manage Collection", books_path%> <%= render partial: 'application/search', locals: {item: @book}%><br>
+<h4><%= link_to "Manage Users", users_path%>  </h4>
+<h4><%= link_to "Manage Collection", books_path%> </h4>

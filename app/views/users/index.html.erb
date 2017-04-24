@@ -3,6 +3,6 @@
 
   
 	<ul>
-		<%= render partial: 'list', collection: @users, as: :user%>
+		<%= render partial: 'list', collection: alphabetized_by_last_name(@users), as: :user%>
 	</ul>
 
