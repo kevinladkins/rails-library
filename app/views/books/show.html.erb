@@ -1,7 +1,6 @@
-<h1><%= @book.title%>  </h1>
+<h1><%= @book.title%> <%= render partial: 'edit_book_button', locals: {book: @book}%> </h1>
 
-<h2>by <%=link_to @book.author.name, author_path(@book.author)%> 
-  <%= render partial: 'edit_book_button', locals: {book: @book}%> </h2>
+<h2>by <%=link_to @book.author.name, author_path(@book.author)%> <%= render partial: 'authors/edit_button', locals: {author: @book.author}%>  </h2>
 
   
 <p>Publication Year: <%=@book.publication_year%></p>
