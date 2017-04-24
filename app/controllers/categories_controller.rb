@@ -18,8 +18,10 @@ before_action :authorize_user, only: [:new, :create]
   end
   
   def create
+    binding.pry
     @book = Book.find(params[:book_id])
     @category = @book.categories.build(category_params)
+    @category.classification = @book.classification
     @book.save ? redirect_to(book_path(@book)) : render('new')
   end
   
