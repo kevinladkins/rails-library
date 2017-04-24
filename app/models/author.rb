@@ -7,7 +7,7 @@ class Author < ActiveRecord::Base
 
   validates :first_name, :last_name, :born, presence: :true
   
-  before_create :set_name
+  before_save :set_name
   
   
   def birth_date
