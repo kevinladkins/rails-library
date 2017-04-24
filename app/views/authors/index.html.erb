@@ -3,5 +3,5 @@
 <%= render partial: 'application/search', locals: {item: @authors.first}%><br>
 
 <ul>
-  <%= render partial: 'alpha_list', collection: alphabetized_by_last_name(@authors), as: :author %><br>
+  <%= render partial: 'list', collection: alphabetized_by_last_name(@authors), as: :author %><br>
 </ul>
