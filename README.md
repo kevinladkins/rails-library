@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+##### RUBY VERSION 2.4.1 ####
 
-* Ruby version
+##### RAILS VERSION 5.0.2 #####
 
-* System dependencies
+###SETUP####
 
-* Configuration
+Fork and clone this repository, then run 'bundle install' and 'rails db:migrate'.
 
-* Database creation
+#####OVERVIEW######
 
-* Database initialization
+Rails Library provides a user interface for accessing and managing a library collection.
 
-* How to run the test suite
+Visitors can view the library's collection by title, author, or category.
 
-* Services (job queues, cache servers, search engines, etc.)
+Users registered as "patrons" can check out and return books. 
 
-* Deployment instructions
+Users registered as "librarians" can add and edit books, authors, and categories, as well as adding additional copies of books already in the collection. The librarian home page (librarians/dashbord) provides an overview of all currently checked-out books, with overdue books displayed at top. 
 
-* ...
+Librarians can extend patron loans via the patron's home page (at users/:id), and can also delete patron accounts. 
