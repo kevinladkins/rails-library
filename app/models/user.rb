@@ -25,6 +25,10 @@ class User < ApplicationRecord
 			user
 		 end
 	end
+	
+	def outstanding_loans?
+	 self.loans.any? {|loan| loan.status == "checked_out"}
+	end
 
 
 end

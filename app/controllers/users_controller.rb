@@ -28,9 +28,14 @@ class UsersController < ApplicationController
   
   def destroy
     user = User.find(params[:id])
-    user.destroy
-    flash.alert = "User #{user.name}'s account has been deleted."
-    redirect_to dashboard_index_path
+    if user.outstanding_loans?
+       flash.alert = "User #{user.name}'s still has outstanding loans."
+       redirect_to user_path(user)
+    else
+			user.destroy
+			flash.alert = "User #{user.name}'s account has been deleted."
+			redirect_to dashboard_index_path
+		end
   end
 
 
