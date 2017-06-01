@@ -1,24 +1,20 @@
-     <h1>Browse Books <%if author_view?%> by <%=link_to @author.name, author_path(@author)%> <%end%></h1>
-	   
-	   <%= render 'add_book_button'%>
-	   
-	   
-	   <%unless author_view?%>
-	   
-			 <h3><%=link_to "View Our Most-Borrowed Books", most_borrowed_books_path%></h3>
-		 
-			 <%= render partial: 'application/search', locals: {item: @books.first}%><br>
-	   
-	   <%end%>
-	
-	   
-	   <%= render 'classifications'%>
-	   
-	    
-	   
-	      
-	     
-	  
+     <h1 id="browse-books">Browse Books <%if author_view?%> by <%=link_to @author.name, author_path(@author)%> <%end%></h1>
 
-  
+	   <%= render 'add_book_button'%>
+
+
+	   <%unless author_view?%>
+
+			 <h3><%=link_to "View Our Most-Borrowed Books", most_borrowed_books_path%></h3>
+
+			 <%= render partial: 'application/search', locals: {item: @books.first}%><br>
+
+	   <%end%>
+
+
+	   <%= render 'classifications'%>
+
+
+     <script type="text/javascript" charset="utf-8">
      
+     </script>
