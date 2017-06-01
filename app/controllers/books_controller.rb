@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   before_action :authorize_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_book, only: [:edit, :update]
+  before_action :set_book, only: [:show, :edit, :update]
 
   def index
     set_books
@@ -21,7 +21,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
     respond_to do |f|
       f.html {render :show}
       f.json {render json: @book}
