@@ -1,9 +1,18 @@
 $(function() {
   $("#books-nav").click(function(e) {
     e.preventDefault();
-    $("#view-content").html("")
-  })
-})
+    fetch('/books.json')
+    .then(res => res.json())
+    .then(books => {
+      $("#view-content").html(" ");
+      books.forEach(book => {
+        let bookObj = new Book(book)
+        let bookHTML = `<h1>${bookObj.title}</h1>`;
+        $("#view-content").append(bookHTML);
+      });
+    });
+  });
+});
 
 $(function() {
     $("h1").click(function() {
@@ -19,7 +28,6 @@ function Book(book) {
   this.publication_year = book.publication_year
   this.classifcation = book.classification
   this.copies = book.copies
-  this.author = book.author.name
-  this.authorId = book.author.id
+  this.author = book.author
   this.categories = book.categories
 }
