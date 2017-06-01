@@ -1,10 +1,14 @@
 class BooksController < ApplicationController
 
   before_action :authorize_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_book, only: [:show, :edit, :update]
+  before_action :set_book, only: [:edit, :update]
 
   def index
     set_books
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @books}
+    end
   end
 
   def new
@@ -17,9 +21,13 @@ class BooksController < ApplicationController
   end
 
   def show
-   
+    @book = Book.find(params[:id])
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @book}
+    end
   end
-  
+
   def most_borrowed
     @most_borrowed_books = Book.most_borrowed
   end
@@ -50,12 +58,12 @@ class BooksController < ApplicationController
       @books = Book.title_search(params[:query])
     end
   end
-  
+
   def set_new_book
     if params[:author_id]
       @author = Author.find(params[:author_id])
       @book = @author.books.build
-    else 
+    else
       @book = Book.new
     end
   end
