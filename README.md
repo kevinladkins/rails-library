@@ -10,6 +10,7 @@
 - bcrypt
 - omniauth
 - omniauth-facebook
+- active_model_serializers
 
 ###SETUP####
 
