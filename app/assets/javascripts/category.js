@@ -11,6 +11,7 @@ function showNextCategory(e) {
   $.get(`/categories/${$id}.json`, resp => {
     var newCategory = new Category(resp);
     newCategory.showPage();
+    history.pushState(null, null, `${$id}`)
   })
 }
 
