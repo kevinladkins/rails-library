@@ -1,5 +1,7 @@
-<h1><%= @category.name%> Books </h1>
+<h1><span id="category-name"><%= @category.name%></span> Books
+  <button id="next-category" data-category-id="<%=@category.id%>">Next Category</button>
+ </h1>
 
-<ul>  
+<ul id="category-book-list">
    <%= render partial: 'books/list', collection: alphabetize_by(@category.books, :title), as: :book%>
 </ul>
