@@ -13,28 +13,3 @@
 
 
 	   <%= render 'classifications'%>
-
-<script id="books-template" type="text/x-handlebars-template">
-   <h1 id="browse-books">Browse Books </h1>
-
-   <button id="add-book">Add A Book</button>
-
-   <a href="#" id="most-borrowed">View Our Most-Borrowed Books</a>
-   <h3>Fiction</h3>
-   <ul>
-    {{#each this}}
-    {{#if classification == "fiction"}}
-      <li>{{Title}} by Author Name</li>
-    {{/if}}
-    {{/each}}
-  </ul>
-
-  <h3>Non-Fiction</h3>
-  <ul>
-   {{#each this}}
-   {{#if classification == "non_fiction"}}
-     <li>{{Title}} by Author Name</li>
-   {{/if}}
-   {{/each}}
-  </ul>
-</script>

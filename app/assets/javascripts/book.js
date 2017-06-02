@@ -1,5 +1,6 @@
 $(function() {
   $("#books-nav").click(function(e) {
+    debugger
     e.preventDefault();
     fetch('/books.json')
     .then(res => res.json())
