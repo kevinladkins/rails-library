@@ -6,4 +6,5 @@ class BookSerializer < ActiveModel::Serializer
   has_many :borrowers, :through => :loans, :source => :patron
   has_many :categories, through: :book_categories
 
+
 end
