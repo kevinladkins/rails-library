@@ -17,16 +17,6 @@
 
      <div id="books-index">
 
-     <%= render 'classifications'%>
+     <% render 'classifications'%>
 
       </div>
-
-     <script id="most-borrowed-template" type="text/x-handlebars-template">
-
-        <h3>Most-Borrowed Books</h3>
-        <ol>
-         {{#each this}}
-           <li><a href="/books/{{id}}" data-book-id="{{id}}">{{title}}</a> by <a href="#" data-author-id="{{author.id}}">{{author.name}}</a></li>
-         {{/each}}
-       </ol>
-     </script>
