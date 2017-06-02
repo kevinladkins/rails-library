@@ -29,6 +29,7 @@ class BooksController < ApplicationController
 
   def most_borrowed
     @most_borrowed_books = Book.most_borrowed
+    render json: @most_borrowed_books
   end
 
   def edit

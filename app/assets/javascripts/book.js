@@ -1,17 +1,17 @@
+"use strict";
+
 $(function() {
-  $("#books-nav").click(function(e) {
+  $("#most-borrowed-link").click(function(e) {
     debugger
     e.preventDefault();
-    fetch('/books.json')
+    fetch('/books/most_borrowed.json')
     .then(res => res.json())
     .then(books => {
-      $("#view-content").html(" ");
-      var template = $('#books-template').html();
+      var template = $('#most-borrowed-template').html();
         debugger
       var templateScript = Handlebars.compile(template);
       var result = templateScript(books);
-      $("#view-content").html(result);
-      history.pushState(null, null, "books");
+      $("#books-index").html(result);
     });
   });
 });
