@@ -9,7 +9,7 @@ before_action :authorize_user, only: [:new, :create]
 
 
   def show
-    @category = Category.find(params[:id])
+    set_category
     respond_to do |f|
       f.html {render :show}
       f.json {render json: @category}
@@ -32,6 +32,14 @@ before_action :authorize_user, only: [:new, :create]
 
   def category_params
     params.require(:category).permit(:name, :classification)
+  end
+
+  def set_category
+    if Category.find_by(id: params[:id])
+      @category = Category.find(params[:id])
+    else
+      @category = Category.next(params[:id].to_i)
+    end
   end
 
 
