@@ -7,7 +7,7 @@ class BooksController < ApplicationController
     set_books
     respond_to do |f|
       f.html {render :index}
-      f.json {render json: @books.as_json(only: [:title, :id], include: [author: {only: [:name, :id]}])}
+      f.json {render json: @books.as_json(only: [:title, :id, :classification], include: [author: {only: [:name, :id]}])}
     end
   end
 
@@ -54,7 +54,7 @@ class BooksController < ApplicationController
       @author = Author.find(params[:author_id])
       @books = @author.books.find_each
     else
-      @books = Book.title_search(params[:query])
+      @books = Book.order(:title)
     end
   end
 
