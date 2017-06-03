@@ -9,6 +9,15 @@ function alphabetize(obj, attr) {
   return alpha
 }
 
+function orderedList() {
+  let html = `<ol></ol>`
+  return html
+}
+
+function unorderedList() {
+  let html = `<ul></ul>`
+  return html
+}
 
 
 $(function() {
@@ -17,11 +26,11 @@ $(function() {
     fetch('/books/most_borrowed.json')
     .then(res => res.json())
     .then(books => {
-      let $layout = $("#books-index").html(mostBorrowedLayout());
+      $("#books-index").html(orderedList());
       books.forEach(book => {
         let newBook = new Book(book);
         let html = newBook.listBook();
-        $("#books-index").append(html);
+        $("#books-index ol").append(html);
       })
     });
   });
@@ -33,15 +42,7 @@ $(function() {
     fetch('/books.json')
     .then(res => res.json())
     .then(books => {
-      let $layout = $("#books-index").html(unorderedList());
-      let alphaBooks = alphabetize(books, "title")
-      alphaBooks.forEach(book => {
-        if (book.classification == "fiction") {
-          let newBook = new Book(book);
-          let html = newBook.listBook();
-          $("#books-index").append(html);
-        }
-      })
+      booksList(books, "fiction");
     });
   });
 });
@@ -52,35 +53,22 @@ $(function() {
     fetch('/books.json')
     .then(res => res.json())
     .then(books => {
-      let $layout = $("#books-index").html(unorderedList());
-      let alphaBooks = alphabetize(books, "title")
-      alphaBooks.forEach(book => {
-        if (book.classification == "non_fiction") {
-          let newBook = new Book(book);
-          let html = newBook.listBook();
-          $("#books-index").append(html);
-        }
-      })
+       booksList(books, "non_fiction")
     });
   });
 });
 
-function mostBorrowedLayout() {
-  let html = `
-  <ol></ol>
-  `
-  return html
-}
-
-function unorderedList() {
-  let html = `<ul></ul>`
-  return html
-}
-
-function Layout() {
-  let html = `
-
-  `
+function booksList(books, classification) {
+  $("#books-index").html('')
+  $("#books-index").html(unorderedList());
+  let alphaBooks = alphabetize(books, "title")
+  alphaBooks.forEach(book => {
+    if (book.classification == classification) {
+      let newBook = new Book(book);
+      let html = newBook.listBook();
+      $("#books-index ul").append(html);
+    }
+  })
 }
 
 function Book(book) {
