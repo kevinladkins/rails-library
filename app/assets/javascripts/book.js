@@ -1,5 +1,16 @@
 "use strict";
 
+function alphabetize(obj, attr) {
+  var alpha = obj.sort(function(a, b){
+    if(a[attr] < b[attr]) return -1;
+    if(a[attr] > b[attr]) return 1;
+    return 0;
+  })
+  return alpha
+}
+
+
+
 $(function() {
   $("#most-borrowed-link").click(function(e) {
     e.preventDefault();
@@ -23,8 +34,8 @@ $(function() {
     .then(res => res.json())
     .then(books => {
       let $layout = $("#books-index").html(unorderedList());
-      debugger
-      books.forEach(book => {
+      let alphaBooks = alphabetize(books, "title")
+      alphaBooks.forEach(book => {
         if (book.classification == "fiction") {
           let newBook = new Book(book);
           let html = newBook.listBook();
@@ -42,8 +53,8 @@ $(function() {
     .then(res => res.json())
     .then(books => {
       let $layout = $("#books-index").html(unorderedList());
-      debugger
-      books.forEach(book => {
+      let alphaBooks = alphabetize(books, "title")
+      alphaBooks.forEach(book => {
         if (book.classification == "non_fiction") {
           let newBook = new Book(book);
           let html = newBook.listBook();

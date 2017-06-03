@@ -4,10 +4,10 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update]
 
   def index
-    set_books
+    @books = Book.all
     respond_to do |f|
       f.html {render :index}
-      f.json {render json: @books.as_json(only: [:title, :id, :classification], include: [author: {only: [:name, :id]}])}
+      f.json {render json: @books}
     end
   end
 
