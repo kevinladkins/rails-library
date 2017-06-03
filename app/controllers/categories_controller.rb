@@ -16,6 +16,11 @@ before_action :authorize_user, only: [:new, :create]
     end
   end
 
+  def next
+    binding.pry
+    render json: Category.next(params[:id].to_i)
+  end
+
   def new
     @book = Book.find(params[:book_id])
     @category = Category.new
@@ -35,11 +40,7 @@ before_action :authorize_user, only: [:new, :create]
   end
 
   def set_category
-    if Category.find_by(id: params[:id])
       @category = Category.find(params[:id])
-    else
-      @category = Category.next(params[:id].to_i)
-    end
   end
 
 

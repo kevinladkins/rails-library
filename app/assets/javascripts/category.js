@@ -7,8 +7,8 @@ $(function() {
 })
 
 function showNextCategory(e) {
-  var $id = parseInt($(e.currentTarget).attr("data-category-id")) + 1;
-  $.get(`/categories/${$id}.json`, resp => {
+  var $id = parseInt($(e.currentTarget).attr("data-category-id"));
+  $.get(`/categories/${$id}/next`, resp => {
     var newCategory = new Category(resp);
     newCategory.showPage();
     history.pushState(null, null, `${newCategory.id}`)

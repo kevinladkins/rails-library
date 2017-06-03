@@ -8,15 +8,16 @@ class Category < ApplicationRecord
   validates :name, :classification, presence: true
   validates :name, uniqueness: true
 
+
+  def self.alphabetical
+    self.order(:name)
+  end
+
   def self.next(id)
-    a = id +1
-    b = self.last.id
-    for i in a..b
-      if self.find_by(id: i) then
-        return self.find(i)
-      end
-    end
-    self.first
+   ids = self.alphabetical.map {|category| category.id}
+   current_index = ids.each_index.select{|i| ids[i] == id}.pop
+   binding.pry
+   self.find(ids[current_index + 1])
   end
 
 
