@@ -37,3 +37,8 @@ Category.prototype.listBook = function(book) {
   `
   return html
 }
+
+Category.prototype.displayBookCategory = function() {
+  let html = ` ${category.name} ||`
+  return html
+}

@@ -30,7 +30,10 @@ before_action :authorize_user, only: [:new, :create]
     @book = Book.find(params[:book_id])
     @category = @book.categories.build(category_params)
     @category.classification = @book.classification
-    @book.save ? redirect_to(book_path(@book)) : render('new')
+    respond_to do |f|
+      f.html {@book.save ? redirect_to(book_path(@book)) : render('new')}
+      f.json {render json: @category}
+    end
   end
 
   private
