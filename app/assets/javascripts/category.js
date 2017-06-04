@@ -26,7 +26,7 @@ Category.prototype.showPage = function() {
   $("#category-book-list").html("");
   this.books.forEach(book => {
     let listItem = this.listBook(book)
-    $("#book-categories-list").append(listItem);
+    $("#category-book-list").append(listItem);
   });
   $("#next-category").attr("data-category-id", this.id);
 }
