@@ -1,18 +1,37 @@
-$(function() {
-  $("#add-category-form").hide();
-  $("#create-category-button").click(function(e) {
-    e.preventDefault();
-    $("#add-category-form").toggle();
-    $("#add-category-form form").submit(function(e) {
-      e.preventDefault();
-      var values = $(this).serialize();
-      var $book_id = $(this).attr("data-book-id")
-      debugger
-      var posting = $.post(`/books/${$book_id}/categories`, values)
-    })
 
-  })
+
+$(function() {
+  $("#fiction-link").click(function(e) {
+    e.preventDefault();
+    fetch('/books.json')
+    .then(res => res.json())
+    .then(books => {
+      booksList(books, "fiction");
+    });
+  });
 });
+
+$(function() {
+  $("#non-fiction-link").click(function(e) {
+    e.preventDefault();
+    $.get('/books.json', books => {
+       booksList(books, "non_fiction")
+    });
+  });
+});
+
+function booksList(books, classification) {
+  $("#books-index").html('')
+  $("#books-index").html(unorderedList());
+  let alphaBooks = alphabetize(books, "title")
+  alphaBooks.forEach(book => {
+    if (book.classification == classification) {
+      let newBook = new Book(book);
+      let html = newBook.listBook();
+      $("#books-index ul").append(html);
+    }
+  })
+}
 
 
 $(function() {
@@ -32,39 +51,28 @@ $(function() {
 });
 
 $(function() {
-  $("#fiction-link").click(function(e) {
+  $("#add-category-form").hide();
+  $("#create-category-button").click(function(e) {
     e.preventDefault();
-    fetch('/books.json')
-    .then(res => res.json())
-    .then(books => {
-      booksList(books, "fiction");
-    });
-  });
-});
+    $("#add-category-form").toggle();
+    $("#add-category-form form").submit(function(e) {
+      e.preventDefault();
+      var values = $(this).serialize();
+      var $book_id = $(this).attr("data-book-id")
+      var posting = $.post(`/books/${$book_id}/categories.json`, values)
+      posting.done(function(data) {
+         let newCategory = new Category(data);
+         let categoryText = newCategory.displayBookCategory();
+         $("#book-categories-list").append(categoryText);
+         $("#add-category-form").hide();
+      })
+    })
 
-$(function() {
-  $("#non_fiction-link").click(function(e) {
-    e.preventDefault();
-    fetch('/books.json')
-    .then(res => res.json())
-    .then(books => {
-       booksList(books, "non_fiction")
-    });
-  });
-});
-
-function booksList(books, classification) {
-  $("#books-index").html('')
-  $("#books-index").html(unorderedList());
-  let alphaBooks = alphabetize(books, "title")
-  alphaBooks.forEach(book => {
-    if (book.classification == classification) {
-      let newBook = new Book(book);
-      let html = newBook.listBook();
-      $("#books-index ul").append(html);
-    }
   })
-}
+});
+
+
+
 
 function Book(book) {
   this.id = book.id

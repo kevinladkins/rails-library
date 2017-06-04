@@ -16,7 +16,6 @@ class Category < ApplicationRecord
   def self.next(id)
    ids = self.alphabetical.map {|category| category.id}
    current_index = ids.each_index.select{|i| ids[i] == id}.pop
-   binding.pry
    self.find(ids[current_index + 1])
   end
 

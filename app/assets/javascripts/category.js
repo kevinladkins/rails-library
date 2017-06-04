@@ -26,7 +26,7 @@ Category.prototype.showPage = function() {
   $("#category-book-list").html("");
   this.books.forEach(book => {
     let listItem = this.listBook(book)
-    $("#category-book-list").append(listItem);
+    $("#book-categories-list").append(listItem);
   });
   $("#next-category").attr("data-category-id", this.id);
 }
@@ -39,6 +39,6 @@ Category.prototype.listBook = function(book) {
 }
 
 Category.prototype.displayBookCategory = function() {
-  let html = ` ${category.name} ||`
+  let html = ` <a href="/categories/${this.id}">${this.name}</a> ||`
   return html
 }

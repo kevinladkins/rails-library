@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:new, :create, :edit, :update]
    end
 
+
   resources :authors do
     resources :books, only: [:index, :show, :new, :create]
   end
