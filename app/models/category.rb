@@ -10,13 +10,17 @@ class Category < ApplicationRecord
 
 
   def self.alphabetical
-    self.order(:name)
+    alpha = self.order(:name)
   end
 
   def self.next(id)
-   ids = self.alphabetical.map {|category| category.id}
-   current_index = ids.each_index.select{|i| ids[i] == id}.pop
-   self.find(ids[current_index + 1])
+   all_ids = self.alphabetical.map {|category| category.id}
+   current_index = all_ids.each_index.select {|i| all_ids[i] == id}.pop
+   if all_ids[current_index + 1] == nil
+     self.find(all_ids[0])
+   else
+     self.find(all_ids[current_index + 1])
+   end
   end
 
 
