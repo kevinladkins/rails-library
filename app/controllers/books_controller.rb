@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update]
 
   def index
-    @books = Book.all
+    set_books
     respond_to do |f|
       f.html {render :index}
       f.json {render json: @books}
@@ -52,9 +52,9 @@ class BooksController < ApplicationController
   def set_books
     if params[:author_id]
       @author = Author.find(params[:author_id])
-      @books = @author.books.find_each
+      @books = @author.books
     else
-      @books = Book.order(:title)
+      @books = Book.all
     end
   end
 

@@ -6,7 +6,7 @@ Born: <%= @author.birth_date %><br>
 Died: <%= @author.death_date%><br>
 
 
-<br><a href="#" id="show-author-books">View Books By This Author</a>
+<br><a href="#" id="show-author-books" data-author-id="<%= @author.id%>">View Books By This Author</a>
 <%= render partial: 'add_book_button', locals: {author: @author}%>
 <div id="author-books-list"></div>
 <br>
