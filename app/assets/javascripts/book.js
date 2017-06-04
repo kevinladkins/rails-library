@@ -1,4 +1,4 @@
-
+"use strict";
 
 $(function() {
   $("#fiction-link").click(function(e) {
@@ -67,7 +67,6 @@ $(function() {
          $("#add-category-form").hide();
       })
     })
-
   })
 });
 
