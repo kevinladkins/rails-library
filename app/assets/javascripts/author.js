@@ -26,6 +26,13 @@ Author.prototype.listBooks = function() {
       <li><a href="/books/${book.id}">${book.title}</a></li>
     `
   })
-  debugger
   return html
 }
+
+$(function(){
+  $("#new-author-book-form").hide()
+  $("#add-author-book-button").click(function(e) {
+    e.preventDefault(e)
+    $("#new-author-book-form").toggle()
+  })
+})
