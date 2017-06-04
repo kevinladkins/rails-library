@@ -1,4 +1,10 @@
-
+$(function() {
+  $("#add-category-form").hide();
+  $("#create-category-button").click(function(e) {
+    e.preventDefault();
+    $("#add-category-form").toggle();
+  })
+});
 
 
 $(function() {

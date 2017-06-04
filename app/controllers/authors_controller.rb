@@ -18,6 +18,10 @@ class AuthorsController < ApplicationController
 
   def show
     set_author
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: set_author}
+    end
   end
 
   def edit

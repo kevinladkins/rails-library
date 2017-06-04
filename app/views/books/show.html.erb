@@ -2,14 +2,21 @@
 
 <h2>by <%=link_to @book.author.name, author_path(@book.author)%> <%= render partial: 'authors/edit_button', locals: {author: @book.author}%>  </h2>
 
-  
+
 <p>Publication Year: <%=@book.publication_year%></p>
 
 <strong>Categories: </strong>
 
  <%@book.categories.find_each do |c|%><%= render partial: 'categories/links', locals: {category: c} %> || <%end%>
  <%= render partial: 'create_category_button', locals: {book: @book}%>
-  
+
+ <div id="add-category-form">
+   <%= form_for @book.categories.build do |f|%>
+     <%= render partial: 'categories/form', locals: {book: @book, f: f}%>
+     <%= f.submit%>
+   <%end%>
+ </div>
+
 <p><%=@book.synopsis%></p>
 
 
@@ -17,20 +24,18 @@
 
   <%=@book.available_copies%> available
   <%=button_to "Borrow", loans_path, method: :post, params: {"loan[book_id]": @book.id}%>
-  
+
 <%elsif librarian? %>
-  
+
   <br><%= @book.copies%> in collection<br>
-  
-  
+
+
 	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies > 0%> to: <br><br>
-	  
+
 	  <%@book.loans.on_loan.each do |l|%>
 		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.show_due_date%><br>
 	  <%end%>
-   <%end%>	  
-  
+   <%end%>
+
 
 <%end%>
-
-  
