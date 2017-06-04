@@ -13,17 +13,24 @@
 <%= f.text_area :synopsis, :cols => "30", :rows => "5"%><br>
 <%= f.label :copies%>
 <%= f.number_field :copies%><br><br>
- 
+
+<a href="#" id="add-new-author-button">Add New Author</a> ||
+<a href="#" id="select-categories-button">Select Categories</a>
+
 <%= render partial: 'new_author_field_set', locals: {book: book, f: f} unless author_view?%>
 
 
+
+<div id="select-categories-field-set">
 <%= field_set_tag "Categories" do %>
-		
+
 		<%= render partial: 'categories/check_boxes', locals: {f: f}%> <br><br>
-		
+
 		<%= f.label "New Category: " %>
 		<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
 		  <%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
-		<%end%><br>
-	
+		<%end%>
+
 	<%end%>
+</div>
+<br><br>

@@ -70,6 +70,22 @@ $(function() {
   })
 });
 
+$(function(){
+  $("#new-author-field-set").hide()
+  $("#add-new-author-button").click(function(e) {
+    e.preventDefault(e)
+    $("#new-author-field-set").toggle()
+  })
+})
+
+$(function(){
+  $("#select-categories-field-set").hide()
+  $("#select-categories-button").click(function(e) {
+    e.preventDefault(e)
+    $("#select-categories-field-set").toggle()
+  })
+})
+
 
 
 
