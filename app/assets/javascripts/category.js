@@ -66,9 +66,9 @@ function showCategoryForm(e) {
      $("#add-category-form").toggle();
      $("#add-category-form form").submit(function(e) {
        e.preventDefault();
-       var values = $(this).serialize();
-       var $book_id = $(this).attr("data-book-id")
-       var posting = $.post(`/books/${$book_id}/categories.json`, values)
+       let values = $(this).serialize();
+       let $book_id = $(this).attr("data-book-id")
+       let posting = $.post(`/books/${$book_id}/categories.json`, values)
        posting.done(function(category) {
          showNewCategory(category)
        })

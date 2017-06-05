@@ -1,7 +1,7 @@
 "use strict";
 
 function alphabetize(obj, attr) {
-  var alpha = obj.sort(function(a, b){
+  let alpha = obj.sort(function(a, b){
     if(a[attr] < b[attr]) return -1;
     if(a[attr] > b[attr]) return 1;
     return 0;
