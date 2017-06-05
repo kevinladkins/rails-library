@@ -1,46 +1,43 @@
 "use strict";
 
-//
+// PAGE SETUP & EVENT LISTENERS
 
 $(function() {
-  setEventListeners();
-  $("#add-category-form").hide();
+  setBookListeners();
+  $("#new-author-field-set").hide()
+  $("#select-categories-field-set").hide()
 });
 
-function setEventListeners() {
-  $("#next-category").click(function(e) {
-    showNextCategory(e);
+function setBookListeners() {
+  $("#fiction-link").click(function(e) {
+    displayCategory(e, "fiction");
   });
-   $("#create-category-button").click(function(e) {
-     showCategoryForm(e);
+  $("#non-fiction-link").click(function(e) {
+    displayCategory(e, "non_fiction")
+  });
+  $("#most-borrowed-link").click(function(e) {
+     displayMostBorrowed(e)
+  });
+};
+
+// BOOKS#INDEX
+
+function displayCategory(e, category) {
+  e.preventDefault();
+  $.get('/books.json', books => {
+     booksList(books, category)
+  });
+};
+
+function displayMostBorrowed(e) {
+  e.preventDefault();
+  $.get('/books/most_borrowed.json', books => {
+    mostBorrowedList(books)
   });
 };
 
 
-
-
-$(function() {
-  $("#fiction-link").click(function(e) {
-    e.preventDefault();
-    fetch('/books.json')
-    .then(res => res.json())
-    .then(books => {
-      booksList(books, "fiction");
-    });
-  });
-});
-
-$(function() {
-  $("#non-fiction-link").click(function(e) {
-    e.preventDefault();
-    $.get('/books.json', books => {
-       booksList(books, "non_fiction")
-    });
-  });
-});
-
 function booksList(books, classification) {
-  $("#books-index").html('')
   $("#books-index").html(unorderedList());
   let alphaBooks = alphabetize(books, "title")
   alphaBooks.forEach(book => {
@@ -50,29 +47,21 @@ function booksList(books, classification) {
       $("#books-index ul").append(html);
     }
   })
-}
+};
 
-
-$(function() {
-  $("#most-borrowed-link").click(function(e) {
-    e.preventDefault();
-    fetch('/books/most_borrowed.json')
-    .then(res => res.json())
-    .then(books => {
-      $("#books-index").html(orderedList());
-      books.forEach(book => {
-        let newBook = new Book(book);
-        let html = newBook.listBook();
-        $("#books-index ol").append(html);
-      })
-    });
+function mostBorrowedList(books) {
+  $("#books-index").html(orderedList());
+  books.forEach(book => {
+    let newBook = new Book(book);
+    let html = newBook.listBook();
+    $("#books-index ol").append(html);
   });
-});
+};
 
+//
 
 
 $(function(){
-  $("#new-author-field-set").hide()
   $("#add-new-author-button").click(function(e) {
     e.preventDefault(e)
     $("#new-author-field-set").toggle()
@@ -80,7 +69,6 @@ $(function(){
 })
 
 $(function(){
-  $("#select-categories-field-set").hide()
   $("#select-categories-button").click(function(e) {
     e.preventDefault(e)
     $("#select-categories-field-set").toggle()
