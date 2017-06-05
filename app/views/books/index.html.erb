@@ -1,22 +1,13 @@
-     <h1 id="browse-books">Browse Books <%if author_view?%> by <%=link_to @author.name, author_path(@author)%> <%end%></h1>
+ <h1 id="browse-books">Browse Books  <%= render 'add_book_button'%></h1>
 
-	   <%= render 'add_book_button'%>
+ <h3>
+   <a href="#" id="fiction-link">Fiction</a> |
+   <a href="#" id="non-fiction-link">Non-Fiction</a> |
+   <a href="#" id="most-borrowed-link">Most-Borrowed</a>
+ </h3>
 
+ <div id="books-index">
 
-	   <%unless author_view?%>
+   <% render 'classifications'%>
 
-			 <%= render partial: 'application/search', locals: {item: @books.first}%><br>
-
-	   <%end%>
-
-     <h3>
-       <a href="#" id="fiction-link">Fiction</a> |
-       <a href="#" id="non-fiction-link">Non-Fiction</a> |
-       <a href="#" id="most-borrowed-link">Most-Borrowed</a>
-     </h3>
-
-     <div id="books-index">
-
-     <% render 'classifications'%>
-
-      </div>
+</div>
