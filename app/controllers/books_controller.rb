@@ -67,9 +67,4 @@ class BooksController < ApplicationController
     end
   end
 
-  def json_params
-
-  end
-
-
 end
