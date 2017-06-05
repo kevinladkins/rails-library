@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'home', to: 'home#index'
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
   get 'auth/:provider/callback', to: 'sessions#create'
@@ -28,6 +27,6 @@ Rails.application.routes.draw do
   end
 
 
-  root 'home#index'
+  root 'books#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
