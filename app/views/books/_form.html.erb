@@ -14,7 +14,7 @@
 <%= f.label :copies%>
 <%= f.number_field :copies%><br><br>
 
-<%if !author_view?%>><a href="#" id="add-new-author-button">Add New Author</a> || <%end%>
+<%if !author_view?%> <a href="#" id="add-new-author-button">Add New Author</a> || <%end%>
 <a href="#" id="select-categories-button">Select Categories</a>
 
 <%= render partial: 'new_author_field_set', locals: {book: book, f: f} unless author_view?%>

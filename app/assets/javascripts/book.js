@@ -18,9 +18,38 @@ function setBookListeners() {
   $("#most-borrowed-link").click(function(e) {
      displayMostBorrowed(e)
   });
+  $("#add-new-author-button").click(function(e) {
+     displayAuthorFieldSet();
+  });
+  $("#select-categories-button").click(function(e) {
+     displayCategoryFieldSet();
+  });
 };
 
-// BOOKS#INDEX
+
+//BOOK MODEL
+
+function Book(book) {
+  this.id = book.id
+  this.title = book.title
+  this.synopsis = book.synopsis
+  this.available_copies = book.available_copies
+  this.publication_year = book.publication_year
+  this.classification = book.classification
+  this.copies = book.copies
+  this.author = book.author
+  this.categories = book.categories
+}
+
+Book.prototype.listBook = function() {
+  let html = `
+    <li><a href="/books/${this.id}">${this.title}</a> by <a href="/authors/${this.author.id}">${this.author.name}</a></li>
+  `
+  return html
+}
+
+
+// BOOKS#INDEX FUNCTIONS
 
 function displayCategory(e, category) {
   e.preventDefault();
@@ -58,39 +87,12 @@ function mostBorrowedList(books) {
   });
 };
 
-//
+//BOOKS#NEW FUNCTIONS
 
+function displayAuthorFieldSet() {
+  $("#new-author-field-set").toggle()
+};
 
-$(function(){
-  $("#add-new-author-button").click(function(e) {
-    e.preventDefault(e)
-    $("#new-author-field-set").toggle()
-  })
-})
-
-$(function(){
-  $("#select-categories-button").click(function(e) {
-    e.preventDefault(e)
+function displayCategoryFieldSet(e) {
     $("#select-categories-field-set").toggle()
-  })
-})
-
-
-function Book(book) {
-  this.id = book.id
-  this.title = book.title
-  this.synopsis = book.synopsis
-  this.available_copies = book.available_copies
-  this.publication_year = book.publication_year
-  this.classification = book.classification
-  this.copies = book.copies
-  this.author = book.author
-  this.categories = book.categories
-}
-
-Book.prototype.listBook = function() {
-  let html = `
-    <li><a href="/books/${this.id}">${this.title}</a> by <a href="/authors/${this.author.id}">${this.author.name}</a></li>
-  `
-  return html
-}
+};
