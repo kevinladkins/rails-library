@@ -69,8 +69,6 @@ $(function(){
 })
 
 
-
-
 function Book(book) {
   this.id = book.id
   this.title = book.title

@@ -1,45 +1,22 @@
 "use strict";
 
+// PAGE SETUP & EVENT LISTENERS
+
 $(function() {
   setEventListeners();
   $("#add-category-form").hide();
-})
+});
 
 function setEventListeners() {
   $("#next-category").click(function(e) {
     showNextCategory(e);
   });
-  $("#create-category-button").click(function(e) {
-    displayCategoryForm(e)
+   $("#create-category-button").click(function(e) {
+     showCategoryForm(e);
   });
-}
+};
 
-function showNextCategory(e) {
-  var $id = parseInt($(e.currentTarget).attr("data-category-id"));
-  $.get(`/categories/${$id}/next`, resp => {
-    var newCategory = new Category(resp);
-    newCategory.showPage();
-    history.pushState(null, null, `${newCategory.id}`)
-  })
-}
-
-function displayCategoryForm(e) {
-    e.preventDefault();
-    $("#add-category-form").toggle();
-    $("#add-category-form form").submit(function(e) {
-      e.preventDefault();
-      var values = $(this).serialize();
-      var $book_id = $(this).attr("data-book-id")
-      var posting = $.post(`/books/${$book_id}/categories.json`, values)
-      posting.done(function(data) {
-         let newCategory = new Category(data);
-         let categoryText = newCategory.displayBookCategory();
-         $("#book-categories-list").append(categoryText);
-         $("#add-category-form").hide();
-      })
-    })
-  }
-
+//CATEGORY MODEL
 
 function Category(category) {
   this.name = category.name
@@ -68,3 +45,39 @@ Category.prototype.displayBookCategory = function() {
   let html = ` <a href="/categories/${this.id}">${this.name}</a> ||`
   return html
 }
+
+
+// CATEGORIES#SHOW "NEXT"
+
+function showNextCategory(e) {
+  let $id = parseInt($(e.currentTarget).attr("data-category-id"));
+  $.get(`/categories/${$id}/next`, category => {
+    let newCategory = new Category(category);
+    newCategory.showPage();
+    history.pushState(null, null, `${newCategory.id}`);
+  });
+};
+
+
+// CREATE CATEGORY VIA BOOKS#SHOW
+
+function showCategoryForm(e) {
+     e.preventDefault();
+     $("#add-category-form").toggle();
+     $("#add-category-form form").submit(function(e) {
+       e.preventDefault();
+       var values = $(this).serialize();
+       var $book_id = $(this).attr("data-book-id")
+       var posting = $.post(`/books/${$book_id}/categories.json`, values)
+       posting.done(function(category) {
+         showNewCategory(category)
+       })
+     })
+   };
+
+   function showNewCategory(category) {
+     let newCategory = new Category(category);
+     let categoryText = newCategory.displayBookCategory();
+     $("#book-categories-list").append(categoryText);
+     $("#add-category-form").hide();
+   }
