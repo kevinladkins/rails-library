@@ -1,9 +1,9 @@
 class Book < ApplicationRecord
 
   extend Searchable::ClassMethods
-  
+
   enum classification: {fiction: 0, non_fiction: 1}
-  
+
   belongs_to :author
   has_many :loans
   has_many :borrowers, :through => :loans, :source => :patron
@@ -14,9 +14,9 @@ class Book < ApplicationRecord
   validates :copies, numericality: {greater_than: 0}
   validates_associated :author
 
-  
+
   ## attribute builders ##
-  
+
   def author_attributes=(author_attributes)
     self.build_author(author_attributes) unless author_attributes[:last_name].blank?
   end
@@ -33,23 +33,27 @@ class Book < ApplicationRecord
     name = categories_attributes["0"][:name]
     self.categories.build(name: name, classification: self.classification) unless name.blank?
   end
-  
+
+  def add_category(category)
+    self.categories << category unless self.categories.include?(category)
+  end
+
   ## most_borrowed ##
-  
+
   def self.most_borrowed
     joins(:loans).group("loans.book_id").order("count (*) desc").limit(5)
   end
-  
+
   ## availability status ##
-  
+
   def available?
     available_copies > 0
   end
-  
+
   def available_copies
-    self.copies - self.checked_out_copies 
+    self.copies - self.checked_out_copies
   end
-  
+
   def checked_out_copies
     self.loans.checked_out.count(:book_id)
   end

@@ -28,12 +28,12 @@ before_action :authorize_user, only: [:new, :create]
   def create
     @book = Book.find(params[:book_id])
     if @category = Category.find_by(name: params[:category][:name])
-      @book.categories << @category
+      @book.add_category(@category)
       @book.save
     else
       @category = @book.categories.build(category_params)
       @category.classification = @book.classification
-      @category.save
+      @book.save
     end
     respond_to do |f|
       f.html {redirect_to(book_path(@book))}
