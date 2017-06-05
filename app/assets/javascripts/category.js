@@ -1,6 +1,28 @@
 "use strict";
 
 $(function() {
+  $("#add-category-form").hide();
+  $("#create-category-button").click(function(e) {
+    e.preventDefault();
+    $("#add-category-form").toggle();
+    $("#add-category-form form").submit(function(e) {
+      e.preventDefault();
+      var values = $(this).serialize();
+      var $book_id = $(this).attr("data-book-id")
+      var posting = $.post(`/books/${$book_id}/categories.json`, values)
+      posting.done(function(data) {
+         let newCategory = new Category(data);
+         let categoryText = newCategory.displayBookCategory();
+         $("#book-categories-list").append(categoryText);
+         $("#add-category-form").hide();
+      })
+    })
+  })
+});
+
+
+
+$(function() {
   $("#next-category").click(function(e) {
     showNextCategory(e);
   })
