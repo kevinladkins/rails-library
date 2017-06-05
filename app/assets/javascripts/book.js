@@ -1,5 +1,24 @@
 "use strict";
 
+//
+
+$(function() {
+  setEventListeners();
+  $("#add-category-form").hide();
+});
+
+function setEventListeners() {
+  $("#next-category").click(function(e) {
+    showNextCategory(e);
+  });
+   $("#create-category-button").click(function(e) {
+     showCategoryForm(e);
+  });
+};
+
+
+
+
 $(function() {
   $("#fiction-link").click(function(e) {
     e.preventDefault();

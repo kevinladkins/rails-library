@@ -3,11 +3,11 @@
 // PAGE SETUP & EVENT LISTENERS
 
 $(function() {
-  setEventListeners();
+  setCategoryListeners();
   $("#add-category-form").hide();
 });
 
-function setEventListeners() {
+function setCategoryListeners() {
   $("#next-category").click(function(e) {
     showNextCategory(e);
   });
