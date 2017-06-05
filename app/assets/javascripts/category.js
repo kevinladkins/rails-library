@@ -1,8 +1,29 @@
 "use strict";
 
 $(function() {
+  setEventListeners();
   $("#add-category-form").hide();
+})
+
+function setEventListeners() {
+  $("#next-category").click(function(e) {
+    showNextCategory(e);
+  });
   $("#create-category-button").click(function(e) {
+    displayCategoryForm(e)
+  });
+}
+
+function showNextCategory(e) {
+  var $id = parseInt($(e.currentTarget).attr("data-category-id"));
+  $.get(`/categories/${$id}/next`, resp => {
+    var newCategory = new Category(resp);
+    newCategory.showPage();
+    history.pushState(null, null, `${newCategory.id}`)
+  })
+}
+
+function displayCategoryForm(e) {
     e.preventDefault();
     $("#add-category-form").toggle();
     $("#add-category-form form").submit(function(e) {
@@ -17,25 +38,8 @@ $(function() {
          $("#add-category-form").hide();
       })
     })
-  })
-});
+  }
 
-
-
-$(function() {
-  $("#next-category").click(function(e) {
-    showNextCategory(e);
-  })
-})
-
-function showNextCategory(e) {
-  var $id = parseInt($(e.currentTarget).attr("data-category-id"));
-  $.get(`/categories/${$id}/next`, resp => {
-    var newCategory = new Category(resp);
-    newCategory.showPage();
-    history.pushState(null, null, `${newCategory.id}`)
-  })
-}
 
 function Category(category) {
   this.name = category.name
