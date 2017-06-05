@@ -9,19 +9,19 @@ $(function() {
 });
 
 function setBookListeners() {
-  $("#fiction-link").click(function(e) {
-    displayCategory(e, "fiction");
+  $("#fiction-link").click(function() {
+    displayCategory("fiction");
   });
-  $("#non-fiction-link").click(function(e) {
-    displayCategory(e, "non_fiction")
+  $("#non-fiction-link").click(function() {
+    displayCategory("non_fiction")
   });
-  $("#most-borrowed-link").click(function(e) {
-     displayMostBorrowed(e)
+  $("#most-borrowed-link").click(function() {
+     displayMostBorrowed()
   });
-  $("#add-new-author-button").click(function(e) {
+  $("#add-new-author-button").click(function() {
      displayAuthorFieldSet();
   });
-  $("#select-categories-button").click(function(e) {
+  $("#select-categories-button").click(function() {
      displayCategoryFieldSet();
   });
 };
@@ -51,15 +51,13 @@ Book.prototype.listBook = function() {
 
 // BOOKS#INDEX FUNCTIONS
 
-function displayCategory(e, category) {
-  e.preventDefault();
+function displayCategory(category) {
   $.get('/books.json', books => {
      booksList(books, category)
   });
 };
 
-function displayMostBorrowed(e) {
-  e.preventDefault();
+function displayMostBorrowed() {
   $.get('/books/most_borrowed.json', books => {
     mostBorrowedList(books)
   });
