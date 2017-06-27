@@ -14,9 +14,9 @@
  <%= render partial: 'create_category_button', locals: {book: @book}%>
 
  <div id="add-category-form">
-   <%= form_for @book.categories.build, data: {book_id: @book.id} do |f|%>
+   <%= form_for @book.categories.build, :html => {:id => "add-book-category-form"}, data: {book_id: @book.id} do |f|%>
      <%= render partial: 'categories/form', locals: {book: @book, f: f}%>
-     <%= f.submit%>
+     <%= f.submit id: "add-book-category-submit"%>
    <%end%>
  </div>
 

@@ -71,9 +71,12 @@ function showCategoryForm(e) {
        let posting = $.post(`/books/${$book_id}/categories.json`, values)
        posting.done(function(category) {
          showNewCategory(category)
+         debugger
        })
      })
    };
+
+
 
    function showNewCategory(category) {
      let newCategory = new Category(category);
