@@ -92,5 +92,5 @@ function displayAuthorFieldSet() {
 };
 
 function displayCategoryFieldSet(e) {
-    $("#select-categories-field-set").toggle()
+  $("#select-categories-field-set").toggle()
 };

@@ -5,16 +5,27 @@
 $(function() {
   setCategoryListeners();
   $("#add-category-form").hide();
+  setCategoryFormListener()
 });
 
 function setCategoryListeners() {
   $("#next-category").click(function(e) {
     showNextCategory(e);
   });
-   $("#create-category-button").click(function(e) {
-     showCategoryForm(e);
+
+  $("#create-category-button").click(function(e) {
+    showCategoryForm(e);
   });
 };
+
+function setCategoryFormListener() {
+  $("#add-category-form form").submit(function(e) {
+    e.preventDefault();
+    let values = $(this).serialize();
+    let bookId = $(this).attr("data-book-id")
+    createCategory(bookId);
+  });
+}
 
 //CATEGORY MODEL
 
@@ -62,25 +73,21 @@ function showNextCategory(e) {
 // CREATE CATEGORY VIA BOOKS#SHOW
 
 function showCategoryForm(e) {
-     e.preventDefault();
-     $("#add-category-form").toggle();
-     $("#add-category-form form").submit(function(e) {
-       e.preventDefault();
-       let values = $(this).serialize();
-       let $book_id = $(this).attr("data-book-id")
-       let posting = $.post(`/books/${$book_id}/categories.json`, values)
-       posting.done(function(category) {
-         showNewCategory(category)
-         $("#new-category-field").val('')
-       })
-     })
-   };
+  e.preventDefault();
+  $("#add-category-form").toggle();
+};
 
+function createCategory(bookId) {
+  let posting = $.post(`/books/${$bookId}/categories.json`, values)
+  posting.done(function(category) {
+    showNewCategory(category)
+    $("#new-category-field").val('')
+  });
+}
 
-
-   function showNewCategory(category) {
-     let newCategory = new Category(category);
-     let categoryText = newCategory.displayBookCategory();
-     $("#book-categories-list").append(categoryText);
-     $("#add-category-form").hide();
-   }
+function showNewCategory(category) {
+  let newCategory = new Category(category);
+  let categoryText = newCategory.displayBookCategory();
+  $("#book-categories-list").append(categoryText);
+  $("#add-category-form").hide();
+}
