@@ -1,5 +1,0 @@
-<%if author_view?%>
-  <%= render partial: 'authors/book_list', locals: {book: book}%>
-<%else%>
-
-<li><%= render partial: 'books/links', locals: {book: book}%> by <%=link_to book.author.name, author_path(book.author)%> <%end%> </li>

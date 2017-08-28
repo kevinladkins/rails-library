@@ -2,15 +2,35 @@
 
 // PAGE SETUP & EVENT LISTENERS
 
+var authorArray = []
+
 $(function() {
   setAuthorListeners();
+  getAuthors();
+  $('#author-books-list').hide()
 });
 
 function setAuthorListeners() {
   $("#show-author-books").click(function(e) {
-    displayAuthorBooks(e);
+    $('#author-books-list').toggle();
   });
 };
+
+
+
+function getAuthors() {
+  $.get('/authors.json', authors => {
+    setAuthorsArray(authors);
+  })
+}
+
+function setAuthorsArray(authors) {
+  authors.forEach(author => {
+    authorArray.push(author.name)
+  });
+  setAuthorSearch();
+}
+
 
 
 // AUTHOR MODEL
@@ -31,15 +51,22 @@ Author.prototype.listBooks = function() {
   return html
 }
 
+// SEARCH FUNCTIONS
 
-// AUTHOR#SHOW FUNCTIONS
+function setAuthorSearch() {
+  var authorNames = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: authorArray
+  });
 
-function displayAuthorBooks(e) {
-  let authorId = parseInt($(e.currentTarget).attr("data-author-id"));
-  $.get(`/authors/${authorId}.json`, author => {
-    let newAuthor = new Author(author)
-    $("#author-books-list").html(unorderedList());
-    let html = newAuthor.listBooks();
-    $("#author-books-list ul").append(html);
-    });
-  };
+  $('#author-search .typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'authorNames',
+      source: authorNames
+  });
+}

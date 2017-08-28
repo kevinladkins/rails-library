@@ -9,12 +9,28 @@ function alphabetize(obj, attr) {
   return alpha
 }
 
+
+
 function orderedList() {
-  let html = `<ol></ol>`
+  let html = `<ol></ol>`;
+  return html
+}
+
+function bookTable() {
+  let html = `
+   <table class="table table-striped catalogue-table">
+     <thead>
+       <tr>
+         <th>Title</th>
+         <th>Author</th>
+       </tr>
+     </thead>
+     <tbody></tbody>
+   </table>`;
   return html
 }
 
 function unorderedList() {
-  let html = `<ul></ul>`
+  let html = `<ul></ul>`;
   return html
 }

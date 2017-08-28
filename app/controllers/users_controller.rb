@@ -6,6 +6,15 @@ class UsersController < ApplicationController
 
   def index
     set_users
+    if params[:query]
+      query_user = User.find_by(name: params[:query])
+      redirect_to(query_user) if query_user
+    else
+      respond_to do |f|
+        f.html {render :index}
+        f.json {render json: User.all.as_json(only: [:name])}
+      end
+    end
   end
 
 
@@ -25,7 +34,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   def destroy
     user = User.find(params[:id])
     if user.outstanding_loans?
@@ -44,17 +53,17 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:last_name, :first_name, :email, :password, :password_confirmation, :role)
   end
-  
+
   def require_login
     if !logged_in?
       flash.alert = "Please log in to view your account."
       redirect_to root_path
     end
-  end 
-  
+  end
+
   def set_users
     @users = User.name_search(params[:query])
-    
+
   end
 
 end

@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require global_functions
+//= require typeahead.bundle.min.js
+
 //= require_tree .

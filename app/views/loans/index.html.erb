@@ -1,17 +1,51 @@
-<h3>Overdue Loans</h3>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="text-primary">Loans</h1>
+      <div class="panel panel-info" id="loans-panel">
+        <div class="panel-heading">
+          <h3><span id="toggle-all-loans" class="btn btn-default active">All Loans</span> || <span id="toggle-overdue" class="btn btn-default">Overdue Loans</span> </h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-hover" id="overdue-loans-table">
+            <thead>
+              <tr>
+                <th><h4>Title</h4></th>
+                <th><h4>Borrower</h4></th>
+                <th><h4>Due Date</h4></th>
+              </tr>
+            </thead>
+            <tbody>
+               <%overdue_books.each do |loan|%>
+                <tr class="loan-row" data-user-id="<%=loan.patron.id%>">
+                  <td><%=loan.book.title%></td>
+                  <td><%=loan.patron.name%></td>
+                  <td><%=loan.show_due_date%></td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
 
-
-<ul>
-   <%overdue_books.each do |loan|%>
-    <li><%= render partial: 'links', locals: {loan: loan} %> due on <%= loan.show_due_date%> </li>
-  <%end%>
-</ul>
-  
-<h3>All Current Loans</h3>
-<ul>
-  <%books_by_due_date.each do |loan|%>
-  <li><%= render partial: 'links', locals: {loan: loan} %> on <%= loan.show_checkout_date%> </li>
-    <%end%>
-</ul>
-  
-  
+          <table class="table table-striped table-hover" id="all-loans-table">
+            <thead>
+              <tr>
+                <th><h4>Title</h4></th>
+                <th><h4>Borrower</h4></th>
+                <th><h4>Due Date</h4></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%books_by_due_date.each do |loan|%>
+                <tr class="loan-row" data-user-id="<%=loan.patron.id%>" >
+                  <td><%=loan.book.title%></td>
+                  <td><%=loan.patron.name%></td>
+                  <td><%=loan.show_due_date%></td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div><!-- close panel body-->
+      </div><!-- close panel -->
+    </div><!--close column-->
+  </div><!-- close row -->
+</div><!-- close well -->

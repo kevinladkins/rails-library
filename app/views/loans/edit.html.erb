@@ -1,4 +1,4 @@
 
   <%=form_tag loan_path(@loan), method: :put%>
-     Extend Loan Until <%=date_field_tag "loan[due_date]"%> 
-	<%= submit_tag "Extend"%><br>
+     Extend Loan Until <%=date_field_tag "loan[due_date]"%>
+	<%= submit_tag "Extend", class: 'btn btn-default'%><br>

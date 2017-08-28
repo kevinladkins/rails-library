@@ -14,6 +14,8 @@ class Book < ApplicationRecord
   validates :copies, numericality: {greater_than: 0}
   validates_associated :author
 
+  before_save :set_alpha_title
+
 
   ## attribute builders ##
 
@@ -38,10 +40,28 @@ class Book < ApplicationRecord
     self.categories << category unless self.categories.include?(category)
   end
 
+  ## alphabetize_title ##
+
+  def set_alpha_title
+    if self.title.split.first == "The"
+      split = self.title.split
+      split.shift
+      self.alpha_title = split.join(" ").concat(", The")
+    else
+      self.alpha_title = self.title
+    end
+  end
+
   ## most_borrowed ##
 
   def self.most_borrowed
     joins(:loans).group("loans.book_id").order("count (*) desc").limit(5)
+  end
+
+  ## global stats ##
+
+  def self.total_count
+    sum(:copies)
   end
 
   ## availability status ##

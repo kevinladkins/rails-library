@@ -1,20 +1,59 @@
-<h1><%= @author.name%>
-<%= render partial: 'edit_button', locals: {author: @author}%> </h1>
+
+<div class="well">
+  <div class="row">
+    <div class="col-xs-6">
+      <h1 class="text-primary"><%= @author.name%>
+      <%= render partial: 'edit_button', locals: {author: @author}%> </h1>
 
 
-Born: <%= @author.birth_date %><br>
-Died: <%= @author.death_date%><br>
+      Born: <%= @author.birth_date %><br>
+      Died: <%= @author.death_date%><br>
+    </div><!--close column-->
+
+    <div class="col-xs-6">
 
 
-<br><a href="#" id="show-author-books" data-author-id="<%= @author.id%>">View Books By This Author</a> ||
+    </div><!--close column-->
+
+  </div><!--close row-->
 
 
 
-<%= render partial: 'add_book_button', locals: {author: @author}%>
+  <div class="row">
+    <div class="col-sm-12" id="author-buttons">
+      <button class="btn btn-sm btn-default" id="show-author-books" data-author-id="<%= @author.id%>">View Books By This Author</button>
+      <%if librarian?%>
+        || <%= render partial: 'add_book_button', locals: {author: @author}%>
+      <%end%>
+    </div><!--close column -->
+    <div class="col-sm-6">
+        <div class="panel panel-info" id="author-books-list">
+          <div class="panel-heading">
+            <%=@author.name%> Titles In Collection
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped">
+              <tbody>
+                <%@author.books.each do |book|%>
+                  <tr>
+                    <td><%=link_to book.title, book_path(book)%></td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+          </div><!--close body-->
+        </div><!-- close panel -->
+    </div><!--close column-->
+    <div class="col-sm-6"></div>
+  </div><!--close row-->
 
-<div id="author-books-list"></div>
 
-<br>
-
-<h3>Bio: </h3>
-<p><%=@author.bio%></p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-info sub-panel">
+      <div class="panel-heading"><h3>Biography</h3> </div>
+      <p class="panel-body"><%=@author.bio%></p>
+    </div>
+  </div>
+</div>
+</div><!--close well -->

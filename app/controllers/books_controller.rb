@@ -4,10 +4,15 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update]
 
   def index
-    set_books
-    respond_to do |f|
-      f.html {render :index}
-      f.json {render json: @books}
+    if params[:query]
+      query_book = Book.find_by(title: params[:query])
+      query_book ? redirect_to(query_book) : set_books
+    else
+      set_books
+      respond_to do |f|
+        f.html {render :index}
+        f.json {render json: @books}
+      end
     end
   end
 
@@ -28,7 +33,7 @@ class BooksController < ApplicationController
   end
 
   def most_borrowed
-    render json: Book.most_borrowed.as_json(only: [:title, :id], include: [author: {only: [:name, :id]}])
+    render json: Book.most_borrowed.as_json(only: [:title, :id, :alpha_title], include: [author: {only: [:name, :id]}])
   end
 
   def edit

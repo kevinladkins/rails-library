@@ -1,1 +1,6 @@
-<%= f.collection_check_boxes :category_ids, categories_for_selection, :id, :name%>
+<%= f.collection_check_boxes :category_ids, categories_for_selection, :id, :name do |b|%>
+ <span class="checkbox-span">
+  <%=b.check_box%>
+  <%=b.label%>
+</span>
+<%end%>

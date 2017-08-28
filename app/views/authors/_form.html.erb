@@ -1,12 +1,20 @@
-
+<div class="form-group">
 	<%= f.label :first_name%>
-	<%= f.text_field :first_name%><br>
+	<%= f.text_field :first_name, class: "form-control"%>
+</div>
+<div class="form-group">
 	<%= f.label :last_name%>
-	<%= f.text_field :last_name%><br>
+	<%= f.text_field :last_name, class: "form-control"%>
+</div>
+<div class="form-group">
 	<%= f.label :born%>
-	<%= f.date_field :born%><br>
+	<%= f.date_field :born, class: "form-control"%>
+</div>
+<div class="form-group">
 	<%= f.label :died%>
-	<%= f.date_field :died %><br>
+	<%= f.date_field :died, class: "form-control" %>
+</div>
+<div class="form-group">
 	<%= f.label :bio%>
-	<%= f.text_area :bio, :cols => "30", :rows => "5" %><br>
-	
+	<%= f.text_area :bio, :cols => "30", :rows => "5", class: "form-control" %>
+</div>

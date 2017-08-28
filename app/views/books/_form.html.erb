@@ -1,36 +1,49 @@
 
-<%= f.radio_button :classification, "fiction" %>
-<%= f.label :classfication, "Fiction" %>
-<%= f.radio_button :classification, "non_fiction" %>
-<%= f.label :classfication, "Non-Fiction" %><br>
-<%= f.label :title %>
-<%= f.text_field :title%><br>
-<%= f.label :author %>
-<%= render partial: 'authors/selection', locals: {f: f}%>
-<%= f.label :publication_year%>
-<%= f.number_field :publication_year%><br>
-<%= f.label :synopsis%><br>
-<%= f.text_area :synopsis, :cols => "30", :rows => "5"%><br>
-<%= f.label :copies%>
-<%= f.number_field :copies%><br><br>
-
-<%if !author_view?%> <a href="#" id="add-new-author-button">Add New Author</a> || <%end%>
-<a href="#" id="select-categories-button">Select Categories</a>
-
-<%= render partial: 'new_author_field_set', locals: {book: book, f: f} unless author_view?%>
-
-
-
-<div id="select-categories-field-set">
-<%= field_set_tag "Categories" do %>
-
-		<%= render partial: 'categories/check_boxes', locals: {f: f}%> <br><br>
-
-		<%= f.label "New Category: " %>
-		<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
-		  <%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
-		<%end%>
-
-	<%end%>
+<div class="form-group">
+	<%= f.label :title %>
+	<%= f.text_field :title, class: "form-control"  %>
 </div>
-<br><br>
+<div class="form-group">
+	<%= f.radio_button :classification,  "fiction" %>
+	<%= f.label :classfication, "Fiction" %>
+	<%= f.radio_button :classification, "non_fiction" %>
+	<%= f.label :classfication, "Non-Fiction" %>
+</div>
+<div class="form-group">
+	<%= f.label :author %>
+	<%= render partial: 'authors/selection', locals: {f: f}%>
+	<%if !author_view?%> <button class="btn btn-info btn-sm" id="add-new-author-button">Add New Author</button><%end%>
+	<div class="form-group">
+		<%= render partial: 'new_author_field_set', locals: {book: book, f: f} unless author_view?%>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :publication_year%>
+	<%= f.number_field :publication_year, class: "form-control"  %>
+</div>
+<div class="form-group">
+	<%= f.label :synopsis%><br>
+	<%= f.text_area :synopsis, :cols => "30", :rows => "5", class: "form-control"  %>
+</div>
+<div class="form-group">
+	<%= f.label :copies%>
+	<%= f.number_field :copies, class: "form-control" %>
+</div>
+<button class="btn btn-info btn-sm" id="select-categories-button">Select Categories</button><br><br>
+
+<div id="select-categories-field-set" class="well">
+	<div class="form-group">
+		<div class="form-group">
+				<%= field_set_tag "Categories" do %>
+				<%= f.label "New Category: " %>
+				<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
+					<%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
+				<%end%>
+		</div>
+
+				<%= render partial: 'categories/check_boxes', locals: {f: f}%> <br><br>
+
+
+			<%end%>
+  </div>
+</div>

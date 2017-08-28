@@ -1,7 +1,24 @@
-<h1><span id="category-name"><%= @category.name%></span> Books
-  <button id="next-category" data-category-id="<%=@category.id%>">Next Category</button>
- </h1>
-
-<ul id="category-book-list">
-   <%= render partial: 'books/list', collection: alphabetize_by(@category.books, :title), as: :book%>
-</ul>
+<div class="well">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h1><span id="category-name"><%= @category.name%></span> Books
+            <button id="next-category" data-category-id="<%=@category.id%>" class="btn btn-default">Next Category</button>
+           </h1>
+        </div><!-- close panel heading -->
+        <div class="panel-body">
+          <table class="table table-striped catalogue-table">
+            <thead>
+              <th>Title</th>
+              <th>Author</th>
+            </thead>
+            <tbody id="category-book-list">
+             <%= render partial: 'books/table', collection: alphabetize_by(@category.books, :title), as: :book%>
+           </tbody>
+          </table>
+        </div><!-- close panel body -->
+      </div><!-- close panel -->
+    </div><!-- close column-->
+  </div><!-- close row -->
+</div><!--close well -->

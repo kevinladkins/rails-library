@@ -4,7 +4,16 @@ class AuthorsController < ApplicationController
 
 
   def index
-    set_authors
+    if params[:query]
+      query_author = Author.find_by(name: params[:query])
+      query_author ? redirect_to(query_author) : set_authors
+    else
+      set_authors
+      respond_to do |f|
+        f.html {render :index}
+        f.json {render json: @authors}
+      end
+    end
   end
 
   def new
@@ -46,8 +55,6 @@ class AuthorsController < ApplicationController
   def set_authors
     @authors = Author.name_search(params[:query])
   end
-
-
 
 
 

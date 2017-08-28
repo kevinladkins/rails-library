@@ -1,44 +1,67 @@
-<h1><%= @book.title%> <%= render partial: 'edit_book_button', locals: {book: @book}%> </h1>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1 class="text-primary"><%= @book.title%> <%= render partial: 'edit_book_button', locals: {book: @book}%> </h1>
 
-<h2>by <%=link_to @book.author.name, author_path(@book.author)%> <%= render partial: 'authors/edit_button', locals: {author: @book.author}%>  </h2>
-
-
-<p>Publication Year: <%=@book.publication_year%></p>
-
-<strong>Categories: </strong>
-
-<span id="book-categories-list">
- <%@book.categories.find_each do |c|%><%= render partial: 'categories/links', locals: {category: c} %> || <%end%>
- </span>
-
- <%= render partial: 'create_category_button', locals: {book: @book}%>
-
- <div id="add-category-form">
-   <%= form_for @book.categories.build, :html => {:id => "add-book-category-form"}, data: {book_id: @book.id} do |f|%>
-     <%= render partial: 'categories/form', locals: {book: @book, f: f}%>
-     <%= f.button id: "add-book-category-submit"%>
-   <%end%>
- </div>
-
-<p><%=@book.synopsis%></p>
+      <h2>by <%=link_to @book.author.name, author_path(@book.author)%> <%= render partial: 'authors/edit_button', locals: {author: @book.author}%>  </h2>
 
 
-<%if patron? && @book.available? %>
+      <p>Publication Year: <%=@book.publication_year%></p>
 
-  <%=@book.available_copies%> available
-  <%=button_to "Borrow", loans_path, method: :post, params: {"loan[book_id]": @book.id}%>
+      <strong>Categories: </strong>
+      <span id="book-categories-list">
+        <%@book.categories.find_each do |c|%><%= render partial: 'categories/links', locals: {category: c} %> || <%end%>
+      </span>
 
-<%elsif librarian? %>
+      <%= render partial: 'create_category_button', locals: {book: @book}%>
 
-  <br><%= @book.copies%> in collection<br>
-
-
-	  <%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies > 0%> to: <br><br>
-
-	  <%@book.loans.on_loan.each do |l|%>
-		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.show_due_date%><br>
-	  <%end%>
-   <%end%>
+      <div id="add-category-form">
+        <%= form_for @book.categories.build, :html => {:id => "add-book-category-form"}, data: {book_id: @book.id} do |f|%>
+          <%= render partial: 'categories/form', locals: {book: @book, f: f}%>
+          <%= f.button id: "add-book-category-submit", class: "btn btn-default btn-sm"%>
+        <%end%>
+      </div>
+    </div><!--close column-->
 
 
-<%end%>
+    <div class="col-sm-6">
+      <div class="panel panel-info" id="availability-panel">
+        <div class="panel-heading">
+          <p><strong><%= @book.copies%> copies in collection<strong></p>
+        </div>
+
+      <%if patron?  %>
+        <div class="panel-body">
+           <%=@book.available_copies%> available
+          <% if @book.available? %>
+            <%=button_to "Borrow", loans_path, class: 'btn btn-default btn-sm', method: :post, params: {"loan[book_id]": @book.id}%>
+          <%end%>
+        </div>
+      <%elsif librarian? %>
+
+        <div class="panel-body">
+      	  <p><%= @book.checked_out_copies%> checked out <%if @book.checked_out_copies > 0%> to:</p>
+      	  <%@book.loans.on_loan.each do |l|%>
+      		  <%= link_to l.patron.name, user_path(l.patron)%>, due on <%=l.show_due_date%><br>
+      	  <%end%>
+         <%end%>
+       </div>
+
+
+      <%end%>
+    </div><!--close well -->
+  </div><!--close column-->
+
+ </div><!--close row-->
+
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-info sub-panel">
+      <div class="panel-heading"><h3>Synopsis</h3></div>
+      <p class="panel-body"><%=@book.synopsis%></p>
+    </div>
+  </div><!--close column-->
+</div><!--close row -->
+</div><!-- close well -->

@@ -1,30 +1,44 @@
 
 <% if checked_out_books?(user) %>
 
-	<h3>Current Loans: </h3>
 
 
-  <ul>
-	  <% on_loan_to(user).each do |loan| %> 
-		
-			<%if loan.overdue?%>
-			
-				<li><%=render partial: 'books/links', locals: {book: loan.book}%> ||
-				OVERDUE <%if patron?%> -- PLEASE RETURN <%end%> 
-			
-			<%else%>
-			
-				<li><%=render partial: 'books/links', locals: {book: loan.book}%> ||
-				due on <%= loan.show_due_date %>
-				
+
+  <table class="table table-striped">
+		<thead>
+			<tr>
+			  <th><h3>Current Loans: </h3></th>
+				<th></th>
+				<th></th>
+		  </tr>
+			<tr>
+				<th>Title</th>
+				<th>Due Date</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% on_loan_to(user).each do |loan| %>
+
+					<%if loan.overdue?%>
+            <tr class="danger">
+						<td><%=render partial: 'books/links', locals: {book: loan.book}%></td>
+						<td>OVERDUE</td>
+
+					<%else%>
+				    <tr>
+						<td><%=render partial: 'books/links', locals: {book: loan.book}%></td>
+						<td> <%= loan.show_due_date %></td>
+
+					<%end%>
+
+				  <td><%= render partial: 'return_book_button', locals: {loan: loan}%>
+				  <%= render partial: 'extend_loan_button', locals: {loan: loan}%></td>
+				</tr>
 			<%end%>
-			
-		  <%= render partial: 'return_book_button', locals: {loan: loan}%>
-		  <%= render partial: 'extend_loan_button', locals: {loan: loan}%>
-	
-		
-		</li>
-		<%end%>
-	</ul>
-	
+		</tbody>
+	</table>
+
+	<%else%>
+	  <h2>No Outstanding Loans</h2>
 <%end%>

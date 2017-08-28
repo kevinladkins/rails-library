@@ -1,8 +1,37 @@
 
- <h3><%=link_to "View Our Most-Borrowed Books", most_borrowed_books_path%></h3>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-6">
+      <% if !current_user %>
+        <h1 class="text-primary">Welcome!</h1>
+        <p class="lead">Please <%=link_to "Log In", login_path%> or <%=link_to "Sign Up", signup_path%> to get started</p></br>
+      <%end%>
 
-<%= link_to "Browse Books", books_path%><br>
-<%= render partial: 'application/search', locals: {item: @book}%><br>
+      <div class="panel panel-info">
 
-<%= link_to "Browse Authors", authors_path%><br>
-<%= render partial: 'application/search', locals: {item: @author}%><br>
+        <div class="panel-heading">
+          <h3>Browse Collection</h3>
+        </div>
+
+        <div class="panel-body">
+
+
+            <%= render partial: 'application/search', locals: {item: "Books", id: "book-search", path: books_path}%></br>
+
+
+            <%= render partial: 'application/search', locals: {item: "Authors", id: "author-search", path: authors_path}%>
+        </div>
+      </div>
+
+ <!-- <h3><%=link_to "View Our Most-Borrowed Books", most_borrowed_books_path%></h3>
+
+
+
+ -->
+
+     </div><!--close column-->
+     <div class="col-sm-6">
+        <%=image_tag("http://imgur.com/OKP93KI.jpg", size: "80%", class: "img-responsive")%>
+    </div>
+  </div><!-- close row -->
+</div><!-- close well-->

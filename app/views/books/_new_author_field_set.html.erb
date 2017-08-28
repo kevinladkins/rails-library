@@ -1,9 +1,10 @@
-<div id ="new-author-field-set">
-<%= field_set_tag "New Author" do %>
 
-    <%= f.fields_for :author, book.build_author do |author_attributes|%>
-			<%= render partial: 'authors/form', locals: {f: author_attributes}%>
-		<%end%><br>
+<div id ="new-author-field-set" class="well">
+  <%= field_set_tag "New Author" do %>
 
-<%end%>
+      <%= f.fields_for :author, book.build_author do |author_attributes|%>
+  			<%= render partial: 'authors/form', locals: {f: author_attributes}%>
+  		<%end%><br>
+
+  <%end%>
 </div>

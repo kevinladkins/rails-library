@@ -22,8 +22,8 @@ function setCategoryFormListener() {
   $("#add-category-form form").submit(function(e) {
     e.preventDefault();
     let values = $(this).serialize();
-    let bookId = $(this).attr("data-book-id")
-    createCategory(bookId);
+    let bookId = $(this).attr("data-book-id");
+    createCategory(bookId, values);
   });
 }
 
@@ -47,7 +47,10 @@ Category.prototype.showPage = function() {
 
 Category.prototype.listBook = function(book) {
   let html = `
-    <li><a href="/books/${book.id}">${book.title}</a> by <a href="/authors/${book.author.id}">${book.author}</a></li>
+    <tr>
+      <td><a href="/books/${book.id}">${book.title}</a></td>
+      <td><a href="/authors/${book.author.id}">${book.author}</a></td>
+    </tr>
   `
   return html
 }
@@ -77,8 +80,8 @@ function showCategoryForm(e) {
   $("#add-category-form").toggle();
 };
 
-function createCategory(bookId) {
-  let posting = $.post(`/books/${$bookId}/categories.json`, values)
+function createCategory(bookId, values) {
+  let posting = $.post(`/books/${bookId}/categories.json`, values);
   posting.done(function(category) {
     showNewCategory(category)
     $("#new-category-field").val('')

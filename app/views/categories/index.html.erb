@@ -1,13 +1,37 @@
-<h1>Book Categories</h1>
+<div class="well">
+  <div class="row">
+    <div class="col-xs-12">
 
-<h3>Fiction</h3>
-
-<ul>
-  <%=render partial: 'list', collection: fiction_categories, as: :category%>
-</ul>
-
-<h3>Non-Fiction</h3>
-
-<ul>
-  <%=render partial: 'list', collection: non_fiction_categories, as: :category%>
-</ul>
+      <h1>Book Categories</h1>
+    </div><!-- close column-->
+  </div><!-- close row -->
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3>Fiction</h3>
+        </div><!-- close heading-->
+        <div class="panel-body">
+            <table class="table table-striped">
+             <tbody>
+                <%=render partial: 'table', collection: fiction_categories, as: :category%>
+            </tbody>
+          </table>
+        </div><!-- close body-->
+      </div><!-- close panel-->
+    </div><!-- close column-->
+    <div class="col-sm-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3>Non-Fiction</h3>
+        </div><!-- close heading-->
+       <div class="panel-body">
+         <table class="table table-striped">
+           <tbody>
+             <%=render partial: 'table', collection: non_fiction_categories, as: :category%>
+           </tbody>
+          </table>
+        </div><!-- close body-->
+      </div><!-- close panel-->
+    </div><!-- close column-->
+  </div><!-- close well -->

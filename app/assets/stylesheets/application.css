@@ -14,30 +14,101 @@
  *= require_self
  */
 
+/*********** TYPEAHEAD FIXES ********************************/
+
+span.twitter-typeahead .tt-menu {
+  cursor: pointer;
+}
+
+.dropdown-menu, span.twitter-typeahead .tt-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  color: #373a3c;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem; }
+
+span.twitter-typeahead .tt-suggestion {
+  display: block;
+  width: 100%;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #373a3c;
+  text-align: inherit;
+  white-space: nowrap;
+  background: none;
+  border: 0;
+}
+
+span.twitter-typeahead .tt-suggestion:focus, .dropdown-item:hover, span.twitter-typeahead .tt-suggestion:hover {
+    color: #2b2d2f;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+span.twitter-typeahead .active.tt-suggestion, span.twitter-typeahead .tt-suggestion.tt-cursor, span.twitter-typeahead .active.tt-suggestion:focus, span.twitter-typeahead .tt-suggestion.tt-cursor:focus, span.twitter-typeahead .active.tt-suggestion:hover, span.twitter-typeahead .tt-suggestion.tt-cursor:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #0275d8;
+    outline: 0;
+}
+
+span.twitter-typeahead .disabled.tt-suggestion, span.twitter-typeahead .disabled.tt-suggestion:focus, span.twitter-typeahead .disabled.tt-suggestion:hover {
+    color: #818a91;
+}
+
+span.twitter-typeahead .disabled.tt-suggestion:focus, span.twitter-typeahead .disabled.tt-suggestion:hover {
+    text-decoration: none;
+    cursor: not-allowed;
+    background-color: transparent;
+    background-image: none;
+    filter: "progid:DXImageTransform.Microsoft.gradient(enabled = false)";
+}
+
+span.twitter-typeahead {
+  width: 100%;
+}
+
+.input-group span.twitter-typeahead {
+    display: block !important;
+}
+
+.input-group span.twitter-typeahead .tt-menu {
+      top: 2.375rem !important;
+}
+
+/*********************  GLOBAL ********************************/
+
 * {
-  font-family: arial;
+  font-family: 'Libre Franklin', arial;
 }
 
-#logo {
-  display: inline-block;
-  color: white;
-  padding-left: 2px;
+p, li {
+  font-size: 1.2em;
 }
 
-#login-nav {
-  color: white;
-  float: right;
-  margin-top: 2em;
-  margin-right: 1em;
+.catalogue-table {
+  width: 80%;
 }
 
-#login-nav a {
-  text-decoration: none;
+.sub-panel {
+  margin-top: 10px;
 }
 
-.librarian-option {
-  font-variant: small-caps;
-  color: red;
+.search-form {
+  max-width: 300px;
 }
 
 .button_to,
@@ -50,24 +121,91 @@
 }
 
 .field-with-errors {
-  border: 1px solid red; 
-}
-
-.link_to,
-.link_to div {
-  display: inline;
-}
-
-header {
-  background: grey;
-}
-
-fieldset {
-  width: 20em;
+  border: 1px solid red;
 }
 
 
 
+/********************* HEADER ************************************/
+
+.page-header {
+  margin-bottom: 0;
+  padding: 20px 0 20px 10px;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 4em;
+}
+
+#logo {
+  display: inline-block;
+  color: white;
+  padding-left: 2px;
+}
+
+/************************* LOANS#INDEX ************************************/
+
+.loan-row:hover {
+  cursor: pointer;
+}
+
+/************************* BOOKS#SHOW *************************************/
+
+#availability-panel {
+  margin-top: 2em;
+}
+
+
+/************************* BOOKS FORM *************************************/
+
+
+.checkbox-span {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+
+#add-new-author-button {
+  margin-left: 5px;
+}
+
+#new-author-field-set {
+  margin-top: 10px;
+}
+
+#author-buttons, #add-category-form {
+  margin: 10px 0 10px;
+}
+
+
+/************************* LIBRARIANS/DASHBOARD *************************************/
+
+
+#loan-stats, #user-stats {
+  width: 100%;
+  height: auto;
+}
+
+
+/********************* RESPONSIVE **********************************/
+
+@media only screen and (max-width: 700px) {
+  .catalogue-table {
+    width: 100%;
+  }
+}
 
 
 
+/********/
+
+
+
+
+
+
+.librarian-option {
+  font-variant: small-caps;
+  color: red;
+}

@@ -1,8 +1,70 @@
-<h1>Librarian Dashboard</h1>
+<div class="well">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-primary">Librarian Dashboard</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
 
-<h3>Total Books On Loan: <%= @loans.total_on_loan%></h3>
-<h3>Total Overdue Books: <%=@loans.total_overdue%></h3>
 
-<h4><%= link_to "Manage Loans", loans_path%></h4>
-<h4><%= link_to "Manage Users", users_path%>  </h4>
-<h4><%= link_to "Manage Collection", books_path%> </h4>
+
+
+      <div class="panel panel-primary">
+        <div class="panel panel-heading">
+          <h3>Total Books On Loan: <%= @loans.total_on_loan%></h3>
+        <!-- </div>
+        <div class="panel panel-heading"> -->
+          <h3>Total Overdue Books: <%=@loans.total_overdue%></h3>
+        </div>
+        <div class="panel-body">
+          <p><%= link_to "Manage Loans", loans_path%></p>
+          <p><%= link_to "Manage Users", users_path%>  </p>
+          <p><%= link_to "Manage Collection", books_path%> </p>
+        </div>
+      </div><!--close panel-->
+    </div><!--close column-->
+
+    <div class="col-sm-6">
+      <!-- <div class="row"> -->
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3>Collection</h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-xs-6">
+              <div class="well">
+                <p style="color:#5bc0de">Total Books: <span id="book-total"><span></p>
+                <p style="color:#d9534f"}>On Loan: <span id="loan-total"><span></p>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <canvas id="loan-stats"></canvas>
+            </div>
+          </div><!--close body-->
+        </div><!--close panel-->
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3>Users</h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-xs-6">
+              <div class="well">
+                <p style="color:#5bc0de">Total Users: <span id="user-total"><span></p>
+                <p style="color:#d9534f"}>Active Users: <span id="active-total"></span><br><small>(1 or more loans)<small></p>
+
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <canvas id="user-stats"></canvas>
+            </div>
+          </div><!--close body-->
+        </div><!--close panel-->
+
+
+      <!--</div>close sub-row-->
+    </div><!--close column-->
+
+  </div><!--close row-->
+</div><!--close well-->

@@ -1,4 +1,6 @@
-<%= form_tag generate_path_name(item), method: :get do%>
-<%= text_field_tag :query, params[:query], placeholder: "Search #{item_name(item)}"%>
-<%= submit_tag "Search", name: nil%>
+<%= form_tag path, class: "input-group", id: id, method: :get do%>
+<%= text_field_tag :query, params[:query], placeholder: "Search #{item}", class: "typeahead form-control"%>
+<span class="input-group-btn">
+   <%= submit_tag "Go", class: "btn btn-default", name: nil%>
+</span>
 <%end%>

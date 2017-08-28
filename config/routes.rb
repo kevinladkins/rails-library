@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
+  get 'home', to: 'home#index'
   get 'auth/:provider/callback', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
     get :most_borrowed, on: :collection
     resources :categories, only: [:new, :create, :edit, :update]
    end
-
 
   resources :authors do
     resources :books, only: [:index, :show, :new, :create]
@@ -24,9 +24,10 @@ Rails.application.routes.draw do
 
   scope 'librarians', module: 'librarians' do
     resources :dashboard, only: [:index]
+    get 'dashboard/stats', to: 'dashboard#stats'
   end
 
 
-  root 'books#index'
+  root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

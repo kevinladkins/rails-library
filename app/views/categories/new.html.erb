@@ -4,5 +4,5 @@
 
 <%= form_for @category, url: book_categories_path(@book) do |f|%>
 	<%= render partial: 'form', locals: {book: @book, f: f}%>
-	<%= f.submit%>
+	<%= f.submit(class: "btn btn-primary btn-sm")%>
 <%end%>

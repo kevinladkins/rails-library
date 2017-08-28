@@ -1,5 +1,0 @@
-<% if patron? %>
-  <%=link_to "Your Account", user_path(current_user)%> ||
-<%elsif librarian?%>
-  <%=link_to "Dashboard", dashboard_index_path%> ||
-<%end%> 
