@@ -20,7 +20,11 @@ class Book < ApplicationRecord
   ## attribute builders ##
 
   def author_attributes=(author_attributes)
-    self.build_author(author_attributes) unless author_attributes[:last_name].blank?
+    if book_author = Author.find_by(first_name: author_attributes[:first_name], last_name: author_attributes[:last_name])
+      self.author = book_author
+    else
+      self.build_author(author_attributes) unless author_attributes[:last_name].blank?
+    end
   end
 
   def category_ids=(ids)
