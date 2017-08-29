@@ -7,13 +7,13 @@ $(function() {
 })
 
 function getUsers() {
-  $.get('/users.json', users => {
+  $.get('/users.json', function(users) {
     setUsersArray(users)
   })
 }
 
 function setUsersArray(users) {
-  users.forEach(user => {
+  users.forEach(function(user) {
     userArray.push(user.name)
   })
   setUsersSearch();

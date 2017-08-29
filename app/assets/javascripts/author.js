@@ -19,13 +19,13 @@ function setAuthorListeners() {
 
 
 function getAuthors() {
-  $.get('/authors.json', authors => {
+  $.get('/authors.json', function(authors) {
     setAuthorsArray(authors);
   })
 }
 
 function setAuthorsArray(authors) {
-  authors.forEach(author => {
+  authors.forEach(function(author) {
     authorArray.push(author.name)
   });
   setAuthorSearch();
@@ -42,11 +42,9 @@ function Author(author) {
 }
 
 Author.prototype.listBooks = function() {
-  let html = ""
-  let result = this.books.forEach(book => {
-    html += `
-      <li><a href="/books/${book.id}">${book.title}</a></li>
-    `
+  var html = ""
+  var result = this.books.forEach(function(book) {
+    html += '<li><a href="/books/' + book.id + '">' + book.title + '</a></li>'
   })
   return html
 }

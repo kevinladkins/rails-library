@@ -51,22 +51,18 @@ function Book(book) {
 
 
 Book.prototype.bookTableData = function() {
-  let html = `
-    <tr>
-      <td><a href="/books/${this.id}">${this.alpha_title}</a></td>
-      <td><a href="/authors/${this.author.id}">${this.author.name}</a></td>
-    </tr>
-  `
+  var html = '<tr> \
+      <td><a href="/books/' + this.id + '">' + this.alpha_title + '</a></td> \
+      <td><a href="/authors/' + this.author.id + '">' + this.author.name + '</a></td> \
+    </tr>'
   return html
 }
 
 Book.prototype.numberedTableData = function(rank) {
-  let html = `
-    <tr>
-      <td><a href="/books/${this.id}">${rank}.  ${this.alpha_title}</a></td>
-      <td><a href="/authors/${this.author.id}">${this.author.name}</a></td>
-    </tr>
-  `
+  var html = '<tr> \
+      <td><a href="/books/' + this.id + '">' + rank + '. ' + this.alpha_title + '</a></td> \
+      <td><a href="/authors/' + this.author.id + '">' + this.author.name + '</a></td> \
+    </tr>'
   return html
 }
 
@@ -74,7 +70,7 @@ Book.prototype.numberedTableData = function(rank) {
 // BOOKS#INDEX FUNCTIONS
 
 function getBooks() {
-  $.get('/books.json', books => {
+  $.get('/books.json', function(books) {
       booksArray = books;
       setTitleArray(books);
       setBookSearch();
@@ -83,7 +79,7 @@ function getBooks() {
 }
 
 function setTitleArray(books) {
-  books.forEach(book => {
+  books.forEach(function(book) {
     titleArray.push(book.title);
   })
 }
@@ -97,7 +93,7 @@ function displayCategory(category) {
 };
 
 function displayMostBorrowed() {
-  $.get('/books/most_borrowed.json', books => {
+  $.get('/books/most_borrowed.json', function(books) {
     mostBorrowedList(books)
   });
 };
@@ -105,11 +101,11 @@ function displayMostBorrowed() {
 
 function booksList(books, classification) {
   $("#books-index").html(bookTable());
-  let alphaBooks = alphabetize(books, "alpha_title")
-  alphaBooks.forEach(book => {
+  var alphaBooks = alphabetize(books, "alpha_title")
+  alphaBooks.forEach(function(book) {
     if (book.classification == classification || classification == "all") {
-      let newBook = new Book(book);
-      let html = newBook.bookTableData();
+      var newBook = new Book(book);
+      var html = newBook.bookTableData();
       $("#books-index table tbody").append(html);
     }
   })
@@ -117,10 +113,10 @@ function booksList(books, classification) {
 
 function mostBorrowedList(books) {
   $("#books-index").html(bookTable());
-  books.forEach((book, index) => {
-    let newBook = new Book(book);
-    let rank = index +1
-    let html = newBook.numberedTableData(rank);
+  books.forEach(function(book, index) {
+    var newBook = new Book(book);
+    var rank = index +1
+    var html = newBook.numberedTableData(rank);
     $("#books-index table tbody").append(html);
   });
 };

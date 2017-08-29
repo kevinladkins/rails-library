@@ -5,7 +5,7 @@ $(function() {
 })
 
 function getStats() {
-  $.get('dashboard/stats', stats => {
+  $.get('dashboard/stats', function(stats) {
     collectionStats(stats.collection);
     userStats(stats.users)
   })

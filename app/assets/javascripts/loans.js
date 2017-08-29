@@ -15,7 +15,7 @@ function setEventListeners() {
   $('.loan-row').click(function(e) {
     var row = e.target.parentElement;
     var id = $(row).data('user-id');
-    window.location.href = `users/${id}`;
+    window.location.href = 'users/' + id;
   })
 }
 
