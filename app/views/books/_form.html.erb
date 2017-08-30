@@ -35,7 +35,6 @@
 	<div class="form-group">
 		<div class="form-group">
 				<%= field_set_tag "Categories" do %>
-				<%= f.label "New Category: " %>
 				<%= f.fields_for :categories, book.categories.build do |category_attributes|%>
 					<%= render partial: 'categories/form', locals: {book: @book, f: category_attributes}%>
 				<%end%>
